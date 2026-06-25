@@ -29,7 +29,7 @@
                             <td>
                                 <div class="flex items-center justify-center gap-2">
                                     {{-- Detail --}}
-                                    <a href="{{ url('backend/fasilitasS/show', $fasilitas->id) }}"
+                                    <a href="{{ url('backend/fasilitas/show', $fasilitas->id) }}"
                                         class="inline-flex items-center gap-1 px-3 py-1.5 rounded-lg text-xs font-semibold bg-blue-50 text-blue-600 hover:bg-blue-100 transition"
                                         title="Lihat Detail">
                                         <i class="fa-solid fa-eye"></i>
@@ -50,7 +50,7 @@
                             <td>
                                 <div class="flex items-center gap-3">
                                     @if ($fasilitas->foto)
-                                        <img src="{{ url("public/fasilitas->foto") }}"
+                                        <img src="{{ url("public/$fasilitas->foto") }}"
                                             class="w-10 h-10 rounded-lg object-cover border border-slate-200">
                                     @else
                                         <div class="w-10 h-10 rounded-lg bg-blue-100 flex items-center justify-center">
@@ -66,7 +66,7 @@
                             <td><span
                                     class="badge badge-{{ $fasilitas->jenis == 'utama' ? 'blue' : 'green' }}">{{ ucfirst($fasilitas->jenis) }}</span>
                             </td>
-                            <td class="text-slate-600">{{ $fasilitas->kapasitas ? $fasilitas->kapasitas . ' orang' : '-' }}</td>
+                            <td class="text-slate-600">{{ $fasilitas->kapasitas ? $fasilitas->kapasitas : '-' }}</td>
                             <td><span
                                     class="badge badge-{{ $fasilitas->status == 'aktif' ? 'green' : 'gray' }}">{{ ucfirst($fasilitas->status ?? 'aktif') }}</span>
                             </td>
