@@ -1,19 +1,19 @@
 <?php
 
-namespace App\Http\Controllers\Backend;
+namespace App\Http\Controllers\Frontend;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\View;
 
-class DashboardController extends Controller
+class DashboardContoller extends Controller
 {
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-         $data['admin'] = $admin = auth()->guard('admin')->user();
-        return View('backend.dashboard', $data);
+        return View('frontend.pengguna');
     }
 
     /**

@@ -12,7 +12,7 @@
         <div class="flex items-center gap-3">
 
             <div class="text-right hidden sm:block">
-                <p class="text-sm font-bold text-slate-800">User</p>
+                <p class="text-sm font-bold text-slate-800">{{ Auth::guard('admin')->user()->nama }}</p>
                 <p class="text-[11px] text-slate-400 capitalize">Admin</p>
             </div>
             <div class="w-9 h-9 rounded-full flex items-center justify-center text-white font-bold text-sm" style="background:linear-gradient(135deg,#1e40af,#0f1f52)">

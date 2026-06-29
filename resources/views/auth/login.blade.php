@@ -1,14 +1,20 @@
 <!DOCTYPE html>
 <html lang="id">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login Admin — Learning Center</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap"
+        rel="stylesheet">
     <style>
-        * { box-sizing: border-box; margin: 0; padding: 0; }
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
 
         body {
             font-family: 'Poppins', sans-serif;
@@ -149,7 +155,9 @@
             z-index: 2;
         }
 
-        .toggle-password:hover { color: #1565C0; }
+        .toggle-password:hover {
+            color: #1565C0;
+        }
 
         /* Error */
         .error-msg {
@@ -193,7 +201,10 @@
             transition: color 0.2s;
         }
 
-        .forgot-link:hover { color: #0D47A1; text-decoration: underline; }
+        .forgot-link:hover {
+            color: #0D47A1;
+            text-decoration: underline;
+        }
 
         /* ── Button ── */
         .btn-login {
@@ -220,7 +231,9 @@
             box-shadow: 0 4px 20px rgba(21, 101, 192, 0.35);
         }
 
-        .btn-login:active { transform: translateY(0); }
+        .btn-login:active {
+            transform: translateY(0);
+        }
 
         /* ── Back link ── */
         .back-link {
@@ -236,7 +249,9 @@
             font-weight: 600;
         }
 
-        .back-link a:hover { text-decoration: underline; }
+        .back-link a:hover {
+            text-decoration: underline;
+        }
 
         /* ── Alert session status ── */
         .alert-status {
@@ -308,136 +323,123 @@
         }
     </style>
 </head>
+
 <body>
 
-<div class="login-wrapper">
+    <div class="login-wrapper">
 
-    {{-- Brand --}}
-    <div class="brand-header">
-        <div class="brand-logo-wrap">
-            <img src="{{ url('public/images/logo-lc.png') }}" alt="Logo">
-        </div>
-        <h1>LEARNING CENTER</h1>
-        <p>Sir Michael Uren</p>
-    </div>
-
-    {{-- Card --}}
-    <div class="login-card">
-
-        <div class="card-heading">
-            <h2>Selamat Datang</h2>
-            <p>Masuk ke panel admin</p>
+        {{-- Brand --}}
+        <div class="brand-header">
+            <div class="brand-logo-wrap">
+                <img src="{{ url('public/images/logo-lc.png') }}" alt="Logo">
+            </div>
+            <h1>LEARNING CENTER</h1>
+            <p>Sir Michael Uren</p>
         </div>
 
-        {{-- Session Status --}}
-        @if (session('status'))
-            <div class="alert-status">
-                <i class="bi bi-check-circle-fill"></i>
-                {{ session('status') }}
+        {{-- Card --}}
+        <div class="login-card">
+            <div class="card-heading">
+                <h2>Selamat Datang</h2>
+                <p>Masuk ke panel admin</p>
             </div>
-        @endif
+            @include('section.notif')
 
-        <form method="POST" action="{{ url('login') }}">
-            @csrf
-
-            {{-- Email --}}
-            <div>
-                <label class="form-label" for="email">Email</label>
-                <div class="input-group-custom">
-                    <i class="bi bi-envelope input-icon"></i>
-                    <input
-                        id="email"
-                        type="email"
-                        name="email"
-                        class="form-control-custom"
-                        placeholder="admin@example.com"
-                        value="{{ old('email') }}"
-                        required
-                        autofocus
-                        autocomplete="username"
-                    >
+            {{-- Session Status --}}
+            @if (session('status'))
+                <div class="alert-status">
+                    <i class="bi bi-check-circle-fill"></i>
+                    {{ session('status') }}
                 </div>
-                @error('email')
-                    <div class="error-msg"><i class="bi bi-exclamation-circle"></i> {{ $message }}</div>
-                @enderror
-            </div>
+            @endif
 
-            {{-- Password --}}
-            <div>
-                <label class="form-label" for="password">Password</label>
-                <div class="input-group-custom">
-                    <i class="bi bi-lock input-icon"></i>
-                    <input
-                        id="password"
-                        type="password"
-                        name="password"
-                        class="form-control-custom"
-                        placeholder="••••••••"
-                        required
-                        autocomplete="current-password"
-                    >
-                    <button type="button" class="toggle-password" onclick="togglePassword()">
-                        <i class="bi bi-eye" id="eyeIcon"></i>
-                    </button>
+            <form method="POST" action="{{ url('login') }}">
+                @csrf
+
+                {{-- Email --}}
+                <div>
+                    <label class="form-label" for="email">Email</label>
+                    <div class="input-group-custom">
+                        <i class="bi bi-envelope input-icon"></i>
+                        <input id="email" type="email" name="email" class="form-control-custom"
+                            placeholder="admin@example.com" value="{{ old('email') }}" required autofocus
+                            autocomplete="username">
+                    </div>
+                    @error('email')
+                        <div class="error-msg"><i class="bi bi-exclamation-circle"></i> {{ $message }}</div>
+                    @enderror
                 </div>
-                @error('password')
-                    <div class="error-msg"><i class="bi bi-exclamation-circle"></i> {{ $message }}</div>
-                @enderror
-            </div>
 
-            {{-- Remember & Forgot --}}
-            <div class="extras-row">
-                <label class="remember-label">
-                    <input type="checkbox" name="remember" id="remember_me">
-                    Ingat saya
-                </label>
-                @if (Route::has('password.request'))
-                    <a href="{{ url('password.request') }}" class="forgot-link">Lupa password?</a>
-                @endif
-            </div>
+                {{-- Password --}}
+                <div>
+                    <label class="form-label" for="password">Password</label>
+                    <div class="input-group-custom">
+                        <i class="bi bi-lock input-icon"></i>
+                        <input id="password" type="password" name="password" class="form-control-custom"
+                            placeholder="••••••••" required autocomplete="current-password">
+                        <button type="button" class="toggle-password" onclick="togglePassword()">
+                            <i class="bi bi-eye" id="eyeIcon"></i>
+                        </button>
+                    </div>
+                    @error('password')
+                        <div class="error-msg"><i class="bi bi-exclamation-circle"></i> {{ $message }}</div>
+                    @enderror
+                </div>
 
-            {{-- Submit --}}
-            <button type="submit" class="btn-login">
-                <i class="bi bi-box-arrow-in-right"></i> Masuk
-            </button>
-            {{-- Divider --}}
-            <div class="register-divider">
-                <span>atau</span>
-            </div>
+                {{-- Remember & Forgot --}}
+                <div class="extras-row">
+                    <label class="remember-label">
+                        <input type="checkbox" name="remember" id="remember_me">
+                        Ingat saya
+                    </label>
+                    @if (Route::has('password.request'))
+                        <a href="{{ url('password.request') }}" class="forgot-link">Lupa password?</a>
+                    @endif
+                </div>
 
-{{-- Register User --}}
-<div class="register-section">
-    <p>Belum memiliki akun untuk memberikan ulasan?</p>
+                {{-- Submit --}}
+                <button type="submit" class="btn-login">
+                    <i class="bi bi-box-arrow-in-right"></i> Masuk
+                </button>
+                {{-- Divider --}}
+                <div class="register-divider">
+                    <span>atau</span>
+                </div>
 
-    <a href="{{ url('register') }}" class="btn-register">
-        <i class="bi bi-person-plus-fill"></i>
-        Daftar Akun User
-    </a>
-</div>
+                {{-- Register User --}}
+                <div class="register-section">
+                    <p>Belum memiliki akun untuk memberikan ulasan?</p>
 
-        </form>
+                    <a href="{{ url('register') }}" class="btn-register">
+                        <i class="bi bi-person-plus-fill"></i>
+                        Daftar Akun User
+                    </a>
+                </div>
+
+            </form>
+        </div>
+
+        {{-- Back to frontend --}}
+        <div class="back-link">
+            <a href="{{ url('home') }}"><i class="bi bi-arrow-left"></i> Kembali ke Beranda</a>
+        </div>
+
     </div>
 
-    {{-- Back to frontend --}}
-    <div class="back-link">
-        <a href="{{ url('home') }}"><i class="bi bi-arrow-left"></i> Kembali ke Beranda</a>
-    </div>
-
-</div>
-
-<script>
-    function togglePassword() {
-        const input = document.getElementById('password');
-        const icon = document.getElementById('eyeIcon');
-        if (input.type === 'password') {
-            input.type = 'text';
-            icon.className = 'bi bi-eye-slash';
-        } else {
-            input.type = 'password';
-            icon.className = 'bi bi-eye';
+    <script>
+        function togglePassword() {
+            const input = document.getElementById('password');
+            const icon = document.getElementById('eyeIcon');
+            if (input.type === 'password') {
+                input.type = 'text';
+                icon.className = 'bi bi-eye-slash';
+            } else {
+                input.type = 'password';
+                icon.className = 'bi bi-eye';
+            }
         }
-    }
-</script>
+    </script>
 
 </body>
+
 </html>

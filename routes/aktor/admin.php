@@ -5,6 +5,7 @@ use App\Http\Controllers\Backend\FasilitasController;
 use App\Http\Controllers\Backend\EventController;
 use App\Http\Controllers\Backend\KontakController;
 use App\Http\Controllers\Backend\UlasanController;
+use App\Http\Controllers\Backend\PenggunaController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/',[DashboardController::class, 'index' ]);
@@ -39,3 +40,8 @@ Route::get('/ulasan/delete/{id}',[UlasanController::class, 'destroy' ]);
 
 Route::get('/kontak',[KontakController::class, 'index' ]);
 
+
+
+Route::get('/pengguna',[PenggunaController::class, 'index' ]);
+Route::get('/pengguna/show/{id}',[PenggunaController::class, 'show' ]);
+Route::get('/pengguna/verifikasi/{id}',[PenggunaController::class, 'verifikasi' ]);

@@ -1,19 +1,20 @@
 <?php
 
-namespace App\Http\Controllers\Backend;
+namespace App\Http\Controllers\Frontend;
 
 use App\Http\Controllers\Controller;
+use App\Models\Kontak;
 use Illuminate\Http\Request;
 
-class DashboardController extends Controller
+class KontakContoller extends Controller
 {
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-         $data['admin'] = $admin = auth()->guard('admin')->user();
-        return View('backend.dashboard', $data);
+        $data['list_kontak'] = Kontak::all();
+        return view('frontend.kontak',$data);
     }
 
     /**

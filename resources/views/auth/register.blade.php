@@ -1,16 +1,15 @@
 <!DOCTYPE html>
 <html lang="id">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Register User - Learning Center</title>
 
     <!-- Bootstrap Icon -->
-    <link rel="stylesheet"
-    href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
 
     <style>
-
         * {
             box-sizing: border-box;
             font-family: 'Poppins', sans-serif;
@@ -71,7 +70,7 @@
             background: white;
             border-radius: 35px;
             padding: 35px;
-            box-shadow: 0 15px 40px rgba(0,0,0,.15);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, .15);
             text-align: left;
         }
 
@@ -151,100 +150,117 @@
             text-decoration: none;
             font-weight: 600;
         }
-
     </style>
 
 </head>
 
 <body>
 
-<div class="container">
+    <div class="container">
 
-    <!-- Logo -->
-    <div class="brand-logo-wrap">
-        <img src="{{ url('public/images/logo-lc.png') }}" alt="Logo Learning Center">
+        <!-- Logo -->
+        <div class="brand-logo-wrap">
+            <img src="{{ url('public/images/logo-lc.png') }}" alt="Logo Learning Center">
+        </div>
+        <h1>Register User</h1>
+        <p class="subtitle">
+            Daftar untuk memberikan ulasan fasilitas
+        </p>
+
+
+        <div class="card">
+
+            <form method="POST" action="{{ url('register') }}" enctype="multipart/form-data">
+                @csrf
+
+
+                <!-- Nama -->
+                <label>NIK</label>
+                <div class="input-group">
+                    <i class="bi bi-person"></i>
+                    <input type="text" name="nik" value="{{ old('nik') }}" placeholder="Masukkan NIP"
+                        required>
+                </div>
+
+                <label>Nama Lengkap</label>
+                <div class="input-group">
+                    <i class="bi bi-person"></i>
+                    <input type="text" name="nama" value="{{ old('nama') }}" placeholder="Masukkan nama lengkap"
+                        required>
+                </div>
+
+                <label>Tempat Lahir</label>
+                <div class="input-group">
+                    <i class="bi bi-person"></i>
+                    <input type="text" name="tempat_lahir" value="{{ old('tempat_lahir') }}" placeholder="Masukkan Tempat Lahir"
+                        required>
+                </div>
+
+                <label>Tanggal Lahir</label>
+                <div class="input-group">
+                    <i class="bi bi-person"></i>
+                    <input type="date" name="tanggal_lahir" value="{{ old('tanggal_lahir') }}"
+                        required>
+                </div>
+
+                <!-- Email -->
+                <label>Email</label>
+                <div class="input-group">
+                    <i class="bi bi-envelope"></i>
+                    <input type="email" name="username" value="{{ old('username') }}" placeholder="Masukkan email"
+                        required>
+                </div>
+
+
+                <!-- Password -->
+                <label>Password</label>
+                <div class="input-group">
+                    <i class="bi bi-lock"></i>
+                    <input type="password" name="password" placeholder="Masukkan password" required>
+                </div>
+
+                <label>Alamat Lengkap</label>
+                <div class="input-group">
+                    <i class="bi bi-person"></i>
+                    <input type="text" name="alamat" value="{{ old('alamat') }}" placeholder="Masukkan Alamat lengkap"
+                        required>
+                </div>
+
+                <label>No Hp</label>
+                <div class="input-group">
+                    <i class="bi bi-person"></i>
+                    <input type="text" name="no_hp" value="{{ old('no_hp') }}" placeholder="Masukkan No Hp"
+                        required>
+                </div>
+
+                <label>Foto</label>
+                <div class="input-group">
+                    <i class="bi bi-person"></i>
+                    <input type="file" name="foto" accept=".jpg, .png, .jpeg"
+                        required>
+                </div>
+
+
+                <button class="btn-register">
+                    <i class="bi bi-person-plus"></i>
+                    Daftar Sekarang
+                </button>
+
+
+            </form>
+
+        </div>
+
+
+        <div class="back">
+            <a href="{{ url('home') }}">
+                ← Kembali ke Beranda
+            </a>
+        </div>
+
+
     </div>
-    <h1>Register User</h1>
-    <p class="subtitle">
-        Daftar untuk memberikan ulasan fasilitas
-    </p>
-
-
-    <div class="card">
-
-        <form method="POST" action="{{ url('register') }}">
-            @csrf
-
-
-            <!-- Nama -->
-            <label>Nama Lengkap</label>
-            <div class="input-group">
-                <i class="bi bi-person"></i>
-                <input
-                    type="text"
-                    name="name"
-                    value="{{ old('name') }}"
-                    placeholder="Masukkan nama lengkap"
-                    required>
-            </div>
-
-
-            <!-- Email -->
-            <label>Email</label>
-            <div class="input-group">
-                <i class="bi bi-envelope"></i>
-                <input
-                    type="email"
-                    name="email"
-                    value="{{ old('email') }}"
-                    placeholder="Masukkan email"
-                    required>
-            </div>
-
-
-            <!-- Password -->
-            <label>Password</label>
-            <div class="input-group">
-                <i class="bi bi-lock"></i>
-                <input
-                    type="password"
-                    name="password"
-                    placeholder="Masukkan password"
-                    required>
-            </div>
-
-
-            <!-- Konfirmasi -->
-            <label>Konfirmasi Password</label>
-            <div class="input-group">
-                <i class="bi bi-shield-lock"></i>
-                <input
-                    type="password"
-                    name="password_confirmation"
-                    placeholder="Ulangi password"
-                    required>
-            </div>
-
-
-            <button class="btn-register">
-                <i class="bi bi-person-plus"></i>
-                Daftar Sekarang
-            </button>
-
-
-        </form>
-
-    </div>
-
-
-    <div class="back">
-        <a href="{{ url('home') }}">
-            ← Kembali ke Beranda
-        </a>
-    </div>
-
-
-</div>
 
 </body>
+
 </html>

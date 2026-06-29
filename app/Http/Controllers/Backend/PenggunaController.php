@@ -3,64 +3,62 @@
 namespace App\Http\Controllers\Backend;
 
 use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
+use App\Models\Pengguna;
 
-class DashboardController extends Controller
+class PenggunaController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-         $data['admin'] = $admin = auth()->guard('admin')->user();
-        return View('backend.dashboard', $data);
+        $data['list_pengguna'] = Pengguna::all();
+        return view ('backend.pengguna.index',$data);
     }
 
     /**
      * Show the form for creating a new resource.
      */
-    public function create()
-    {
-        //
-    }
+
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
-    {
-        //
-    }
+
 
     /**
      * Display the specified resource.
      */
     public function show(string $id)
     {
-        //
+        $data['pengguna'] = Pengguna::find($id);
+        return view('backend.pengguna.show', $data);
     }
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
-    {
-        //
-    }
+
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
-    {
-        //
-    }
+
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+
+    public function verifikasi($id)
     {
-        //
+        $pengguna = Pengguna::findOrFail($id);
+
+        $pengguna->status = 'aktif';
+
+        $pengguna->save();
+
+        return redirect()->back()
+                ->with('success','Pengguna berhasil diverifikasi.');
     }
+
 }
