@@ -49,6 +49,27 @@
                     {{ $loop->iteration }}
                 </td>
 
+                 <td>
+                    <div class="flex items-center justify-center gap-2">
+
+                       <a href="{{ url('backend/ulasan/show', $ulasan) }}"
+                          class="btn-info">
+
+                          <i class="fa-solid fa-eye"></i>
+
+                       </a>
+
+                       <button
+                           onclick="openDel('{{ url('ulasan/ulasan/destroy', $ulasan) }}')"
+                           class="btn-danger">
+
+                           <i class="fa-solid fa-trash"></i>
+
+                       </button>
+
+                    </div>
+                </td>
+
                 <td class="font-semibold text-slate-800">
                     {{ $ulasan->user->name ?? 'User tidak ditemukan' }}
                 </td>
@@ -73,37 +94,7 @@
                 <td class="text-xs text-slate-500">
                     {{ $ulasan->created_at->format('d M Y') }}
                 </td>
-
-
-                <td>
-                    <div class="flex items-center justify-center gap-2">
-
-                       <a href="{{ url('backend/ulasan/show', $ulasan) }}"
-                          class="btn-info">
-
-                          <i class="fa-solid fa-eye"></i>
-
-                       </a>
-
-                       <button
-                           onclick="openDel('{{ url('ulasan/ulasan/destroy', $ulasan) }}')"
-                           class="btn-danger">
-
-                           <i class="fa-solid fa-trash"></i>
-
-                       </button>
-
-                    </div>
-                </td>
-
-            </tr>
-
-
-            <tr>
-                <td colspan="7"
-                    class="text-center py-12 text-slate-400">
-                    Belum ada ulasan.
-                </td>
+                
             </tr>
             @endforeach
         </tbody>

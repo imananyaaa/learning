@@ -1,4 +1,4 @@
-<x-frontend>
+<x-pengguna>
     <section class="page-hero">
     <div class="page-hero-bg"></div>
     <div class="page-hero-ov"></div>
@@ -132,4 +132,4 @@ function filterEvents(type, btn) {
 }
 </script>
 @endpush
-</x-frontend>
+</x-pengguna>

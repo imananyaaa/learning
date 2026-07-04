@@ -8,7 +8,7 @@
 
     <!-- Bootstrap Icon -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
-
+    <link rel="icon" type="image/x-icon" href="{{ url('public') }}/images/logo-lc.png" />
     <style>
         * {
             box-sizing: border-box;
@@ -130,14 +130,34 @@
             text-align: center;
         }
 
-        .footer-link a {
-            color: #2563eb;
-            text-decoration: none;
-            font-weight: 600;
+        .footer-link p {
+            margin-bottom: 12px;
+            color: #64748b;
+            font-size: 14px;
         }
 
-        .footer-link a:hover {
-            text-decoration: underline;
+        .btn-login {
+            width: 100%;
+            height: 50px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 8px;
+
+            border: 2px solid #2563eb;
+            border-radius: 15px;
+
+            text-decoration: none;
+            color: #2563eb;
+            font-weight: 600;
+
+            transition: .3s;
+            background: #fff;
+        }
+
+        .btn-login:hover {
+            background: #2563eb;
+            color: #fff;
         }
 
         .back {
@@ -160,91 +180,89 @@
 
         <!-- Logo -->
         <div class="brand-logo-wrap">
-            <img src="{{ url('public/images/logo-lc.png') }}" alt="Logo Learning Center">
+            <img src="{{ url('public/images') }}/logo-lc.png" alt="Logo Learning Center">
         </div>
         <h1>Register User</h1>
         <p class="subtitle">
-            Daftar untuk memberikan ulasan fasilitas
+            Daftar Untuk Menjadi Anggota Learning Center
         </p>
+        @include('section.notif')
 
 
         <div class="card">
 
             <form method="POST" action="{{ url('register') }}" enctype="multipart/form-data">
                 @csrf
-
-
                 <!-- Nama -->
                 <label>NIK</label>
                 <div class="input-group">
                     <i class="bi bi-person"></i>
-                    <input type="text" name="nik" value="{{ old('nik') }}" placeholder="Masukkan NIP"
-                        required>
+                    <input type="text"name="nik" placeholder="Masukkan NIK" required>
                 </div>
 
                 <label>Nama Lengkap</label>
                 <div class="input-group">
                     <i class="bi bi-person"></i>
-                    <input type="text" name="nama" value="{{ old('nama') }}" placeholder="Masukkan nama lengkap"
-                        required>
+                    <input type="text"name="nama" placeholder="Masukkan nama lengkap" required>
+                </div>
+
+                <label>Email</label>
+                <div class="input-group">
+                    <i class="bi bi-envelope"></i>
+                    <input type="email"name="username" placeholder="Masukkan Email" required>
+                </div>
+
+                <label>Password</label>
+                <div class="input-group">
+                    <i class="bi bi-lock"></i>
+                    <input type="password"name="password" placeholder="Masukkan Password" required>
+                </div>
+
+                <label>Tanggal Lahir</label>
+                <div class="input-group">
+                    <i class="bi bi-calendar"></i>
+                    <input type="date"name="tanggal_lahir" required>
                 </div>
 
                 <label>Tempat Lahir</label>
                 <div class="input-group">
                     <i class="bi bi-person"></i>
-                    <input type="text" name="tempat_lahir" value="{{ old('tempat_lahir') }}" placeholder="Masukkan Tempat Lahir"
-                        required>
+                    <input type="text"name="tempat_lahir" placeholder="Masukkan Tempat Lahir" required>
                 </div>
 
-                <label>Tanggal Lahir</label>
+                <label>Alamat </label>
                 <div class="input-group">
                     <i class="bi bi-person"></i>
-                    <input type="date" name="tanggal_lahir" value="{{ old('tanggal_lahir') }}"
-                        required>
-                </div>
-
-                <!-- Email -->
-                <label>Email</label>
-                <div class="input-group">
-                    <i class="bi bi-envelope"></i>
-                    <input type="email" name="username" value="{{ old('username') }}" placeholder="Masukkan email"
-                        required>
-                </div>
-
-
-                <!-- Password -->
-                <label>Password</label>
-                <div class="input-group">
-                    <i class="bi bi-lock"></i>
-                    <input type="password" name="password" placeholder="Masukkan password" required>
-                </div>
-
-                <label>Alamat Lengkap</label>
-                <div class="input-group">
-                    <i class="bi bi-person"></i>
-                    <input type="text" name="alamat" value="{{ old('alamat') }}" placeholder="Masukkan Alamat lengkap"
-                        required>
+                    <input type="text"name="alamat" placeholder="Masukkan Alamat" required>
                 </div>
 
                 <label>No Hp</label>
                 <div class="input-group">
                     <i class="bi bi-person"></i>
-                    <input type="text" name="no_hp" value="{{ old('no_hp') }}" placeholder="Masukkan No Hp"
-                        required>
+                    <input type="text"name="no_hp" placeholder="Masukkan Nomor Handphone" required>
                 </div>
 
-                <label>Foto</label>
+                <label>Pas Foto</label>
                 <div class="input-group">
                     <i class="bi bi-person"></i>
-                    <input type="file" name="foto" accept=".jpg, .png, .jpeg"
-                        required>
+                    <input type="file"name="foto" accept=".jpg, .png, .jpeg" required>
                 </div>
 
-
-                <button class="btn-register">
+                <button type="submit" class="btn-register">
                     <i class="bi bi-person-plus"></i>
                     Daftar Sekarang
                 </button>
+
+                <div class="footer-link">
+                    <p style="margin-bottom:12px;color:#64748B;">
+                        Sudah memiliki akun?
+                    </p>
+
+                    <a href="{{ url('login') }}" class="btn-login">
+                        <i class="bi bi-box-arrow-in-right"></i>
+                        Login Pengguna
+                    </a>
+                </div>
 
 
             </form>
@@ -253,7 +271,7 @@
 
 
         <div class="back">
-            <a href="{{ url('home') }}">
+            <a href="{{ url('/') }}">
                 ← Kembali ke Beranda
             </a>
         </div>

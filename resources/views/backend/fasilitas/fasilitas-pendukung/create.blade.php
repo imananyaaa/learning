@@ -1,12 +1,12 @@
 <x-backend>
     <div class="max-w">
-        <a href="{{ url('backend/fasilitas') }}"
+        <a href="{{ url('backend/fasilitas-pendukung') }}"
             class="text-sm text-slate-500 hover:text-blue-600 flex items-center gap-1 mb-5">
             <i class="fa-solid fa-arrow-left text-xs"></i> Kembali
         </a>
         <div class="card p-7">
-            <h2 class="text-lg font-bold text-slate-800 mb-6">Tambah Fasilitas Baru</h2>
-            <form action="{{ url('backend/fasilitas') }}" method="POST" enctype="multipart/form-data">
+            <h2 class="text-lg font-bold text-slate-800 mb-6">Tambah Fasilitas Pendukung</h2>
+            <form action="{{ url('backend/fasilitas-pendukung') }}" method="POST" enctype="multipart/form-data">
                 @csrf
                 <div class="space-y-5">
                     <div>
@@ -18,21 +18,16 @@
                         @enderror
                     </div>
                     <div class="grid grid-cols-2 gap-4">
-                        <div>
-                            <label class="form-label">Jenis <span class="text-red-500">*</span></label>
-                            <select name="jenis" class="form-input" required>
-                                <option value="">-- Pilih --</option>
-                                <option value="utama" {{ old('jenis') == 'utama' ? 'selected' : '' }}>Fasilitas Utama
-                                </option>
-                                <option value="pendukung" {{ old('jenis') == 'pendukung' ? 'selected' : '' }}>Fasilitas
-                                    Pendukung</option>
-                            </select>
-                        </div>
-                        <div>
-                            <label class="form-label">Kuota (orang)</label>
-                            <input type="number" name="kuota" value="{{ old('kuota') }}" class="form-input"
-                                placeholder="30" min="0">
-                        </div>
+                         <div>
+                        <label class="form-label">Status</label>
+                        <select name="status" class="form-input">
+                            <option value=""> Pilih Status</option>
+                            <option value="Tersedia" {{ old('status', 'Tersedia') == 'Tersedia' ? 'selected' : '' }}>
+                                Tersedia</option>
+                            <option value="DIperbaiki" {{ old('status') == 'DIperbaiki' ? 'selected' : '' }}>DIperbaiki
+                            </option>
+                        </select>
+                    </div>
                     </div>
                     <div>
                         <label class="form-label">Deskripsi <span class="text-red-500">*</span></label>
@@ -41,13 +36,7 @@
                             <p class="form-error">{{ $message }}</p>
                         @enderror
                     </div>
-                    <div>
-                        <label class="form-label">Status</label>
-                        <select name="status" class="form-input">
-                            <option value="aktif" {{ old('status', 'aktif') == 'aktif' ? 'selected' : '' }}>Aktif</option>
-                            <option value="nonaktif" {{ old('status') == 'nonaktif' ? 'selected' : '' }}>Nonaktif</option>
-                        </select>
-                    </div>
+
                     <div>
                         <label class="form-label">Foto Fasilitas</label>
                         <input type="file" name="foto" class="form-input" accept="image/*"
@@ -58,7 +47,7 @@
                         @enderror
                     </div>
                     <div class="flex gap-3 pt-2">
-                        <a href="{{ url('backend/fasilitas') }}"
+                        <a href="{{ url('backend/fasilitas-pendukung') }}"
                             class="flex-1 py-2.5 text-center rounded-xl border border-slate-200 text-slate-600 font-semibold text-sm hover:bg-slate-50">Batal</a>
                         <button type="submit" class="btn-primary flex-1 justify-center py-2.5"><i
                                 class="fa-solid fa-save"></i> Simpan</button>

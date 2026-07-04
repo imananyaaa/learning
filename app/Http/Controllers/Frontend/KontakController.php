@@ -3,17 +3,18 @@
 namespace App\Http\Controllers\Frontend;
 
 use App\Http\Controllers\Controller;
+use App\Models\Kontak;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\View;
 
-class DashboardContoller extends Controller
+class KontakController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        return View('frontend.pengguna');
+        $data['list_kontak'] = Kontak::all();
+        return view('frontend.kontak',$data);
     }
 
     /**

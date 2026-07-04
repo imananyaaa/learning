@@ -6,8 +6,7 @@ use Illuminate\Support\Str;
 class Fasilitas extends Model
 {
     protected $table ='fasilitas';
-    protected $fillable = ['nama','deskripsi','kapasitas','jenis','status','foto'];
-    protected $attributes = ['status' => 'aktif'];
+
 
     function handleUploadPoto()
     {
@@ -21,5 +20,9 @@ class Fasilitas extends Model
 
 
         }
+    }
+    public function Booking()
+    {
+        return $this->belongsTo(Booking::class, 'id');
     }
 }

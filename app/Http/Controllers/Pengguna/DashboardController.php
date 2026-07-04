@@ -1,20 +1,19 @@
 <?php
 
-namespace App\Http\Controllers\Frontend;
+namespace App\Http\Controllers\Pengguna;
 
 use App\Http\Controllers\Controller;
-use App\Models\Event;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\View;
 
-class EventContoller extends Controller
+class DashboardController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        $data['list_event'] = Event::all();
-        return view('frontend.event',$data);
+        return View('pengguna.home');
     }
 
     /**

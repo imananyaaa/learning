@@ -1,18 +1,18 @@
 <?php
 
-namespace App\Http\Controllers\Frontend;
+namespace App\Http\Controllers\Backend;
 
 use App\Http\Controllers\Controller;
+use App\Models\Fasilitas;
 use Illuminate\Http\Request;
 
-class TentangKamiContoller extends Controller
+class FasilitasPendukungController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
     public function index()
     {
-        return view('frontend.tentang-kami',);
+        $data['list_fasilitas'] = Fasilitas::where('jenis_fasilitas', 'Fasilitas Pendukung')->get();
+
+        return view('backend.fasilitas.fasilitas-pendukung.index', $data);
     }
 
     /**
@@ -20,7 +20,7 @@ class TentangKamiContoller extends Controller
      */
     public function create()
     {
-        //
+        return view('backend.fasilitas.fasilitas-pendukung.create');
     }
 
     /**
@@ -28,7 +28,15 @@ class TentangKamiContoller extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $fasilitas = New Fasilitas();
+        $fasilitas->nama = request('nama');
+        $fasilitas->jenis_fasilitas = 'Fasilitas Pendukung';
+        $fasilitas->deskripsi = request('deskripsi');
+        $fasilitas->status = request('status');
+        $fasilitas->handleUploadPoto();
+        $fasilitas->save();
+
+        return redirect('backend/fasilitas-pendukung')->with('success', 'Data Berhasil di Simpan');
     }
 
     /**

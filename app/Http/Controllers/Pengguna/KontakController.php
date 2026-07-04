@@ -1,20 +1,20 @@
 <?php
 
-namespace App\Http\Controllers\Frontend;
+namespace App\Http\Controllers\Pengguna;
 
 use App\Http\Controllers\Controller;
-use App\Models\Event;
+use App\Models\Kontak;
 use Illuminate\Http\Request;
 
-class EventContoller extends Controller
+class KontakController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        $data['list_event'] = Event::all();
-        return view('frontend.event',$data);
+        $data['list_kontak'] = Kontak::all();
+        return view('pengguna.kontak',$data);
     }
 
     /**

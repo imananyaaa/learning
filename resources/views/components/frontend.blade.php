@@ -921,7 +921,7 @@
         gap: 8px;
         font-size: 0.88rem;
         cursor: pointer;
-        width: 100%;
+        width: auto;
         justify-content: center;
     }
     .btn-primary-custom:hover {

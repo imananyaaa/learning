@@ -19,24 +19,27 @@
         <div class="collapse navbar-collapse" id="navMain">
             <ul class="navbar-nav mx-auto align-items-lg-center gap-1">
                 <li class="nav-item">
-                    <a class="nav-link {{ Request::routeIs('home') ? 'active' : '' }}" href="{{url('/') }}">Beranda</a>
+                    <a class="nav-link {{ Request::routeIs('pengguna/') ? 'active' : '' }}" href="{{url('/pengguna') }}">Beranda</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link {{ Request::routeIs('tentang-kami') ? 'active' : '' }}" href="{{url('tentang-kami') }}">Tentang Kami</a>
+                    <a class="nav-link {{ Request::routeIs('pengguna/tentang-kami') ? 'active' : '' }}" href="{{url('pengguna/tentang-kami') }}">Tentang Kami</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link {{ Request::routeIs('fasilitas') ? 'active' : '' }}" href="{{url('fasilitas') }}">Fasilitas</a>
+                    <a class="nav-link {{ Request::routeIs('pengguna/fasilitas') ? 'active' : '' }}" href="{{url('pengguna/fasilitas') }}">Fasilitas</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link {{ Request::routeIs('event') ? 'active' : '' }}" href="{{url('event') }}">Event</a>
+                    <a class="nav-link {{ Request::routeIs('pengguna/event') ? 'active' : '' }}" href="{{url('pengguna/event') }}">Event</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link {{ Request::routeIs('ulasan') ? 'active' : '' }}"href="{{url('ulasan') }}">Ulasan</a>
+                    <a class="nav-link {{ Request::routeIs('pengguna/ulasan') ? 'active' : '' }}"href="{{url('pengguna/ulasan') }}">Ulasan</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link {{ Request::routeIs('kontak') ? 'active' : '' }}" href="{{url('kontak') }}">Kontak</a>
+                    <a class="nav-link {{ Request::routeIs('pengguna/kontak') ? 'active' : '' }}" href="{{url('pengguna/kontak') }}">Kontak</a>
                 </li>
             </ul>
+            <a href="{{url('logout') }}" class="btn-login-nav">
+                <i class="bi bi-person-fill"></i> Logout
+            </a>
         </div>
     </div>
 </nav>

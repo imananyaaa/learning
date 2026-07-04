@@ -34,8 +34,8 @@ class LoginController extends Controller
     function test(){
 		$user= New Admin();
 		$user->nama= 'Admin LC';
-		$user->email= 'admn@learningcenter.com';
-		$user->username= 'admn@learningcenter.com';
+		$user->email= 'admin@learningcenter.com';
+		$user->username= 'admin@learningcenter.com';
 		$user->password='admin123';
 		$user->save();
 

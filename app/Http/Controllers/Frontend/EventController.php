@@ -1,19 +1,20 @@
 <?php
 
-namespace App\Http\Controllers\Auth;
+namespace App\Http\Controllers\Frontend;
 
 use App\Http\Controllers\Controller;
-use App\Models\Pengguna;
+use App\Models\Event;
 use Illuminate\Http\Request;
 
-class RegisterController extends Controller
+class EventController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        return view('auth.register');
+        $data['list_event'] = Event::all();
+        return view('frontend.event',$data);
     }
 
     /**
@@ -29,24 +30,7 @@ class RegisterController extends Controller
      */
     public function store(Request $request)
     {
-
-        $pengguna = Pengguna::find(request('nik'));
-		if($pengguna) return back()->with('success', 'Anda Sudah Memiliki Akun');
-
-        $pengguna = new Pengguna();
-        $pengguna->nik = request('nik');
-        $pengguna->nama = request('nama');
-        $pengguna->username = request('username');
-        $pengguna->password = request('password');
-        $pengguna->tanggal_lahir = request('tanggal_lahir');
-        $pengguna->tempat_lahir = request('tempat_lahir');
-        $pengguna->alamat = request('alamat');
-        $pengguna->no_hp = request('no_hp');
-        $pengguna->handleUploadPoto();
-        $pengguna->status = '1';
-        $pengguna->save();
-
-        return redirect('login')->with('success', 'Registrasi Berhasil, Silahkan Tunggu Konfirmasi Admin');
+        //
     }
 
     /**

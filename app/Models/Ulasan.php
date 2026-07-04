@@ -3,7 +3,6 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class Ulasan extends Model
 {
@@ -16,8 +15,8 @@ class Ulasan extends Model
         'komentar',
     ];
 
-    public function user(): BelongsTo
+    public function Pengguna()
     {
-        return $this->belongsTo(User::class);
+        return $this->belongsTo(Pengguna::class, 'nik');
     }
 }

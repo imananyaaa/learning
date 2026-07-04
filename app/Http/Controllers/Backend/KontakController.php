@@ -22,14 +22,8 @@ class KontakController extends Controller
      */
     public function create()
     {
-        $kontak = New Kontak();
-        $kontak->whatsapp = request('whatsapp');
-        $kontak->email = request('email');
-        $kontak->alamat = request('alamat');
-        $kontak->maps = request('maps');
-        $kontak->save();
+        return view ('backend.kontak.create');
 
-        return redirect('backend/kontak');
     }
 
     /**
@@ -37,7 +31,14 @@ class KontakController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $kontak = New Kontak();
+        $kontak->no_hp = request('no_hp');
+        $kontak->whatsapp = request('whatsapp');
+        $kontak->instagram = request('instagram');
+        $kontak->alamat = request('alamat');
+        $kontak->save();
+
+        return redirect('backend/kontak');
     }
 
     /**
@@ -45,7 +46,8 @@ class KontakController extends Controller
      */
     public function show(string $id)
     {
-        //
+        $data['kontak'] = Kontak::find($id);
+        return view('backend.kontak.show', $data);
     }
 
     /**
@@ -53,7 +55,8 @@ class KontakController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        $data['kontak'] = Kontak::find($id);
+        return view('backend.kontak.edit', $data);
     }
 
     /**
@@ -61,7 +64,14 @@ class KontakController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $kontak = New Kontak();
+        $kontak->no_hp = request('no_hp');
+        $kontak->whatsapp = request('whatsapp');
+        $kontak->instagram = request('instagram');
+        $kontak->alamat = request('alamat');
+        $kontak->save();
+
+        return redirect('backend/kontak');
     }
 
     /**
@@ -69,6 +79,8 @@ class KontakController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        Kontak::destroy($id);
+
+        return back();
     }
 }

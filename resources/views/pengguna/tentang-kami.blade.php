@@ -1,4 +1,4 @@
-<x-frontend>
+<x-pengguna>
     <section class="page-hero">
     <div class="page-hero-bg"></div>
     <div class="page-hero-ov"></div>
@@ -112,4 +112,4 @@
         </div>
     </div>
 </section>
-</x-frontend>
+</x-pengguna>

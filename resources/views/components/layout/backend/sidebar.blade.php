@@ -27,30 +27,37 @@
 
         <p class="nav-section">Pengelolaan</p>
 
-        <div x-data="{ openFasilitas: false }">
-
+        <div x-data="{ open: {{ request()->routeIs('backend/fasilitas/utama*', 'backend/fasilitas/pendukung*') ? 'true' : 'false' }} }">
             {{-- Menu Utama --}}
-            <button @click="openFasilitas = !openFasilitas" class="nav-link w-full flex items-center justify-between">
+            <button @click="open = !open" class="nav-link w-full flex items-center justify-between {{ request()->routeIs('backend/fasilitas*') ? 'active' : '' }}">
 
                 <div class="flex items-center gap-3">
                     <span class="nav-icon">
                         <i class="fa-solid fa-building"></i>
                     </span>
 
-                    <span>Fasilitas</span>
+                    <span>Data Fasilitas</span>
                 </div>
 
                 <i class="fa-solid fa-chevron-down text-xs transition-transform duration-300"
-                    :class="{ 'rotate-180': openFasilitas }">
+                    :class="{ 'rotate-180': open }">
                 </i>
 
             </button>
 
             {{-- Dropdown --}}
-            <div x-show="openFasilitas" x-transition class="ml-12 mt-1">
+            <div x-show="open" x-transition class="ml-12 mt-1">
 
-                <a href="{{ url('backend/fasilitas') }}" class="block py-2 text-sm text-white/70 hover:text-white">
-                    Data Fasilitas
+                <a href="{{ url('backend/fasilitas-utama') }}" class="block py-2 text-sm text-white/70 hover:text-white">
+                    Fasilitas Utama
+                </a>
+
+            </div>
+
+            <div x-show="open" x-transition class="ml-12 mt-1">
+
+                <a href="{{ url('backend/fasilitas-pendukung') }}" class="block py-2 text-sm text-white/70 hover:text-white"><i class="fa-solid fa-screwdriver-wrench"></i>
+                Fasilitas Pendukung
                 </a>
 
             </div>
@@ -68,13 +75,25 @@
         </a>
         <a href="{{ url('backend/kontak') }}"
             class="nav-link {{ request()->routeIs('backend/kontak*') ? 'active' : '' }}">
-            <span class="nav-icon"><i class="fa-solid fa-envelope"></i></span> Kontak
+            <span class="nav-icon"><i class="fa-solid fa-solid fa-address-book"></i></span> Kontak
+
+        </a>
+
+        <a href="{{ url('backend/pesan') }}"
+            class="nav-link {{ request()->routeIs('backend/pesan*') ? 'active' : '' }}">
+            <span class="nav-icon"><i class="fa-solid fa-envelope"></i></span> Pesan
 
         </a>
 
         <a href="{{ url('backend/pengguna') }}"
             class="nav-link {{ request()->routeIs('backend/pengguna*') ? 'active' : '' }}">
-            <span class="nav-icon"><i class="fa-solid fa-users"></i></span> pengguna
+            <span class="nav-icon"><i class="fa-solid fa-users"></i></span> Pengguna
+
+        </a>
+
+        <a href="{{ url('backend/booking') }}"
+            class="nav-link {{ request()->routeIs('backend/booking*') ? 'active' : '' }}">
+            <span class="nav-icon"><i class="fa-solid fa-calendar-check"></i></span> Booking
 
         </a>
     </nav>

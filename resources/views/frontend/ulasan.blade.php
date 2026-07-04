@@ -1,25 +1,27 @@
 <x-frontend>
+
     <section class="page-hero">
 
-    <div class="page-hero-bg"></div>
+        <div class="page-hero-bg"></div>
 
-    <div class="page-hero-ov"></div>
+        <div class="page-hero-ov"></div>
 
-    <div class="container" style="position:relative; z-index:2;">
+        <div class="container" style="position:relative; z-index:2;">
 
-        <div data-aos="fade-up">
+            <div data-aos="fade-up">
 
-            <div class="stag"
-            style="background:rgba(255,255,255,.15);
+                <div class="stag"
+                    style="background:rgba(255,255,255,.15);
             color:#fff;
             border:1px solid rgba(255,255,255,.25);">
 
-            <i class="bi bi-star-fill"></i>
-            Ulasan
+                    <i class="bi bi-star-fill"></i>
+                    Ulasan
 
-        </div>
+                </div>
 
-            <h1 style="
+                <h1
+                    style="
                 font-size:clamp(2rem,4vw,3rem);
                 font-weight:800;
                 color:#fff;
@@ -27,18 +29,20 @@
                 margin-bottom:16px;
             ">
 
-                Apa Kata
-                <em style="
+                    Apa Kata
+                    <em
+                        style="
                     color:var(--primary-lighter);
                     font-style:normal;
                 ">
-                    Pengguna
-                </em>
+                        Pengguna
+                    </em>
 
-            </h1>
+                </h1>
 
 
-            <p style="
+                <p
+                    style="
                 color:rgba(255,255,255,.75);
                 max-width:500px;
                 line-height:1.8;
@@ -46,130 +50,225 @@
                 font-size:1rem;
             ">
 
-                Berbagai pengalaman dan cerita pengguna selama menggunakan fasilitas Learning Center.
+                    Berbagai pengalaman dan cerita pengguna selama menggunakan fasilitas Learning Center.
 
-            </p>
+                </p>
 
-        </div>
-
-    </div>
-
-</section>
-
-{{-- ULASAN & RATING --}}
-<section style="background:var(--bg-white);" id="ulasan">
-    <div class="container">
-
-        @if(session('success'))
-            <div class="alert alert-success alert-dismissible fade show mb-4" role="alert">
-
-                 <i class="bi bi-check-circle-fill"></i>
-                 {{ session('success') }}
-
-                 <button type="button"
-                         class="btn-close"
-                         data-bs-dismiss="alert">
-                 </button>
-
-              </div>
-          @endif
-
-        <div class="row justify-content-between align-items-end mb-5">
-            <div class="col-lg-6" data-aos="fade-right">
-                <div class="stag"><i class="bi bi-star-fill"></i> Ulasan</div>
-                <h2 class="stitle">Apa Kata <em>Pengguna</em>?</h2>
-                <div class="divider"></div>
-                <p class="sdesc">Ulasan nyata dari para peserta dan pengguna fasilitas Learning Center.</p>
             </div>
+
         </div>
 
-        <div class="row g-4">
+    </section>
 
-            {{-- Review Cards --}}
-            <div class="col-lg-8">
-                <div class="d-flex flex-column gap-3">
-                    @foreach($list_ulasan as $item)
-                    <div class="review-card">
-                        <div class="d-flex align-items-start gap-3">
+    {{-- ULASAN & RATING --}}
+    <section style="background:var(--bg-white);" id="ulasan">
+        <div class="container">
 
-                            {{-- Avatar huruf awal nama --}}
-                            <div class="reviewer-avatar">
-                                {{ strtoupper(substr($item->user->name, 0, 1)) }}
+            @if (session('success'))
+                <div class="alert alert-success alert-dismissible fade show mb-4" role="alert">
+
+                    <i class="bi bi-check-circle-fill"></i>
+                    {{ session('success') }}
+
+                    <button type="button" class="btn-close" data-bs-dismiss="alert">
+                    </button>
+
+                </div>
+            @endif
+
+            <div class="row justify-content-between align-items-end mb-5">
+                <div class="col-lg-6" data-aos="fade-right">
+                    <div class="stag"><i class="bi bi-star-fill"></i> Ulasan</div>
+                    <h2 class="stitle">Apa Kata <em>Pengguna</em>?</h2>
+                    <div class="divider"></div>
+                    <p class="sdesc">Ulasan nyata dari para peserta dan pengguna fasilitas Learning Center.</p>
+                </div>
+            </div>
+
+            <div class="row g-4">
+
+                {{-- Review Cards --}}
+                <div class="col-lg-8">
+                    <div class="d-flex flex-column gap-3">
+                        @foreach ($list_ulasan as $item)
+                            <div class="review-card">
+                                <div class="d-flex align-items-start gap-3">
+
+                                    {{-- Avatar huruf awal nama --}}
+                                    <div class="reviewer-avatar">
+                                        {{ strtoupper(substr($item->user->name, 0, 1)) }}
+                                    </div>
+
+                                    <div class="flex-grow-1">
+
+                                        <div
+                                            class="d-flex justify-content-between align-items-start flex-wrap gap-2 mb-2">
+
+                                            <div>
+                                                <div style="font-weight:700;font-size:.92rem;color:var(--text-dark);">
+                                                    {{ $item->user->name }}
+                                                </div>
+
+                                                <div style="font-size:.76rem;color:var(--text-light);">
+                                                    {{ $item->instansi ?? 'Pengguna Learning Center' }}
+                                                </div>
+                                            </div>
+
+                                            <div class="stars-sm">
+                                                {{ str_repeat('★', $item->rating) }}
+                                                {{ str_repeat('☆', 5 - $item->rating) }}
+                                            </div>
+
+                                        </div>
+
+                                        <p style="font-size:.87rem;color:var(--text-medium);line-height:1.7;margin:0;">
+                                            {{ $item->komentar }}
+                                        </p>
+
+                                    </div>
+
+                                </div>
                             </div>
+                        @endforeach
+                    </div>
+                </div>
+            </div>
 
-                            <div class="flex-grow-1">
+            {{-- Form Ulasan --}}
+            <div class="row mt-5" data-aos="fade-up">
+                <div class="col-lg-8 mx-auto">
 
-                                <div class="d-flex justify-content-between align-items-start flex-wrap gap-2 mb-2">
+                    <div class="review-input-card">
+
+                        @guest
+
+                            {{-- ========================= --}}
+                            {{-- BELUM LOGIN --}}
+                            {{-- ========================= --}}
+
+                            <div class="d-flex align-items-center justify-content-between flex-column flex-md-row gap-3">
+
+                                <div class="d-flex align-items-center gap-3">
+
+                                    <div class="bg-light rounded-circle p-3">
+
+                                        <i class="bi bi-pencil-fill text-primary fs-4"></i>
+
+                                    </div>
 
                                     <div>
-                                        <div style="font-weight:700;font-size:.92rem;color:var(--text-dark);">
-                                            {{ $item->user->name }}
-                                        </div>
 
-                                        <div style="font-size:.76rem;color:var(--text-light);">
-                                            {{ $item->instansi ?? 'Pengguna Learning Center' }}
-                                        </div>
-                                    </div>
+                                        <h5 class="mb-1 fw-bold">
+                                            Tulis Ulasan Anda
+                                        </h5>
 
-                                    <div class="stars-sm">
-                                        {{ str_repeat('★', $item->rating) }}
-                                        {{ str_repeat('☆', 5 - $item->rating) }}
+                                        <p class="text-muted mb-0">
+                                            Untuk menulis ulasan, silakan registrasi atau login terlebih dahulu.
+                                        </p>
+
                                     </div>
 
                                 </div>
 
-                                <p style="font-size:.87rem;color:var(--text-medium);line-height:1.7;margin:0;">
-                                    {{ $item->komentar }}
-                                </p>
+                                <a href="{{ url('register') }}" class="btn-primary-custom">
+
+                                    <i class="bi bi-person-plus-fill"></i>
+
+                                    Registrasi / Login
+
+                                </a>
 
                             </div>
+                        @else
+                            {{-- ========================= --}}
+                            {{-- SUDAH LOGIN --}}
+                            {{-- ========================= --}}
 
-                        </div>
+                            <h4 class="fw-bold mb-2">
+
+                                Tulis Ulasan Anda
+
+                            </h4>
+
+                            <p class="text-muted mb-4">
+
+                                Bagikan pengalaman Anda menggunakan fasilitas Learning Center.
+
+                            </p>
+
+                            <form action="{{ url('ulasan/store') }}" method="POST">
+
+                                @csrf
+
+                                <div class="row g-3">
+
+                                    <div class="col-md-6">
+
+                                        <label class="form-label">
+
+                                            Instansi / Peran
+
+                                        </label>
+
+                                        <input type="text" name="instansi" class="form-control"
+                                            placeholder="Mahasiswa / Peneliti">
+
+                                    </div>
+
+                                    <div class="col-12">
+
+                                        <label class="form-label">
+
+                                            Rating
+
+                                        </label>
+
+                                        <div class="star-rate">
+
+                                            @for ($i = 5; $i >= 1; $i--)
+                                                <input type="radio" id="star{{ $i }}" name="rating"
+                                                    value="{{ $i }}" {{ $i == 5 ? 'checked' : '' }}>
+
+                                                <label for="star{{ $i }}">★</label>
+                                            @endfor
+
+                                        </div>
+
+                                    </div>
+
+                                    <div class="col-12">
+
+                                        <label class="form-label">
+
+                                            Ulasan
+
+                                        </label>
+
+                                        <textarea name="komentar" class="form-control" rows="4" placeholder="Tulis pengalaman Anda..." required></textarea>
+
+                                    </div>
+
+                                    <div class="col-12">
+
+                                        <button type="submit" class="btn-primary-custom">
+
+                                            <i class="bi bi-send-fill"></i>
+
+                                            Kirim Ulasan
+
+                                        </button>
+
+                                    </div>
+
+                                </div>
+
+                            </form>
+
+                        @endguest
+
                     </div>
-                    @endforeach
+
                 </div>
             </div>
-        </div>
-
-        {{-- Form Ulasan --}}
-        <div class="row mt-5" data-aos="fade-up">
-            <div class="col-lg-8 mx-auto">
-                <div class="review-input-card">
-                    <h4 style="font-weight:700;color:var(--text-dark);margin-bottom:6px;">Tulis Ulasan Anda</h4>
-                    <p style="font-size:.87rem;color:var(--text-light);margin-bottom:28px;">Bagikan pengalaman Anda menggunakan fasilitas Learning Center</p>
-                    <form action="{{ url('ulasan.store') }}" method="POST">
-                        @csrf
-                        <div class="row g-3">
-
-                            <div class="col-md-6">
-                                <label style="font-size:.83rem;font-weight:600;color:var(--text-dark);margin-bottom:6px;display:block;">Instansi / Peran</label>
-                                <input type="text" name="instansi" class="form-control" placeholder="Mahasiswa / Peneliti / dll">
-                            </div>
-                            <div class="col-12">
-                                <label style="font-size:.83rem;font-weight:600;color:var(--text-dark);margin-bottom:6px;display:block;">Rating</label>
-                                <div class="star-rate">
-                                    @for($s = 5; $s >= 1; $s--)
-                                    <input type="radio" name="rating" id="star{{ $s }}" value="{{ $s }}" {{ $s == 5 ? 'checked' : '' }}>
-                                    <label for="star{{ $s }}" title="{{ $s }} bintang">★</label>
-                                    @endfor
-                                </div>
-                            </div>
-                            <div class="col-12">
-                                <label style="font-size:.83rem;font-weight:600;color:var(--text-dark);margin-bottom:6px;display:block;">Ulasan</label>
-                                <textarea name="komentar" class="form-control" rows="4"
-                                          placeholder="Ceritakan pengalaman Anda..." required
-                                          style="resize:none;"></textarea>
-                            </div>
-                            <div class="col-12">
-                                <button type="submit" class="btn-primary-custom" style="width:auto;padding:12px 28px;">
-                                    <i class="bi bi-send-fill"></i> Kirim Ulasan
-                                </button>
-                            </div>
-                        </div>
-                    </form>
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
+    </section>
 </x-frontend>

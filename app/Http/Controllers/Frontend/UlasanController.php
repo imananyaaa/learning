@@ -3,16 +3,18 @@
 namespace App\Http\Controllers\Frontend;
 
 use App\Http\Controllers\Controller;
+use App\Models\Ulasan;
 use Illuminate\Http\Request;
 
-class FasilitasContoller extends Controller
+class UlasanController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        return View('frontend.fasilitas');
+        $data['list_ulasan'] = Ulasan::all();
+        return view('frontend.ulasan',$data);
     }
 
     /**

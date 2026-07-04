@@ -38,7 +38,7 @@
                 </li>
             </ul>
             <a href="{{url('login') }}" class="btn-login-nav">
-                <i class="bi bi-person-fill"></i> Login Admin
+                <i class="bi bi-person-fill"></i> Login 
             </a>
         </div>
     </div>

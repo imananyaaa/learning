@@ -1,10 +1,10 @@
 <x-backend>
     <div class="flex items-center justify-between mb-6">
         <div>
-            <h2 class="text-xl font-bold text-slate-800">Kelola Fasilitas</h2>
+            <h2 class="text-xl font-bold text-slate-800">Kelola Fasilitas Utama</h2>
 
         </div>
-        <a href="{{ url('backend/fasilitas/create') }}" class="btn-primary">
+        <a href="{{ url('backend/fasilitas-utama/create') }}" class="btn-primary">
             <i class="fa-solid fa-plus"></i> Tambah Fasilitas
         </a>
     </div>
@@ -29,19 +29,19 @@
                             <td>
                                 <div class="flex items-center justify-center gap-2">
                                     {{-- Detail --}}
-                                    <a href="{{ url('backend/fasilitas/show', $fasilitas->id) }}"
+                                    <a href="{{ url('backend/fasilitas-utama/show', $fasilitas->id) }}"
                                         class="inline-flex items-center gap-1 px-3 py-1.5 rounded-lg text-xs font-semibold bg-blue-50 text-blue-600 hover:bg-blue-100 transition"
                                         title="Lihat Detail">
                                         <i class="fa-solid fa-eye"></i>
                                     </a>
                                     {{-- Edit --}}
-                                    <a href="{{ url('backend/fasilitas/edit', $fasilitas->id) }}" class="btn-warning"
+                                    <a href="{{ url('backend/fasilitas-utama/edit', $fasilitas->id) }}" class="btn-warning"
                                         title="Edit">
                                         <i class="fa-solid fa-pen"></i>
                                     </a>
                                     {{-- Hapus --}}
                                     <a onclick="return confirm('Apakah Anda Yakin Ingin Menghapus Data Ini?')"
-                                        href="{{ url("backend/fasilitas/delete/$fasilitas->id") }}')" class="btn-danger"
+                                        href="{{ url("backend/fasilitas-utama/delete/$fasilitas->id") }}')" class="btn-danger"
                                         title="Hapus">
                                         <i class="fa-solid fa-trash"></i>
                                     </a>
@@ -62,14 +62,10 @@
                                         <p class="text-xs text-slate-400 line-clamp-1 max-w-xs">{{ $fasilitas->deskripsi }}</p>
                                     </div>
                                 </div>
-                            </td>
-                            <td><span
-                                    class="badge badge-{{ $fasilitas->jenis == 'utama' ? 'blue' : 'green' }}">{{ ucfirst($fasilitas->jenis) }}</span>
-                            </td>
-                            <td class="text-slate-600">{{ $fasilitas->kapasitas ? $fasilitas->kapasitas : '-' }}</td>
-                            <td><span
-                                    class="badge badge-{{ $fasilitas->status == 'aktif' ? 'green' : 'gray' }}">{{ ucfirst($fasilitas->status ?? 'aktif') }}</span>
-                            </td>
+                             </td>
+                            <td class="text-slate-400 text-xs">{{ $fasilitas->nama }}</td>
+                            <td class="text-slate-400 text-xs">{{ $fasilitas->kapasitas }}</td>
+                            <td class="text-slate-400 text-xs">{{ $fasilitas->status }}</td>
 
                         </tr>
                     @endforeach

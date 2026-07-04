@@ -5,6 +5,6 @@ use Illuminate\Database\Eloquent\Model;
 class Kontak extends Model
 {
     protected $table = 'kontak';
-    protected $fillable = ['nama','email','telepon','pesan','balasan','status'];
-    protected $attributes = ['status' => 'baru'];
+    protected $fillable = ['no_hp','whatsapp','instagram','alamat'];
+    
 }

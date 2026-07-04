@@ -1,16 +1,23 @@
 <?php
 
-use App\Http\Controllers\Frontend\DashboardContoller;
-use App\Http\Controllers\Frontend\EventContoller;
-use App\Http\Controllers\Frontend\FasilitasContoller;
-use App\Http\Controllers\Frontend\KontakContoller;
-use App\Http\Controllers\Frontend\TentangKamiContoller;
-use App\Http\Controllers\Frontend\UlasanContoller;
+use App\Http\Controllers\Pengguna\DashboardController;
+use App\Http\Controllers\Pengguna\EventController;
+use App\Http\Controllers\Pengguna\FasilitasController;
+use App\Http\Controllers\Pengguna\KontakController;
+use App\Http\Controllers\Pengguna\TentangKamiController;
+use App\Http\Controllers\Pengguna\UlasanController;
 use Illuminate\Support\Facades\Route;
 
-Route::get('/',[DashboardContoller::class, 'index' ]);
-Route::get('/tentang-kami',[TentangKamiContoller::class, 'index' ]);
-Route::get('/fasilitas',[FasilitasContoller::class, 'index' ]);
-Route::get('/event',[EventContoller::class, 'index' ]);
-Route::get('/ulasan',[UlasanContoller::class, 'index' ]);
-Route::get('/kontak',[KontakContoller::class, 'index' ]);
+Route::get('/',[DashboardController::class, 'index' ]);
+Route::get('/tentang-kami',[TentangKamiController::class, 'index' ]);
+
+
+Route::get('/fasilitas',[FasilitasController::class, 'index' ]);
+Route::post('/fasilitas',[FasilitasController::class, 'store' ]);
+
+Route::get('/event',[EventController::class, 'index' ]);
+
+Route::get('/ulasan',[UlasanController::class, 'index' ]);
+Route::post('/ulasan',[UlasanController::class, 'store' ]);
+
+Route::get('/kontak',[KontakController::class, 'index' ]);

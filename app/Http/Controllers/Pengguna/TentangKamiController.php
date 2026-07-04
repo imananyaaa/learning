@@ -1,19 +1,18 @@
 <?php
 
-namespace App\Http\Controllers\Frontend;
+namespace App\Http\Controllers\Pengguna;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\View;
 
-class DashboardContoller extends Controller
+class TentangKamiController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        return View('frontend.home');
+        return view('pengguna.tentang-kami',);
     }
 
     /**

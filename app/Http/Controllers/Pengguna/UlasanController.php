@@ -1,18 +1,21 @@
 <?php
 
-namespace App\Http\Controllers\Frontend;
+namespace App\Http\Controllers\Pengguna;
 
 use App\Http\Controllers\Controller;
+use App\Models\Ulasan;
 use Illuminate\Http\Request;
 
-class TentangKamiContoller extends Controller
+class UlasanController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        return view('frontend.tentang-kami',);
+        $data['list_ulasan'] = Ulasan::all();
+        $data['pengguna'] = $pengguna = auth()->guard('pengguna')->user();
+        return view('pengguna.ulasan',$data);
     }
 
     /**
@@ -28,7 +31,13 @@ class TentangKamiContoller extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $ulasan = New Ulasan();
+        $ulasan->nik = request('nik');
+        $ulasan->rating = request('rating');
+        $ulasan->komentar = request('komentar');
+        $ulasan->save();
+
+        return back()->with('success', 'Terima Kasih Monyet Ulasan Berhasil Dikirim');
     }
 
     /**

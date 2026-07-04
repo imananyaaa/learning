@@ -1,4 +1,4 @@
-<x-frontend>
+<x-pengguna>
     <section class="hero-section">
         <div class="container">
             <div class="row align-items-center g-4 g-lg-5">
@@ -174,5 +174,4 @@
         </div>
     </section>
 
-
-</x-frontend>
+    </x-penggunna>

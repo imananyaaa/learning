@@ -3,16 +3,19 @@
 namespace App\Http\Controllers\Frontend;
 
 use App\Http\Controllers\Controller;
+use App\Models\Fasilitas;
 use Illuminate\Http\Request;
 
-class FasilitasContoller extends Controller
+class FasilitasController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        return View('frontend.fasilitas');
+         $data['list_fasilitas'] = Fasilitas::where('jenis_fasilitas', 'Fasilitas Utama')->get();
+        $data['list_fasilitas_pendukung'] = Fasilitas::where('jenis_fasilitas', 'Fasilitas Pendukung')->get();
+        return View('frontend.fasilitas', $data);
     }
 
     /**

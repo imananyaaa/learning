@@ -1,20 +1,20 @@
 <?php
 
-namespace App\Http\Controllers\Frontend;
+namespace App\Http\Controllers\Backend;
 
 use App\Http\Controllers\Controller;
-use App\Models\Kontak;
+use App\Models\PesanKontak;
 use Illuminate\Http\Request;
 
-class KontakContoller extends Controller
+class PesanController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        $data['list_kontak'] = Kontak::all();
-        return view('frontend.kontak',$data);
+        $data['list_pesan'] = PesanKontak::all();
+        return view ('backend.pesan.index', $data);
     }
 
     /**
@@ -22,7 +22,14 @@ class KontakContoller extends Controller
      */
     public function create()
     {
-        //
+        $kontak = New PesanKontak();
+        $kontak->whatsapp = request('whatsapp');
+        $kontak->email = request('email');
+        $kontak->alamat = request('alamat');
+        $kontak->maps = request('maps');
+        $kontak->save();
+
+        return redirect('backend/pesan');
     }
 
     /**
@@ -38,7 +45,10 @@ class KontakContoller extends Controller
      */
     public function show(string $id)
     {
-        //
+
+        $data['pesan'] = PesanKontak::find($id);
+        return view('backend.pesan.show', $data);
+
     }
 
     /**
