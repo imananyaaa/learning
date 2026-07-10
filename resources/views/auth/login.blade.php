@@ -421,7 +421,7 @@
 
         {{-- Back to frontend --}}
         <div class="back-link">
-            <a href="{{ url('home') }}"><i class="bi bi-arrow-left"></i> Kembali ke Beranda</a>
+            <a href="{{ url('/') }}"><i class="bi bi-arrow-left"></i> Kembali ke Beranda</a>
         </div>
 
     </div>

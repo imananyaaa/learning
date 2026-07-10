@@ -1,124 +1,179 @@
 <x-backend>
-{{-- Statistik --}}
-<div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
-    <div class="card p-4 text-center">
 
-        <span class="badge badge-blue mt-1">
-            Total Pesan
-        </span>
-    </div>
-</div>
+    <div class="card p-5 mb-6">
 
+        <form action="{{ url('backend/pesan') }}" method="GET">
 
-{{-- Tabel Pesan --}}
-<div class="card overflow-hidden">
+            <div class="flex flex-col md:flex-row gap-3">
 
-    <table class="w-full">
+                {{-- Search --}}
+                <div class="relative flex-1">
 
-        <thead class="tbl-head">
-            <tr>
-                <th class="text-left">#</th>
-                <th class="text-center">Aksi</th>
-                <th class="text-left">Pengirim</th>
-                <th class="text-left">Tujuan</th>
-                <th class="text-left">Pesan</th>
-                <th class="text-left">Status</th>
-                <th class="text-left">Tanggal</th>
-            </tr>
-        </thead>
+                    <i class="fa-solid fa-magnifying-glass absolute left-4 top-1/2 -translate-y-1/2 text-slate-400"></i>
 
+                    <input type="text" name="search" value="{{ request('search') }}"
+                        placeholder="Cari pesan..."
+                        class="w-full rounded-xl border border-slate-300 bg-white pl-12 pr-4 py-3
+                           focus:border-blue-500 focus:ring-4 focus:ring-blue-100
+                           transition duration-200">
 
-        <tbody>
+                </div>
 
-        @foreach($list_pesan as $pesan)
+                {{-- Tombol --}}
+                <div class="flex gap-2">
 
-            <tr class="tbl-row">
+                    <button type="submit"
+                        class="px-6 py-3 rounded-xl bg-blue-600 text-white font-semibold
+                           hover:bg-blue-700 transition">
 
-                <td class="text-slate-400 text-xs">
-                    {{ $loop->iteration }}
-                </td>
+                        <i class="fa-solid fa-magnifying-glass mr-2"></i>
+                        Cari
 
-                <td>
-                    <div class="flex items-center justify-center gap-2">
+                    </button>
 
-                        {{-- Lihat detail --}}
-                        <a href="{{ url('backend/pesan/show', $pesan) }}"
-                           class="btn-info">
-                            <i class="fa-solid fa-eye"></i>
+                    @if (request('search'))
+                        <a href="{{ url('backend/pesan') }}"
+                            class="px-6 py-3 rounded-xl border border-red-300
+                              bg-red-50 text-red-600 font-semibold
+                              hover:bg-red-100 transition">
+
+                            <i class="fa-solid fa-rotate-left mr-2"></i>
+                            Reset
+
                         </a>
-
-
-                        {{-- Hapus --}}
-                        <button
-                            onclick="openDel('{{ url('backend/pesan/destroy', $pesan) }}')"
-                            class="btn-danger">
-
-                            <i class="fa-solid fa-trash"></i>
-
-                        </button>
-
-                    </div>
-                </td>
-
-
-                <td>
-                    <p class="font-semibold text-slate-800">
-                        {{ $pesan->nama }}
-                    </p>
-
-                    <p class="text-xs text-slate-400">
-                        {{ $pesan->email }}
-                    </p>
-
-                    @if($pesan->telepon)
-                        <p class="text-xs text-slate-400">
-                            {{ $pesan->telepon }}
-                        </p>
                     @endif
-                </td>
+
+                </div>
+
+            </div>
+
+        </form>
+
+    </div>
+    <div class="flex items-center justify-between mb-6">
+
+        <div>
+            <h2 class="text-xl font-bold text-slate-800">Kelola Pesan Masuk</h2>
+        </div>
+    </div>
 
 
-                <td>
-                    {{ $pesan->tujuan }}
-                </td>
+    {{-- Statistik --}}
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
+        <div class="card p-4 text-center">
 
-                <td class="max-w-xs">
-                    <p class="text-sm text-slate-700 line-clamp-2">
-                        {{ $pesan->pesan }}
-                    </p>
-                </td>
-
-                <td>
-                    @if($pesan->status_baca)
-                        <span class="badge badge-green">
-                            Dibaca
-                        </span>
-
-                    @else
-                        <span class="badge badge-red">
-                            Baru
-                        </span>
-                    @endif
-                </td>
+            <span class="badge badge-blue mt-1">
+                Total Pesan
+            </span>
+        </div>
+    </div>
 
 
-                <td class="text-xs text-slate-500">
-                    {{ $pesan->created_at ? $pesan->created_at->format('d M Y H:i') : '-' }}
-                </td>
-            </tr>
+    {{-- Tabel Pesan --}}
+    <div class="card overflow-hidden">
 
-        @endforeach
+        <table class="w-full">
 
-        </tbody>
+            <thead class="tbl-head">
+                <tr>
+                    <th class="text-left">No</th>
+                    <th class="text-center">Aksi</th>
+                    <th class="text-left">Pengirim</th>
+                    <th class="text-left">Tujuan</th>
+                    <th class="text-left">Pesan</th>
+                    <th class="text-left">Status</th>
+                    <th class="text-left">Tanggal</th>
+                </tr>
+            </thead>
 
-    </table>
+
+            <tbody>
+
+                @foreach ($list_pesan as $pesan)
+                    <tr class="tbl-row">
+
+                        <td class="text-slate-400 text-xs">
+                            {{ $loop->iteration }}
+                        </td>
+
+                        <td>
+                            <div class="flex items-center justify-center gap-2">
+
+                                {{-- Lihat detail --}}
+                                @if ($pesan->status_baca == '0')
+                                    <a href="{{ url('backend/pesan/show', $pesan) }}" class="btn-info">
+                                        <i class="fa-solid fa-eye"></i>
+                                    </a>
+                                @endif
 
 
-    {{-- Pagination --}}
+
+                                {{-- Hapus --}}
+                                <button onclick="openDel('{{ url('backend/pesan/destroy', $pesan) }}')"
+                                    class="btn-danger">
+
+                                    <i class="fa-solid fa-trash"></i>
+
+                                </button>
+
+                            </div>
+                        </td>
 
 
-</div>
+                        <td>
+                            <p class="font-semibold text-slate-800">
+                                {{ $pesan->nama }}
+                            </p>
+
+                            <p class="text-xs text-slate-400">
+                                {{ $pesan->email }}
+                            </p>
+
+                            @if ($pesan->telepon)
+                                <p class="text-xs text-slate-400">
+                                    {{ $pesan->telepon }}
+                                </p>
+                            @endif
+                        </td>
+
+
+                        <td>
+                            {{ $pesan->tujuan }}
+                        </td>
+
+                        <td class="max-w-xs">
+                            <p class="text-sm text-slate-700 line-clamp-2">
+                                {{ $pesan->pesan }}
+                            </p>
+                        </td>
+
+                        <td>
+                            @if ($pesan->status_baca)
+                                <span class="badge badge-green">
+                                    Dibaca
+                                </span>
+                            @else
+                                <span class="badge badge-red">
+                                    Baru
+                                </span>
+                            @endif
+                        </td>
+
+
+                        <td class="text-xs text-slate-500">
+                            {{ $pesan->created_at ? $pesan->created_at->format('d M Y H:i') : '-' }}
+                        </td>
+                    </tr>
+                @endforeach
+
+            </tbody>
+
+        </table>
+
+
+        {{-- Pagination --}}
+
+
+    </div>
 
 </x-backend>
-
-

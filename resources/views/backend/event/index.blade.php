@@ -1,8 +1,62 @@
 <x-backend>
+
+    <div class="card p-5 mb-6">
+
+            <form action="{{ url('backend/event') }}" method="GET">
+
+                <div class="flex flex-col md:flex-row gap-3">
+
+                    {{-- Search --}}
+                    <div class="relative flex-1">
+
+                        <i
+                            class="fa-solid fa-magnifying-glass absolute left-4 top-1/2 -translate-y-1/2 text-slate-400"></i>
+
+                        <input type="text" name="search" value="{{ request('search') }}"
+                            placeholder="Cari event..."
+                            class="w-full rounded-xl border border-slate-300 bg-white pl-12 pr-4 py-3
+                           focus:border-blue-500 focus:ring-4 focus:ring-blue-100
+                           transition duration-200">
+
+                    </div>
+
+                    {{-- Tombol --}}
+                    <div class="flex gap-2">
+
+                        <button type="submit"
+                            class="px-6 py-3 rounded-xl bg-blue-600 text-white font-semibold
+                           hover:bg-blue-700 transition">
+
+                            <i class="fa-solid fa-magnifying-glass mr-2"></i>
+                            Cari
+
+                        </button>
+
+                        @if (request('search'))
+                            <a href="{{ url('backend/event') }}"
+                                class="px-6 py-3 rounded-xl border border-red-300
+                              bg-red-50 text-red-600 font-semibold
+                              hover:bg-red-100 transition">
+
+                                <i class="fa-solid fa-rotate-left mr-2"></i>
+                                Reset
+
+                            </a>
+                        @endif
+
+                    </div>
+
+                </div>
+
+            </form>
+
+        </div>
+
+
+
     <div class="flex items-center justify-between mb-6">
         <div>
             <h2 class="text-xl font-bold text-slate-800">Kelola Event</h2>
-            <p class="text-sm text-slate-500 mt-0.5">Total event terdaftar</p>
         </div>
         <a href="{{ url('backend/event/create') }}" class="btn-primary">
             <i class="fa-solid fa-plus"></i> Tambah Event
@@ -14,7 +68,7 @@
             <table class="w-full">
                 <thead class="tbl-head">
                     <tr>
-                        <th class="text-left">#</th>
+                        <th class="text-left">No</th>
                         <th class="text-center">Aksi</th>
                         <th class="text-left">Event</th>
                         <th class="text-left">Tanggal</th>
@@ -100,7 +154,6 @@
                                 </span>
                             </td>
 
-                            {{-- Aksi --}}
 
                         </tr>
                     @endforeach

@@ -8,9 +8,11 @@ class Ulasan extends Model
 {
     protected $table = 'ulasan';
 
-    protected $fillable = [
-        'user_id',
-        'instansi',
+     protected $fillable = [
+        'nama',
+        'email',
+        'no_hp',
+        'alamat',
         'rating',
         'komentar',
     ];

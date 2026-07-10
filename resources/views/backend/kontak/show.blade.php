@@ -1,5 +1,5 @@
 <x-backend>
-<div class="max-w-3xl">
+<div class="max-w">
     <a href="{{ url('backend/kontak') }}"
        class="text-sm text-slate-500 hover:text-blue-600 flex items-center gap-1 mb-5">
         <i class="fa-solid fa-arrow-left text-xs"></i> Kembali

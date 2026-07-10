@@ -6,65 +6,40 @@ use App\Http\Controllers\Controller;
 use App\Models\Booking;
 use App\Models\Tracking;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Schema;
 
 class BookingController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        $data['list_booking'] = Booking::all();
+        $data['booking_masuk'] = Booking::where('status', '1')->count();
+
+        $data['list_booking'] = $this->getBooking($request, [1,2]);
         return view('backend.booking.index', $data);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
+    public function bookingSelesai(Request $request)
     {
-        //
+        $data['list_booking'] = $this->getBooking($request, [4]);
+        return view('backend.booking.selesai', $data);
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(Request $request)
+    public function bookingDitolak(Request $request)
     {
-        //
+         $data['list_booking'] = $this->getBooking($request, [3]);
+        return view('backend.booking.ditolak', $data);
     }
 
-    /**
-     * Display the specified resource.
-     */
+
     public function show(string $id)
     {
-        //
+        $data['booking'] = Booking::find($id);
+        return view('backend.booking.show', $data);
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(string $id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, string $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(string $id)
-    {
-        //
-    }
 
     public function verifikasi(Booking $booking)
     {
@@ -89,7 +64,7 @@ class BookingController extends Controller
         $tracking->status = 'Ditolak';
         $tracking->save();
 
-        return back()->with('success', 'Data Booking Berhasil Di Tolak');
+        return redirect('backend/booking-ditolak')->with('success', 'Data Booking Berhasil Di Tolak');
     }
 
     public function selesai(Booking $booking)
@@ -103,5 +78,61 @@ class BookingController extends Controller
         $tracking->save();
 
         return back()->with('success', 'Data Booking Berhasil Di Selesaikan');
+    }
+
+
+    public function konfirmasi(Request $request, $id)
+    {
+        $booking = Booking::find($id);
+
+        $booking->catatan = $request->catatan;
+
+        if ($request->aksi == 'terima') {
+            $booking->status = 2;
+            $statusTracking = 'Diterima';
+        } else {
+            $booking->status = 3;
+            $statusTracking = 'Ditolak';
+        }
+
+        $booking->save();
+
+        $tracking = new Tracking();
+        $tracking->id_booking = $booking->id;
+        $tracking->status = $statusTracking;
+        $tracking->save();
+
+        return redirect()->back()
+            ->with('success', 'Booking berhasil dikonfirmasi.');
+    }
+
+    private function getBooking(Request $request, array $status)
+    {
+        $search = $request->search;
+
+        $columns = collect(Schema::getColumnListing('booking'))
+            ->reject(function ($column) {
+                return in_array($column, [
+                    'id',
+                    'created_at',
+                    'updated_at',
+                ]);
+            });
+
+        return Booking::whereIn('status', $status)
+            ->when($search, function ($query) use ($search, $columns) {
+
+                $query->where(function ($q) use ($search, $columns) {
+
+                    foreach ($columns as $column) {
+                        $q->orWhere($column, 'like', "%{$search}%");
+                    }
+
+                });
+
+            })
+            ->orderByDesc('id')
+            ->paginate(10)
+            ->withQueryString();
     }
 }

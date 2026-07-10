@@ -1,10 +1,61 @@
 <x-backend>
-    <div class="flex items-center justify-between mb-6">
-        <div>
-            <h2 class="text-xl font-bold text-slate-800">Kelola Pengguna</h2>
-            <p class="text-sm text-slate-500 mt-0.5">Total Pengguna Terdaftar</p>
+    <div class="card p-5 mb-6">
+
+            <form action="{{ url('backend/pengguna') }}" method="GET">
+
+                <div class="flex flex-col md:flex-row gap-3">
+
+                    {{-- Search --}}
+                    <div class="relative flex-1">
+
+                        <i
+                            class="fa-solid fa-magnifying-glass absolute left-4 top-1/2 -translate-y-1/2 text-slate-400"></i>
+
+                        <input type="text" name="search" value="{{ request('search') }}"
+                            placeholder="Cari nama..."
+                            class="w-full rounded-xl border border-slate-300 bg-white pl-12 pr-4 py-3
+                           focus:border-blue-500 focus:ring-4 focus:ring-blue-100
+                           transition duration-200">
+
+                    </div>
+
+                    {{-- Tombol --}}
+                    <div class="flex gap-2">
+
+                        <button type="submit"
+                            class="px-6 py-3 rounded-xl bg-blue-600 text-white font-semibold
+                           hover:bg-blue-700 transition">
+
+                            <i class="fa-solid fa-magnifying-glass mr-2"></i>
+                            Cari
+
+                        </button>
+
+                        @if (request('search'))
+                            <a href="{{ url('backend/pengguna') }}"
+                                class="px-6 py-3 rounded-xl border border-red-300
+                              bg-red-50 text-red-600 font-semibold
+                              hover:bg-red-100 transition">
+
+                                <i class="fa-solid fa-rotate-left mr-2"></i>
+                                Reset
+
+                            </a>
+                        @endif
+
+                    </div>
+
+                </div>
+
+            </form>
+
         </div>
-    </div>
+        <div class="flex items-center justify-between mb-6">
+
+            <div>
+                <h2 class="text-xl font-bold text-slate-800">Kelola Data pengguna</h2>
+            </div>
+        </div>
 
     <div class="card overflow-hidden">
         <div class="overflow-x-auto">
@@ -76,7 +127,7 @@
                                 @elseif ($pengguna->status == '2')
                                 <span class="btn-danger">Sudah Terverifikasi</span>
                                 @endif
-                            </td>   
+                            </td>
 
                            <td class="text-center">
                                 <img src="{{ url("public/$pengguna->foto") }}" width="50" >

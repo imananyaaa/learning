@@ -1,5 +1,5 @@
 <x-backend>
-<div class="max-w-4xl">
+<div class="max-w">
 
     <a href="{{ url('backend/fasilitas-utama') }}"
        class="text-sm text-slate-500 hover:text-blue-600 flex items-center gap-1 mb-5">

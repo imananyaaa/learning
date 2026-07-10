@@ -94,11 +94,6 @@
                             <div class="review-card">
                                 <div class="d-flex align-items-start gap-3">
 
-                                    {{-- Avatar huruf awal nama --}}
-                                    <div class="reviewer-avatar">
-                                        {{ strtoupper(substr($item->user->name, 0, 1)) }}
-                                    </div>
-
                                     <div class="flex-grow-1">
 
                                         <div
@@ -106,7 +101,7 @@
 
                                             <div>
                                                 <div style="font-weight:700;font-size:.92rem;color:var(--text-dark);">
-                                                    {{ $item->user->name }}
+                                                    {{ $item->user?->name ?? 'Pengguna Learning Center' }}
                                                 </div>
 
                                                 <div style="font-size:.76rem;color:var(--text-light);">

@@ -43,11 +43,17 @@ class PesanController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show(PesanKontak $pesanKontak)
     {
 
-        $data['pesan'] = PesanKontak::find($id);
-        return view('backend.pesan.show', $data);
+         if ($pesanKontak->status_baca == 0) {
+        $pesanKontak->status_baca = 1;
+        $pesanKontak->save();
+    }
+
+    return view('backend.pesan.show', [
+        'pesanKontak' => $pesanKontak
+    ]);
 
     }
 

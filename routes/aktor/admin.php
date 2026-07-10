@@ -10,6 +10,7 @@ use App\Http\Controllers\Backend\KontakController;
 use App\Http\Controllers\Backend\UlasanController;
 use App\Http\Controllers\Backend\PenggunaController;
 use App\Http\Controllers\Backend\PesanController;
+use App\Http\Controllers\Backend\TentangKamiController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/',[DashboardController::class, 'index' ]);
@@ -17,6 +18,13 @@ Route::resource('fasilitas', FasilitasController::class);
 
 Route::get('/dashboard',[DashboardController::class, 'index' ]);
 
+
+Route::get('/tentang_kami',[TentangKamiController::class, 'index' ]);
+Route::get('/tentang_kami/create',[TentangKamiController::class, 'create' ]);
+Route::post('/tentang_kami', [TentangKamiController::class, 'store']);
+Route::get('/tentang_kami/show/{id}',[TentangKamiController::class, 'show' ]);
+Route::get('/tentang_kami/edit/{id}',[TentangKamiController::class, 'edit' ]);
+Route::put('/tentang_kami/update/{id}',[TentangKamiController::class, 'update' ]);
 
 
 Route::get('/event',[EventController::class, 'index' ]);
@@ -49,6 +57,7 @@ Route::get('/fasilitas-pendukung/delete/{id}',[FasilitasPendukungController::cla
 Route::get('/ulasan',[UlasanController::class, 'index' ]);
 Route::get('/ulasan/show/{id}',[UlasanController::class, 'show' ]);
 Route::get('/ulasan/delete/{id}',[UlasanController::class, 'destroy' ]);
+Route::post('/ulasan/import',[UlasanController::class, 'import' ]);
 
 
 Route::get('/kontak',[KontakController::class, 'index' ]);
@@ -61,7 +70,7 @@ Route::get('/kontak/delete/{id}',[KontakController::class, 'destroy' ]);
 
 
 Route::get('/pesan',[PesanController::class, 'index' ]);
-Route::get('/pesan/show/{id}',[PesanController::class, 'show' ]);
+Route::get('/pesan/show/{pesanKontak}', [PesanController::class, 'show']);
 
 
 Route::get('pengguna',[PenggunaController::class, 'index' ]);
@@ -74,3 +83,10 @@ Route::put('pengguna/verifikasi/{pengguna}', [PenggunaController::class, 'verifi
 
 
 Route::get('booking',[BookingController::class, 'index' ]);
+Route::get('booking/show/{id}', [BookingController::class, 'show']);
+Route::put('booking/verifikasi/{booking}', [BookingController::class, 'verifikasi']);
+Route::put('booking/ditolak/{booking}', [BookingController::class, 'ditolak']);
+Route::put('booking/selesai/{booking}', [BookingController::class, 'selesai']);
+Route::get('booking-selesai', [BookingController::class, 'bookingSelesai']);
+Route::get('booking-ditolak', [BookingController::class, 'bookingDitolak']);
+Route::put('/booking/konfirmasi/{id}', [BookingController::class, 'konfirmasi']);

@@ -44,7 +44,9 @@ class FasilitasPendukungController extends Controller
      */
     public function show(string $id)
     {
-        //
+        $data['fasilitas'] = Fasilitas::find($id);
+
+        return view('backend.fasilitas.fasilitas-pendukung.show', $data);
     }
 
     /**
@@ -52,7 +54,9 @@ class FasilitasPendukungController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        $data['fasilitas'] = Fasilitas::find($id);
+
+        return view('backend.fasilitas.fasilitas-pendukung.edit', $data);
     }
 
     /**
@@ -60,7 +64,15 @@ class FasilitasPendukungController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $fasilitas = Fasilitas::find($id);
+        $fasilitas->nama = request('nama');
+        $fasilitas->jenis_fasilitas = 'Fasilitas Pendukung';
+        $fasilitas->deskripsi = request('deskripsi');
+        $fasilitas->status = request('status');
+        $fasilitas->handleUploadPoto();
+        $fasilitas->save();
+
+        return redirect('backend/fasilitas-pendukung')->with('success', 'Data Berhasil di Simpan');
     }
 
     /**
@@ -68,6 +80,8 @@ class FasilitasPendukungController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+         Fasilitas::destroy($id);
+
+        return back();
     }
 }

@@ -34,9 +34,9 @@
                     <div class="vm-icon"><i class="bi bi-eye-fill"></i></div>
                     <h4 style="font-weight:700;color:var(--text-dark);margin-bottom:14px;">Visi</h4>
                     <p style="color:var(--text-medium);line-height:1.85;font-size:.95rem;margin:0;">
-                        Komunitas lokal, sektor swasta, lembaga penelitian akademik, serta organisasi pemerintah
-                        dan non-pemerintah berkumpul di Learning Center untuk
-                        <strong style="color:var(--text-dark);">membangun masa depan yang lebih baik bagi manusia dan alam.</strong>
+                        {{ $tentang_kami->visi ?? 'Komunitas lokal, sektor swasta, lembaga penelitian akademik, serta organisasi pemerintah
+                        dan non-pemerintah berkumpul di Learning Center untuk' }}
+                        {{-- <strong style="color:var(--text-dark);">membangun masa depan yang lebih baik bagi manusia dan alam.</strong> --}}
                     </p>
                 </div>
             </div>
@@ -45,9 +45,9 @@
                     <div class="vm-icon"><i class="bi bi-bullseye"></i></div>
                     <h4 style="font-weight:700;color:var(--text-dark);margin-bottom:14px;">Misi</h4>
                     <p style="color:var(--text-medium);line-height:1.85;font-size:.95rem;margin:0;">
-                        Membangun kesadaran, pengetahuan, dan kapasitas melalui penelitian dan pendidikan untuk
-                        <strong style="color:var(--text-dark);">melindungi lingkungan dan memungkinkan pertumbuhan berkelanjutan
-                        Kabupaten Ketapang.</strong>
+                        {{ $tentang_kami->misi ?? 'Membangun kesadaran, pengetahuan, dan kapasitas melalui penelitian dan pendidikan untuk' }}
+                        {{-- <strong style="color:var(--text-dark);">melindungi lingkungan dan memungkinkan pertumbuhan berkelanjutan --}}
+                        {{-- Kabupaten Ketapang.</strong> --}}
                     </p>
                 </div>
             </div>
@@ -61,7 +61,7 @@
         <div class="row align-items-center g-5">
             <div class="col-lg-5" data-aos="fade-right">
                 <div style="border-radius:var(--radius-lg);overflow:hidden;box-shadow:var(--shadow-lg);">
-                    <img src="{{ url('public/images/lc.jpg') }}"
+                    <img src="{{ url('public/' . $tentang_kami->foto) }}"
                          style="width:100%;height:420px;object-fit:cover;display:block;"
                          alt="Learning Center IAR Indonesia"
                          onerror="this.style.display='none'">
@@ -70,6 +70,9 @@
             <div class="col-lg-7" data-aos="fade-left">
                 <div class="stag"><i class="bi bi-clock-history"></i> Sejarah</div>
                 <h2 class="stitle">Perjalanan <em>Kami</em></h2>
+                <p style="color:var(--text-medium);line-height:1.85;font-size:.95rem;margin:0;">
+                        {{ $tentang_kami->sejarah ?? '-' }}
+                </p>
                 <div class="divider"></div>
                 <div class="d-flex flex-column gap-3 mt-4">
 

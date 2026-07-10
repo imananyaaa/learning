@@ -10,7 +10,7 @@
                 @csrf
                 <div class="space-y-5">
                     <div>
-                        <label class="form-label">Nama Fasilitas <span class="text-red-500">*</span></label>
+                        <label class="form-label">Nama Fasilitas Pendukung <span class="text-red-500">*</span></label>
                         <input type="text" name="nama" value="{{ old('nama') }}" class="form-input"
                             placeholder="contoh: Ruang Rapat Utama" required>
                         @error('nama')

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Pengguna;
 
 use App\Http\Controllers\Controller;
+use App\Models\TentangKami;
 use Illuminate\Http\Request;
 
 class TentangKamiController extends Controller
@@ -12,7 +13,8 @@ class TentangKamiController extends Controller
      */
     public function index()
     {
-        return view('pengguna.tentang-kami',);
+        $tentang_kami = TentangKami::first();
+        return view('pengguna.tentang-kami', compact('tentang_kami'));
     }
 
     /**

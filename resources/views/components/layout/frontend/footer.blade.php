@@ -51,9 +51,7 @@
                 <ul class="list-unstyled d-flex flex-column gap-1">
                     <li><a href="#" class="footer-link">Ruang Rapat</a></li>
                     <li><a href="#" class="footer-link">Aula Serbaguna</a></li>
-                    <li><a href="#" class="footer-link">Penginapan</a></li>
-                    <li><a href="#" class="footer-link">Ruang Kelas</a></li>
-                    <li><a href="#" class="footer-link">Kantin</a></li>
+                    <li><a href="#" class="footer-link">Kamar</a></li>
                 </ul>
             </div>
 

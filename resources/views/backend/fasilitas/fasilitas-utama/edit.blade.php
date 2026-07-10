@@ -1,15 +1,15 @@
 <x-backend>
-    <div class="max-w-2xl">
-        <a href="{{ url('backend/fasilitas') }}"
+    <div class="max-w">
+        <a href="{{ url('backend/fasilitas-utama') }}"
             class="text-sm text-slate-500 hover:text-blue-600 flex items-center gap-1 mb-5"><i
                 class="fa-solid fa-arrow-left text-xs"></i> Kembali</a>
         <div class="card p-7">
-            <h2 class="text-lg font-bold text-slate-800 mb-6">Edit Fasilitas</h2>
-            <form action="{{ url('backend/fasilitas/update', $fasilitas) }}" method="POST" enctype="multipart/form-data">
+            <h2 class="text-lg font-bold text-slate-800 mb-6">Edit Fasilitas Utama</h2>
+            <form action="{{ url('backend/fasilitas-utama/update', $fasilitas) }}" method="POST" enctype="multipart/form-data">
                 @csrf @method('PUT')
                 <div class="space-y-5">
                     <div>
-                        <label class="form-label">Nama Fasilitas_utama <span class="text-red-500">*</span></label>
+                        <label class="form-label">Nama Fasilitas <span class="text-red-500">*</span></label>
                         <input type="text" name="nama" value="{{ old('nama', $fasilitas->nama) }}"
                             class="form-input" required>
                         @error('nama')
@@ -21,9 +21,9 @@
                             <label class="form-label">Jenis <span class="text-red-500">*</span></label>
                             <select name="jenis" class="form-input" required>
                                 <option value="utama" {{ old('jenis', $fasilitas->jenis) == 'utama' ? 'selected' : '' }}>
-                                    Fasilitas_utama Utama</option>
+                                    Fasilitas Utama</option>
                                 <option value="pendukung"
-                                    {{ old('jenis', $fasilitas->jenis) == 'pendukung' ? 'selected' : '' }}>Fasilitas_utama Pendukung
+                                    {{ old('jenis', $fasilitas->jenis) == 'pendukung' ? 'selected' : '' }}>Fasilitas Utama
                                 </option>
                             </select>
                         </div>
@@ -59,7 +59,7 @@
                             onchange="previewImg(this,'prev')">
                     </div>
                     <div class="flex gap-3 pt-2">
-                        <a href="{{ url('backend/fasilitas_utama/update') }}"
+                        <a href="{{ url('backend/fasilitas-utama/update') }}"
                             class="flex-1 py-2.5 text-center rounded-xl border border-slate-200 text-slate-600 font-semibold text-sm hover:bg-slate-50">Batal</a>
                         <button type="submit" class="btn-primary flex-1 justify-center py-2.5"><i
                                 class="fa-solid fa-save"></i> Simpan Perubahan</button>

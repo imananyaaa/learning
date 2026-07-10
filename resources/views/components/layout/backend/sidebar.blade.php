@@ -27,6 +27,11 @@
 
         <p class="nav-section">Pengelolaan</p>
 
+        <a href="{{ url('backend/tentang_kami') }}"
+            class="nav-link {{ request()->routeIs('backend/tentang_kami*') ? 'active' : '' }}">
+            <span class="nav-icon"><i class="fa-solid fa-address-card"></i></span> Tentang Kami
+        </a>
+
         <div x-data="{ open: {{ request()->routeIs('backend/fasilitas/utama*', 'backend/fasilitas/pendukung*') ? 'true' : 'false' }} }">
             {{-- Menu Utama --}}
             <button @click="open = !open" class="nav-link w-full flex items-center justify-between {{ request()->routeIs('backend/fasilitas*') ? 'active' : '' }}">

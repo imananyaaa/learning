@@ -16,6 +16,7 @@ Route::get('/fasilitas',[FasilitasController::class, 'index' ]);
 Route::post('/fasilitas',[FasilitasController::class, 'store' ]);
 
 Route::get('/event',[EventController::class, 'index' ]);
+Route::get('/event/show/{id}',[EventController::class, 'show' ]);
 
 Route::get('/ulasan',[UlasanController::class, 'index' ]);
 Route::post('/ulasan',[UlasanController::class, 'store' ]);

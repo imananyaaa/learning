@@ -702,10 +702,7 @@
                                     <li><i class="bi bi-check-circle-fill"></i> {{ $item }}</li>
                                 @endforeach
                             </ul>
-                            <a href="https://wa.me/6285750057187?text={{ urlencode('Halo, saya ingin memesan paket ' . $pk[0] . ' di Learning Center IAR Indonesia') }}"
-                                target="_blank" class="btn-primary-custom mt-4">
-                                <i class="bi bi-whatsapp"></i> Pesan Sekarang
-                            </a>
+                            
                         </div>
                     </div>
                 @endforeach

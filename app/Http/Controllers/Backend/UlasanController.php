@@ -5,16 +5,38 @@ namespace App\Http\Controllers\Backend;
 use App\Http\Controllers\Controller;
 use App\Models\Ulasan;
 use Illuminate\Http\Request;
+use App\Imports\UlasanImport;
+use Maatwebsite\Excel\Facades\Excel;
 
 class UlasanController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        $data['list_ulasan'] = Ulasan::all();
+        $search = $request->search;
+
+        $data['list_ulasan'] = Ulasan::when($search, function ($query) use ($search) {
+                $query->where('nama', 'like', "%{$search}%")
+                    ->orWhere('komentar', 'like', "%{$search}%");
+            })
+            ->latest()
+            ->paginate(10)
+            ->withQueryString();
         return view ('backend.ulasan.index',$data);
+    }
+
+
+    public function import(Request $request)
+    {
+        $request->validate([
+            'file'=>'required|mimes:xlsx,xls'
+        ]);
+
+        Excel::import(new UlasanImport(), $request->file('file'));
+
+        return back()->with('success','Import berhasil.');
     }
 
     /**

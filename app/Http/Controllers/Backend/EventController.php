@@ -80,7 +80,7 @@ class EventController extends Controller
         $event->deskripsi = request('deskripsi');
         $event->save();
 
-        return redirect('backend/event');
+        return redirect('backend/event')->with('success', 'Data Berhasil di Simpan');
     }
 
     /**
