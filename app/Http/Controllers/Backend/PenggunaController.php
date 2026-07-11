@@ -5,14 +5,43 @@ namespace App\Http\Controllers\Backend;
 use App\Http\Controllers\Controller;
 use App\Models\Pengguna;
 use Illuminate\Http\Request;
-use PhpParser\Node\Expr\New_;
+use Illuminate\Support\Facades\Schema;
 
 class PenggunaController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
 
-        $data['list_pengguna'] = Pengguna::all();
+        $search = $request->search;
+
+        // Ambil semua kolom kecuali yang tidak perlu dicari
+        $columns = collect(Schema::getColumnListing('pengguna'))
+            ->reject(function ($column) {
+                return in_array($column, [
+                    'id',
+                    'created_at',
+                    'updated_at',
+
+                ]);
+            });
+
+        $data['list_pengguna'] = Pengguna::when($search, function ($query) use ($search, $columns) {
+
+                $query->where(function ($q) use ($search, $columns) {
+
+                    foreach ($columns as $column) {
+                        $q->orWhere($column, 'like', "%{$search}%");
+                    }
+
+                });
+
+            })
+            ->orderByDesc('created_at')
+            ->latest()
+            ->paginate(10)
+            ->withQueryString();
+
+
         return view('backend.pengguna.index', $data);
     }
 

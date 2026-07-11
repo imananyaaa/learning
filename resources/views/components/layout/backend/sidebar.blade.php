@@ -32,41 +32,47 @@
             <span class="nav-icon"><i class="fa-solid fa-address-card"></i></span> Tentang Kami
         </a>
 
-        <div x-data="{ open: {{ request()->routeIs('backend/fasilitas/utama*', 'backend/fasilitas/pendukung*') ? 'true' : 'false' }} }">
-            {{-- Menu Utama --}}
-            <button @click="open = !open" class="nav-link w-full flex items-center justify-between {{ request()->routeIs('backend/fasilitas*') ? 'active' : '' }}">
+         <div x-data="{ open: {{ request()->routeIs('backend/fasilitas/utama*', 'backend/fasilitas/pendukung*') ? 'true' : 'false' }} }">
 
-                <div class="flex items-center gap-3">
+            <button @click="open = !open"
+                class="nav-link w-full flex items-center justify-between {{ request()->routeIs('backend/fasilitas*') ? 'active' : '' }}">
+                <div class="flex items-center">
                     <span class="nav-icon">
                         <i class="fa-solid fa-building"></i>
                     </span>
-
-                    <span>Data Fasilitas</span>
+                    <span style="margin-left: 10px"> Data Fasilitas</span>
                 </div>
-
-                <i class="fa-solid fa-chevron-down text-xs transition-transform duration-300"
-                    :class="{ 'rotate-180': open }">
-                </i>
-
+                <i class="fa-solid fa-chevron-down text-[10px] opacity-70 transition-transform duration-300"
+                    :class="open ? 'rotate-180' : ''"></i>
             </button>
 
-            {{-- Dropdown --}}
-            <div x-show="open" x-transition class="ml-12 mt-1">
+            <div x-show="open" x-collapse x-transition:enter="transition ease-out duration-200"
+                x-transition:enter-start="opacity-0 -translate-y-2" x-transition:enter-end="opacity-100 translate-y-0"
+                x-transition:leave="transition ease-in duration-150"
+                x-transition:leave-start="opacity-100 translate-y-0" x-transition:leave-end="opacity-0 -translate-y-2"
+                class="pl-12 pr-4 py-2 space-y-1" style="display: none;">
 
-                <a href="{{ url('backend/fasilitas-utama') }}" class="block py-2 text-sm text-white/70 hover:text-white">
-                    Fasilitas Utama
+                <a href="{{ url('backend/fasilitas-utama') }}"
+                    class="block py-2 text-sm rounded-md transition-colors {{ request()->routeIs('backend/fasilitas/utama*') ? 'text-white bg-white/10 font-medium' : 'text-white/60 hover:text-white hover:bg-white/5' }}">
+                    <div class="flex items-center">
+                        <span class="nav-icon">
+                            <i class="fa-solid fa-door-open"></i>
+                        </span>
+                        <span style="margin-left: 10px"> Fasilitas Utama</span>
+                    </div>
+                </a>
+
+                <a href="{{ url('backend/fasilitas-pendukung') }}"
+                    class="block py-2 text-sm rounded-md transition-colors {{ request()->routeIs('backend/fasilitas/pendukung*') ? 'text-white bg-white/10 font-medium' : 'text-white/60 hover:text-white hover:bg-white/5' }}">
+                    <div class="flex items-center">
+                        <span class="nav-icon">
+                            <i class="fa-solid fa-screwdriver-wrench"></i>
+                        </span>
+                        <span style="margin-left: 10px"> Fasilitas Pendukung</span>
+                    </div>
                 </a>
 
             </div>
-
-            <div x-show="open" x-transition class="ml-12 mt-1">
-
-                <a href="{{ url('backend/fasilitas-pendukung') }}" class="block py-2 text-sm text-white/70 hover:text-white"><i class="fa-solid fa-screwdriver-wrench"></i>
-                Fasilitas Pendukung
-                </a>
-
-            </div>
-
         </div>
 
         <a href="{{ url('backend/event') }}"
@@ -96,11 +102,63 @@
 
         </a>
 
-        <a href="{{ url('backend/booking') }}"
-            class="nav-link {{ request()->routeIs('backend/booking*') ? 'active' : '' }}">
-            <span class="nav-icon"><i class="fa-solid fa-calendar-check"></i></span> Booking
+        <div x-data="{ open: {{ request()->routeIs('backend/booking*', 'backend/booking-selesai*', 'backend/booking-ditolak*') ? 'true' : 'false' }} }">
 
-        </a>
+            <button @click="open = !open"
+                class="nav-link w-full flex items-center justify-between {{ request()->routeIs('backend/booking*') ? 'active' : '' }}">
+                <div class="flex items-center">
+                    <span class="nav-icon">
+                        <i class="fa-solid fa-list"></i>
+                    </span>
+                    <span style="margin-left: 10px"> Data Booking</span>
+
+                    <span class="ml-2 bg-red-500 text-white text-xs rounded-full px-2 py-1">
+                        {{ $booking_masuk }}
+                    </span>
+
+                </div>
+                <i class="fa-solid fa-chevron-down text-[10px] opacity-70 transition-transform duration-300"
+                    :class="open ? 'rotate-180' : ''"></i>
+            </button>
+
+            <div x-show="open" x-collapse x-transition:enter="transition ease-out duration-200"
+                x-transition:enter-start="opacity-0 -translate-y-2" x-transition:enter-end="opacity-100 translate-y-0"
+                x-transition:leave="transition ease-in duration-150"
+                x-transition:leave-start="opacity-100 translate-y-0" x-transition:leave-end="opacity-0 -translate-y-2"
+                class="pl-12 pr-4 py-2 space-y-1" style="display: none;">
+
+                <a href="{{ url('backend/booking') }}"
+                    class="block py-2 text-sm rounded-md transition-colors {{ request()->routeIs('backend/booking*') ? 'text-white bg-white/10 font-medium' : 'text-white/60 hover:text-white hover:bg-white/5' }}">
+                    <div class="flex items-center">
+                        <span class="nav-icon">
+                            <i class="fa-solid fa-list"></i>
+                        </span>
+                        <span style="margin-left: 10px"> Booking Masuk</span>
+                    </div>
+                </a>
+
+                <a href="{{ url('backend/booking-selesai') }}"
+                    class="block py-2 text-sm rounded-md transition-colors {{ request()->routeIs('backend/booking-selesai*') ? 'text-white bg-white/10 font-medium' : 'text-white/60 hover:text-white hover:bg-white/5' }}">
+                    <div class="flex items-center">
+                        <span class="nav-icon">
+                            <i class="fa-solid fa-check"></i>
+                        </span>
+                        <span style="margin-left: 10px"> Booking Selesai</span>
+                    </div>
+                </a>
+
+                <a href="{{ url('backend/booking-ditolak') }}"
+                    class="block py-2 text-sm rounded-md transition-colors {{ request()->routeIs('backend/booking-ditolak*') ? 'text-white bg-white/10 font-medium' : 'text-white/60 hover:text-white hover:bg-white/5' }}">
+                    <div class="flex items-center">
+                        <span class="nav-icon">
+                            <i class="fa-solid fa-times"></i>
+                        </span>
+                        <span style="margin-left: 10px"> Booking Ditolak</span>
+                    </div>
+                </a>
+
+            </div>
+        </div>
     </nav>
 
     <div class="p-4 border-t border-white/10 flex-shrink-0">

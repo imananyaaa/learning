@@ -70,7 +70,7 @@
                             <td class="text-slate-600 text-sm">{{ $tentang_kami->misi }}</td>
 
                             {{-- Sejarah --}}
-                            <td class="text-slate-600 text-sm">{{ $tentang_kami->sejarah }}</td>
+                            <td class="text-slate-600 text-sm">{!! nl2br($tentang_kami->sejarah) !!}</td>
 
 
                         </tr>

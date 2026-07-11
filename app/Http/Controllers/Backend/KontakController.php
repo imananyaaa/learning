@@ -32,10 +32,11 @@ class KontakController extends Controller
     public function store(Request $request)
     {
         $kontak = New Kontak();
-        $kontak->no_hp = request('no_hp');
+        $kontak->telepon = request('telepon');
         $kontak->whatsapp = request('whatsapp');
         $kontak->instagram = request('instagram');
-        $kontak->alamat = request('alamat');
+        $kontak->lalitude = request('latitude');
+        $kontak->longitude = request('longitude');
         $kontak->save();
 
         return redirect('backend/kontak');
@@ -65,10 +66,11 @@ class KontakController extends Controller
     public function update(Request $request, string $id)
     {
         $kontak = New Kontak();
-        $kontak->no_hp = request('no_hp');
+        $kontak->telepon = request('telepon');
         $kontak->whatsapp = request('whatsapp');
         $kontak->instagram = request('instagram');
-        $kontak->alamat = request('alamat');
+        $kontak->lalitude = request('latitude');
+        $kontak->longitude = request('longitude');
         $kontak->save();
 
         return redirect('backend/kontak');

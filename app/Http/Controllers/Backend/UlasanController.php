@@ -3,9 +3,9 @@
 namespace App\Http\Controllers\Backend;
 
 use App\Http\Controllers\Controller;
+use App\Imports\UlasanImport;
 use App\Models\Ulasan;
 use Illuminate\Http\Request;
-use App\Imports\UlasanImport;
 use Maatwebsite\Excel\Facades\Excel;
 
 class UlasanController extends Controller
@@ -15,6 +15,7 @@ class UlasanController extends Controller
      */
     public function index(Request $request)
     {
+
         $search = $request->search;
 
         $data['list_ulasan'] = Ulasan::when($search, function ($query) use ($search) {
@@ -24,9 +25,9 @@ class UlasanController extends Controller
             ->latest()
             ->paginate(10)
             ->withQueryString();
+
         return view ('backend.ulasan.index',$data);
     }
-
 
     public function import(Request $request)
     {

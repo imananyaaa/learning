@@ -43,6 +43,7 @@ class BookingController extends Controller
 
     public function verifikasi(Booking $booking)
     {
+        $booking->catatan = request('catatan') ;
         $booking->status = '2';
         $booking->save();
 
@@ -56,6 +57,7 @@ class BookingController extends Controller
 
     public function ditolak(Booking $booking)
     {
+        $booking->catatan = request('catatan') ;
         $booking->status = '3';
         $booking->save();
 

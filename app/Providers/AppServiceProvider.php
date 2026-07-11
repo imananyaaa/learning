@@ -1,8 +1,10 @@
 <?php
 
 namespace App\Providers;
-
+use App\Models\Booking;
+use Illuminate\Support\Facades\View;
 use Illuminate\Support\ServiceProvider;
+use Illuminate\Pagination\Paginator;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -19,6 +21,18 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        //
+        View::composer('*', function($view){
+
+        $view->with(
+            'booking_masuk',
+            Booking::where('status','1')->count()
+        );
+
+    });
+
+    Paginator::useBootstrapFive();
+
     }
+
+
 }

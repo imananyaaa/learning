@@ -20,19 +20,13 @@
 
             {{-- Info Grid --}}
             <div class="grid grid-cols-2 gap-4 mb-6">
-                <div class="bg-slate-50 rounded-xl p-4">
-                    <p class="text-xs text-slate-400 mb-1">
-                        <i class="fa-solid fa-location-dot mr-1"></i> Alamat
-                    </p>
-                    <p class="font-semibold text-slate-700">{{ $kontak->alamat }}</p>
-                </div>
 
                 <div class="bg-slate-50 rounded-xl p-4">
                     <p class="text-xs text-slate-400 mb-1">
-                        <i class="fa-solid fa-clock mr-1"></i> No Hp
+                        <i class="fa-solid fa-clock mr-1"></i> Telepon
                     </p>
                     <p class="font-semibold text-slate-700">
-                        {{ $kontak->no_hp }}</p>
+                        {{ $kontak->telepon }}</p>
                 </div>
 
                 <div class="bg-slate-50 rounded-xl p-4">
@@ -48,6 +42,21 @@
                     </p>
                     <p class="font-semibold text-slate-700">{{ $kontak->instagram }}</p>
                 </div>
+
+                 <div class="bg-slate-50 rounded-xl p-4">
+                    <p class="text-xs text-slate-400 mb-1">
+                        <i class="fa-solid fa-location-dot mr-1"></i> Latitude
+                    </p>
+                    <p class="font-semibold text-slate-700">{{ $kontak->latitude }}</p>
+                </div>
+
+                 <div class="bg-slate-50 rounded-xl p-4">
+                    <p class="text-xs text-slate-400 mb-1">
+                        <i class="fa-solid fa-location-dot mr-1"></i> Longitude
+                    </p>
+                    <p class="font-semibold text-slate-700">{{ $kontak->longitude }}</p>
+                </div>
+
             </div>
 
         </div>

@@ -29,10 +29,11 @@
                     <tr>
                         <th class="text-left">No</th>
                         <th class="text-center">Aksi</th>
-                        <th class="text-left">Alamat</th>
-                        <th class="text-left">No Hp</th>
+                        <th class="text-left">Telepon</th>
                         <th class="text-left">Whatsapp</th>
                         <th class="text-left">Instagram</th>
+                        <th class="text-left">Latitude</th>
+                        <th class="text-left">Longitude</th>
                     </tr>
                 </thead>
 
@@ -78,14 +79,9 @@
                                 </div>
                             </td>
 
-                            {{-- Alamat --}}
+                            {{-- Telepon --}}
                             <td class="text-slate-600 text-sm">
-                                {{ $kontak->alamat ?? '-' }}
-                            </td>
-
-                            {{-- No Hp --}}
-                            <td class="text-slate-600 text-sm">
-                                {{ $kontak->no_hp ?? '-' }}
+                                {{ $kontak->telepon ?? '-' }}
                             </td>
 
                             {{-- Whatsapp --}}
@@ -96,6 +92,16 @@
                             {{-- Instagram --}}
                             <td class="text-slate-600 text-sm">
                                 {{ $kontak->instagram ?? '-' }}
+                            </td>
+
+                             {{-- Latitude --}}
+                            <td class="text-slate-600 text-sm">
+                                {{ $kontak->latitude ?? '-' }}
+                            </td>
+
+                             {{-- Longitude --}}
+                            <td class="text-slate-600 text-sm">
+                                {{ $kontak->longitude ?? '-' }}
                             </td>
 
                         </tr>

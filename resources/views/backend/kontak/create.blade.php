@@ -30,19 +30,10 @@
                     <div class="grid grid-cols-2 gap-4">
 
                         <div>
-                            <label class="form-label">Alamat <span class="text-red-500">*</span></label>
-                            <input type="text" name="alamat" value="{{ old('alamat') }}" class="form-input"
+                            <label class="form-label">Telepon <span class="text-red-500">*</span></label>
+                            <input type="text" name="telepon" value="{{ old('telepon') }}" class="form-input"
                                 required>
-                            @error('alamat')
-                                <p class="form-error">{{ $message }}</p>
-                            @enderror
-                        </div>
-
-                        <div>
-                            <label class="form-label">No Hp <span class="text-red-500">*</span></label>
-                            <input type="text" name="no_hp" value="{{ old('no_hp') }}" class="form-input"
-                                required>
-                            @error('no_hp')
+                            @error('telepon')
                                 <p class="form-error">{{ $message }}</p>
                             @enderror
                         </div>
@@ -65,6 +56,26 @@
                             @enderror
                         </div>
                     </div>
+
+                    <div>
+                            <label class="form-label">Latitude <span class="text-red-500">*</span></label>
+                            <input type="number" step="any" name="latitude" value="{{ old('latitude') }}" class="form-input"
+                                required>
+                            @error('latitude')
+                                <p class="form-error">{{ $message }}</p>
+                            @enderror
+                        </div>
+
+                        <div>
+                            <label class="form-label">Longitude <span class="text-red-500">*</span></label>
+                            <input type="number" step="any" name="longitude" value="{{ old('longitude') }}" class="form-input"
+                                required>
+                            @error('longitude')
+                                <p class="form-error">{{ $message }}</p>
+                            @enderror
+                        </div>
+                    </div>
+
 
                     <div class="flex gap-3 pt-2">
                         <a href="{{ url('admin.event.index') }}"

@@ -7,6 +7,8 @@ use App\Models\Booking;
 use App\Models\Fasilitas;
 use App\Models\Tracking;
 use Illuminate\Http\Request;
+use Carbon\Carbon;
+use Illuminate\Support\Facades\Storage;
 
 class FasilitasController extends Controller
 {
@@ -19,6 +21,34 @@ class FasilitasController extends Controller
         $data['list_fasilitas_pendukung'] = Fasilitas::where('jenis_fasilitas', 'Fasilitas Pendukung')->get();
         $data['list_booking'] = Booking::orderBy('id', 'desc')->get();
         $data['list_tracking'] = Tracking::all();
+
+         // ambil tanggal yang sudah digunakan
+        $booking = Booking::whereIn('status',[1,2])
+            ->get();
+
+
+        $tanggal_block = [];
+
+
+        foreach($booking as $item){
+
+            $mulai = Carbon::parse($item->tanggal_mulai);
+            $selesai = Carbon::parse($item->tanggal_selesai);
+
+
+            while($mulai <= $selesai){
+
+            $tanggal_block[$item->id_fasilitas][] =
+                $mulai->format('Y-m-d');
+
+
+            $mulai->addDay();
+        }
+
+        }
+
+
+        $data['tanggal_block'] = $tanggal_block;
 
         $data['pengguna'] = $pengguna = auth()->guard('pengguna')->user();
         return View('pengguna.fasilitas', $data);
@@ -44,8 +74,9 @@ class FasilitasController extends Controller
         $booking->nama_kegiatan = request('nama_kegiatan');
         $booking->tanggal_mulai = request('tanggal_mulai');
         $booking->tanggal_selesai = request('tanggal_selesai');
-        $booking->handleUploadPoto();
+        $booking->handleUploadFile();
         $booking->status = '1';
+
         $booking->save();
 
         $tracking = New Tracking();
@@ -85,6 +116,20 @@ class FasilitasController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+       $booking = Booking::find($id);
+
+        if ($booking->file_proposal) {
+
+            $oldFile = str_replace('app/', '', $booking->file_proposal);
+
+            if (Storage::exists($oldFile)) {
+                Storage::delete($oldFile);
+            }
+        }
+
+        $booking->delete();
+
+
+        return back()->with('success', 'Berhasil membatalkan booking fasilitas');
     }
 }

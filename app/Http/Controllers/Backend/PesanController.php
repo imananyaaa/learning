@@ -5,15 +5,43 @@ namespace App\Http\Controllers\Backend;
 use App\Http\Controllers\Controller;
 use App\Models\PesanKontak;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Schema;
 
 class PesanController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        $data['list_pesan'] = PesanKontak::all();
+       $search = $request->search;
+
+        // Ambil semua kolom kecuali yang tidak perlu dicari
+        $columns = collect(Schema::getColumnListing('pesan'))
+            ->reject(function ($column) {
+                return in_array($column, [
+                    'id',
+                    'created_at',
+                    'updated_at',
+
+                ]);
+            });
+
+        $data['list_pesan'] = PesanKontak::when($search, function ($query) use ($search, $columns) {
+
+                $query->where(function ($q) use ($search, $columns) {
+
+                    foreach ($columns as $column) {
+                        $q->orWhere($column, 'like', "%{$search}%");
+                    }
+
+                });
+
+            })
+            ->latest()
+            ->paginate(10)
+            ->withQueryString();
         return view ('backend.pesan.index', $data);
     }
 

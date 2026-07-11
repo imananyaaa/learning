@@ -5,15 +5,45 @@ namespace App\Http\Controllers\Backend;
 use App\Http\Controllers\Controller;
 use App\Models\Event;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Schema;
 
 class EventController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        $data['list_event'] = Event::all();
+        $search = $request->search;
+
+        // Ambil semua kolom kecuali yang tidak perlu dicari
+        $columns = collect(Schema::getColumnListing('event'))
+            ->reject(function ($column) {
+                return in_array($column, [
+                    'id',
+                    'created_at',
+                    'updated_at',
+
+                ]);
+            });
+
+        $data['list_event'] = Event::when($search, function ($query) use ($search, $columns) {
+
+                $query->where(function ($q) use ($search, $columns) {
+
+                    foreach ($columns as $column) {
+                        $q->orWhere($column, 'like', "%{$search}%");
+                    }
+
+                });
+
+            })
+            ->latest()
+            ->paginate(10)
+            ->withQueryString();
+
+
         return view ('backend.event.index',$data);
     }
 
@@ -80,7 +110,7 @@ class EventController extends Controller
         $event->deskripsi = request('deskripsi');
         $event->save();
 
-        return redirect('backend/event')->with('success', 'Data Berhasil di Simpan');
+        return redirect('backend/event');
     }
 
     /**
@@ -88,7 +118,18 @@ class EventController extends Controller
      */
     public function destroy(string $id)
     {
-         Event::destroy($id);
+        $event = Event::find($id);
+
+        if ($event->foto) {
+
+            $oldFile = str_replace('app/', '', $event->foto);
+
+            if (Storage::exists($oldFile)) {
+                Storage::delete($oldFile);
+            }
+        }
+
+        $event->delete();
 
         return back();
     }

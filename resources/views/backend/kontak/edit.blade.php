@@ -25,29 +25,34 @@
 
                 <div class="space-y-5">
 
-                        <<div>
-                            <label class="form-label">Alamat <span class="text-red-500">*</span></label>
-                            <input type="text" name="alamat" value="{{ old('alamat', $kontak->alamat) }}"
-                                class="form-input" required>
-                        </div>
-
-                        <div>
-                            <label class="form-label">No Hp <span class="text-red-500">*</span></label>
-                            <input type="number" name="no_hp" value="{{ old('no_hp', $kontak->no_hp) }}"
+                    <div>
+                        <label class="form-label">Telepon <span class="text-red-500">*</span></label>
+                        <input type="number" name="telepon" value="{{ old('telepon', $kontak->telepon) }}"
                             class="form-input" required>
-                        </div>
+                    </div>
 
-                        <div>
-                            <label class="form-label">Whatsapp <span class="text-red-500">*</span></label>
-                            <input type="text" name="whatsapp" value="{{ old('whatsapp', $kontak->whatsapp) }}"
+                    <div>
+                        <label class="form-label">Whatsapp <span class="text-red-500">*</span></label>
+                        <input type="text" name="whatsapp" value="{{ old('whatsapp', $kontak->whatsapp) }}"
                             class="form-input" required>
-                        </div>
+                    </div>
 
-                        <div>
-                            <label class="form-label">Instagram <span class="text-red-500">*</span></label>
-                            <input type="text" name="instagram" value="{{ old('instagram', $kontak->instagram) }}"
+                    <div>
+                        <label class="form-label">Instagram <span class="text-red-500">*</span></label>
+                        <input type="text" name="instagram" value="{{ old('instagram', $kontak->instagram) }}"
                             class="form-input" required>
-                        </div>
+                    </div>
+
+                    <div>
+                        <label class="form-label">Latitude <span class="text-red-500">*</span></label>
+                        <input type="number" step="any" name="latitude" value="{{ old('latitude', $kontak->latitude) }}" class="form-input" required>
+                    </div>
+
+                    <div>
+                        <label class="form-label">Longitude <span class="text-red-500">*</span></label>
+                        <input type="number" step="any" name="longitude" value="{{ old('longitude', $kontak->longitude) }}" class="form-input" required>
+                    </div>
+
                 </div>
 
                 <div class="flex gap-3 pt-2">

@@ -84,14 +84,14 @@
                         @foreach ($list_booking as $booking)
                             <tr class="tbl-row">
 
+                                <td class="text-center">{{ $loop->iteration }}</td>
                                 <td class="px-6 py-4 whitespace-nowrap text-sm align-middle">
-                                    <div class="flex items-center justify-center gap-2">
-
-                                        {{-- Detail --}}
+                                    <div class="flex items-center">
                                         <a href="{{ url('backend/booking/show', $booking->id) }}"
-                                            class="inline-flex items-center justify-center w-10 h-8 rounded-lg bg-blue-50 text-blue-600 hover:bg-blue-100 transition"
+                                            class="flex items-center justify-center space-x-1 px-3 py-1.5 bg-sky-500 text-white hover:bg-sky-600 rounded-md transition"
                                             title="Lihat Detail">
-                                            <i class="fa-solid fa-eye"></i>
+                                            <i class="bi bi-eye"></i>
+                                            <span class="text-xs">Detail</span>
                                         </a>
 
                                         @if ($booking->status == '1')

@@ -31,13 +31,17 @@ class UlasanController extends Controller
      */
     public function store(Request $request)
     {
-        $ulasan = New Ulasan();
-        $ulasan->nik = request('nik');
-        $ulasan->rating = request('rating');
-        $ulasan->komentar = request('komentar');
+        $ulasan = new Ulasan();
+        $ulasan->nik = $request->nik;
+        $ulasan->nama = $request->nama;
+        $ulasan->alamat = $request->alamat;
+        $ulasan->email = $request->email;
+        $ulasan->no_hp = $request->no_hp;
+        $ulasan->rating = $request->rating;
+        $ulasan->komentar = $request->komentar;
         $ulasan->save();
 
-        return back()->with('success', 'Terima Kasih Monyet Ulasan Berhasil Dikirim');
+        return redirect('pengguna/ulasan')->with('success', 'Ulasan berhasil dikirim!');
     }
 
     /**
