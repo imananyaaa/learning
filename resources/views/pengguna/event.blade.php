@@ -87,7 +87,7 @@
                 @forelse ($list_event as $event)
 
                     <div class="col-lg-4 col-md-6 event-item"
-                        data-type="{{ strtolower($event->jenis) }}"
+                        data-type="{{ $event->jenis }}"
                         data-aos="fade-up">
 
                         <div class="ev-card h-100">
@@ -136,8 +136,8 @@
                                 {{-- BADGE --}}
                                 <div class="d-flex gap-2 flex-wrap mb-3">
 
-                                    <span class="ev-badge badge-{{ strtolower($event->jenis) }}">
-                                        {{ ucfirst($event->jenis) }}
+                                    <span class="ev-badge badge-open {{ $event->jenis }}">
+                                        {{ $event->jenis }}
                                     </span>
 
                                     <span class="ev-badge badge-open">
@@ -188,11 +188,6 @@
                                         {{ $event->lokasi }}
                                     </span>
 
-                                    <span>
-                                        <i class="bi bi-people"></i>
-
-                                        {{ $event->kuota ?? 'Tidak Terbatas' }}
-                                    </span>
 
                                 </div>
 
@@ -411,23 +406,6 @@
 
                                                 <hr>
 
-
-                                                {{-- KUOTA --}}
-                                                <div>
-
-                                                    <small style="color:var(--text-light);">
-                                                        <i class="bi bi-people me-1"></i>
-                                                        Kuota Peserta
-                                                    </small>
-
-                                                    <div style="font-weight:600;
-                                                                color:var(--text-dark);
-                                                                margin-top:4px;">
-
-                                                        {{ $event->kuota ?? 'Tidak Terbatas' }}
-                                                    </div>
-
-                                                </div>
 
                                             </div>
 

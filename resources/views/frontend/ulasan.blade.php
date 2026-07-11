@@ -85,52 +85,8 @@
                 </div>
             </div>
 
-            <div class="row g-4">
-
-                {{-- Review Cards --}}
-                <div class="col-lg-8">
-                    <div class="d-flex flex-column gap-3">
-                        @foreach ($list_ulasan as $item)
-                            <div class="review-card">
-                                <div class="d-flex align-items-start gap-3">
-
-                                    <div class="flex-grow-1">
-
-                                        <div
-                                            class="d-flex justify-content-between align-items-start flex-wrap gap-2 mb-2">
-
-                                            <div>
-                                                <div style="font-weight:700;font-size:.92rem;color:var(--text-dark);">
-                                                    {{ $item->user?->name ?? 'Pengguna Learning Center' }}
-                                                </div>
-
-                                                <div style="font-size:.76rem;color:var(--text-light);">
-                                                    {{ $item->instansi ?? 'Pengguna Learning Center' }}
-                                                </div>
-                                            </div>
-
-                                            <div class="stars-sm">
-                                                {{ str_repeat('★', $item->rating) }}
-                                                {{ str_repeat('☆', 5 - $item->rating) }}
-                                            </div>
-
-                                        </div>
-
-                                        <p style="font-size:.87rem;color:var(--text-medium);line-height:1.7;margin:0;">
-                                            {{ $item->komentar }}
-                                        </p>
-
-                                    </div>
-
-                                </div>
-                            </div>
-                        @endforeach
-                    </div>
-                </div>
-            </div>
-
             {{-- Form Ulasan --}}
-            <div class="row mt-5" data-aos="fade-up">
+            <div class="row mt-5 mb-4" data-aos="fade-up">
                 <div class="col-lg-8 mx-auto">
 
                     <div class="review-input-card">
@@ -265,5 +221,76 @@
 
                 </div>
             </div>
+
+            <div class="row g-4">
+
+                {{-- Review Cards --}}
+                @foreach ($list_ulasan as $item)
+                    <div class="col-lg-4 col-md-6 col-12 review-item {{ $loop->iteration > 9 ? 'd-none' : '' }}">
+                        <div class="review-card h-100">
+                            <div class="d-flex align-items-start gap-3">
+
+                                <div class="flex-grow-1">
+
+                                    <div class="d-flex justify-content-between align-items-start flex-wrap gap-2 mb-2">
+
+                                        <div>
+                                            <div style="font-weight:700;font-size:.92rem;color:var(--text-dark);">
+                                                {{ $item->user?->name ?? 'Pengguna Learning Center' }}
+                                            </div>
+
+                                            <div style="font-size:.76rem;color:var(--text-light);">
+                                                {{ $item->instansi ?? 'Pengguna Learning Center' }}
+                                            </div>
+                                        </div>
+
+                                        <div class="stars-sm">
+                                            {{ str_repeat('★', $item->rating) }}
+                                            {{ str_repeat('☆', 5 - $item->rating) }}
+                                        </div>
+
+                                    </div>
+
+                                    <p style="font-size:.87rem;color:var(--text-medium);line-height:1.7;margin:0;">
+                                        {{ $item->komentar }}
+                                    </p>
+
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                @endforeach
+
+            </div>
+
+            @if ($list_ulasan->count() > 9)
+                <div class="text-center mt-5">
+                    <button type="button" class="btn btn-primary-custom" id="btnLihatSemua"
+                    >
+                        <i class="bi bi-chat-square-text-fill"></i>
+                        Lihat semua ulasan
+                    </button>
+                </div>
+
+            @endif
     </section>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const btnLihatSemua = document.getElementById('btnLihatSemua')
+
+            if (btnLihatSemua) {
+                btnLihatSemua.addEventListener('click', function() {
+                    const ulasanTersembunyi = document.querySelectorAll('.review-item.d-none')
+
+                    ulasanTersembunyi.forEach(function(item) {
+                        item.classList.remove('d-none')
+                    })
+
+                    btnLihatSemua.style.display = 'none';
+                })
+            }
+        })
+    </script>
 </x-frontend>

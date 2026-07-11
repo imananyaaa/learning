@@ -53,7 +53,13 @@
                                         <p class="font-semibold text-slate-800">{{ $fasilitas->nama }}</p>
                                         <p class="text-xs text-slate-400 line-clamp-1 max-w-xs">{{ $fasilitas->deskripsi }}</p>
                                     </div>
-                                     @if ($fasilitas->foto)
+
+
+                                </div>
+                            </td>
+
+                            <td>
+                                @if ($fasilitas->foto)
                                         <img src="{{ url("public/$fasilitas->foto") }}"
                                             class="w-10 h-10 rounded-lg object-cover border border-slate-200">
                                     @else
@@ -61,11 +67,6 @@
                                             <i class="fa-solid fa-building text-blue-500 text-sm"></i>
                                         </div>
                                     @endif
-
-                                </div>
-                            </td>
-                            <td><span
-                                    class="badge badge-{{ $fasilitas->jenis == 'utama' ? 'blue' : 'green' }}">{{ ucfirst($fasilitas->jenis) }}</span>
                             </td>
 
                             <td><span

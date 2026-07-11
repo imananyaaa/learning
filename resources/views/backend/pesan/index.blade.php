@@ -11,8 +11,7 @@
 
                     <i class="fa-solid fa-magnifying-glass absolute left-4 top-1/2 -translate-y-1/2 text-slate-400"></i>
 
-                    <input type="text" name="search" value="{{ request('search') }}"
-                        placeholder="Cari pesan..."
+                    <input type="text" name="search" value="{{ request('search') }}" placeholder="Cari pesan..."
                         class="w-full rounded-xl border border-slate-300 bg-white pl-12 pr-4 py-3
                            focus:border-blue-500 focus:ring-4 focus:ring-blue-100
                            transition duration-200">
@@ -22,15 +21,10 @@
                 {{-- Tombol --}}
                 <div class="flex gap-2">
 
-                    <button type="submit"
-                        class="px-6 py-3 rounded-xl bg-blue-600 text-white font-semibold
-                           hover:bg-blue-700 transition">
-
-                        <i class="fa-solid fa-magnifying-glass mr-2"></i>
+                    <button type="submit" class="btn-primary">
+                        <i class="fa-solid fa-magnifying-glass"></i>
                         Cari
-
                     </button>
-
                     @if (request('search'))
                         <a href="{{ url('backend/pesan') }}"
                             class="px-6 py-3 rounded-xl border border-red-300

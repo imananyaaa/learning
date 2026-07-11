@@ -20,9 +20,6 @@
                 <div>
                     <h2 class="text-2xl font-bold text-slate-800">{{ $pengguna->judul }}</h2>
                     <div class="flex items-center gap-2 mt-2">
-                        <span class="badge badge-{{ $pengguna->jenis == 'internal' ? 'blue' : 'green' }}">
-                            {{ ucfirst($pengguna->jenis) }}
-                        </span>
                         <span class="badge badge-{{ $pengguna->status == 'aktif' ? 'green' : ($pengguna->status == 'selesai' ? 'gray' : 'red') }}">
                             {{ ucfirst($pengguna->status ?? 'aktif') }}
                         </span>

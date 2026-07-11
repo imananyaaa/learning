@@ -29,10 +29,9 @@
                             <td class="px-6 py-4 whitespace-nowrap text-sm align-middle">
                                 <div class="flex items-center">
                                     <a href="{{ url('backend/booking/show', $booking->id) }}"
-                                        class="flex items-center justify-center space-x-1 px-3 py-1.5 bg-sky-500 text-white hover:bg-sky-600 rounded-md transition"
+                                        class="inline-flex items-center justify-center px-3 py-1.5 rounded-lg text-xs font-semibold bg-blue-50 text-blue-600 hover:bg-blue-100 transition"
                                         title="Lihat Detail">
-                                        <i class="bi bi-eye"></i>
-                                        <span class="text-xs">Detail</span>
+                                        <i class="fa-solid fa-eye"></i>
                                     </a>
 
                                     @if ($booking->status == '1')
