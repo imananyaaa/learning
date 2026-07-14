@@ -52,16 +52,6 @@
     </div>
 
 
-    {{-- Statistik --}}
-    <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
-        <div class="card p-4 text-center">
-
-            <span class="badge badge-blue mt-1">
-                Total Pesan
-            </span>
-        </div>
-    </div>
-
 
     {{-- Tabel Pesan --}}
     <div class="card overflow-hidden">

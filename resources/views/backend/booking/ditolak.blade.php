@@ -94,7 +94,10 @@
                                 @elseif ($booking->status == '2')
                                     <span class="btn-primary">Sedang Berlangsung</span>
                                 @elseif ($booking->status == '3')
-                                    <span class="btn-primary">Ditolak</span>
+                                    <span
+                                        class="inline-flex items-center px-3 py-1 rounded-full text-xs font-semibold bg-red-100 text-red-600">
+                                        Ditolak
+                                    </span>
                                 @elseif ($booking->status == '4')
                                     <span class="btn-primary">Selesai</span>
                                 @endif

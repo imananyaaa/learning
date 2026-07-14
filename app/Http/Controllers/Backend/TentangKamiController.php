@@ -61,7 +61,7 @@ class TentangKamiController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(Request $request, $id)
     {
         $tentang_kami = TentangKami::find($id);
         $tentang_kami->visi = request('visi');

@@ -1,13 +1,13 @@
 <x-backend>
     <div class="flex items-center justify-between mb-6">
         <div>
-            <h2 class="text-xl font-bold text-slate-800">Kelola Tentng Kami</h2>
+            <h2 class="text-xl font-bold text-slate-800">Kelola Tentang Kami</h2>
         </div>
         @if($list_tentang_kami->isEmpty())
-        <a href="{{ url('backend/tentang-kami/create') }}"
+        <a href="{{ url('backend/tentang_kami/create') }}"
             class="btn-primary">
             <i class="fa-solid fa-plus"></i>
-            Tambah Kontak
+            Tambah Data
         </a>
     @endif
 

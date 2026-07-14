@@ -3,8 +3,8 @@
 namespace App\Http\Controllers\Frontend;
 
 use App\Http\Controllers\Controller;
+use App\Models\Event;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\View;
 
 class DashboardController extends Controller
 {
@@ -13,7 +13,8 @@ class DashboardController extends Controller
      */
     public function index()
     {
-        return View('frontend.home');
+         $data['list_event'] = Event::all();
+        return View('frontend.home', $data);
     }
 
     /**

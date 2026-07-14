@@ -32,7 +32,7 @@
             <span class="nav-icon"><i class="fa-solid fa-address-card"></i></span> Tentang Kami
         </a>
 
-         <div x-data="{ open: {{ request()->routeIs('backend/fasilitas/utama*', 'backend/fasilitas/pendukung*') ? 'true' : 'false' }} }">
+        <div x-data="{ open: {{ request()->routeIs('backend/fasilitas/utama*', 'backend/fasilitas/pendukung*') ? 'true' : 'false' }} }">
 
             <button @click="open = !open"
                 class="nav-link w-full flex items-center justify-between {{ request()->routeIs('backend/fasilitas*') ? 'active' : '' }}">
@@ -173,10 +173,58 @@
             </div>
         </div>
 
-        <a href="{{ url('logout') }}" onclick="return confirm('Apakah Anda Yakin Ingin Meninggalkan Halaman Ini')"
+        <a href="#" onclick="openLogoutModal()"
             class="nav-link w-full text-left hover:!bg-red-500/20 hover:!text-red-300">
-            <span class="nav-icon !bg-transparent"><i class="fa-solid fa-right-from-bracket"></i></span> Keluar
+            <span class="nav-icon !bg-transparent">
+                <i class="fa-solid fa-right-from-bracket"></i>
+            </span>
+            Keluar
         </a>
+
+        <!-- Logout Modal -->
+        <div id="logoutModal"
+            class="fixed inset-0 z-50 hidden items-center justify-center bg-black/60 backdrop-blur-sm p-4">
+
+            <div id="logoutContent"
+                class="w-full max-w-md rounded-2xl bg-white shadow-2xl transform scale-90 opacity-0 transition-all duration-300">
+
+                <div class="p-8">
+
+                    <!-- Icon -->
+                    <div class="mx-auto flex h-20 w-20 items-center justify-center rounded-full bg-red-100">
+                        <i class="fa-solid fa-right-from-bracket text-4xl text-red-500"></i>
+                    </div>
+
+                    <!-- Title -->
+                    <h2 class="mt-5 text-center text-2xl font-bold text-gray-800">
+                        Keluar?
+                    </h2>
+
+                    <!-- Text -->
+                    <p class="mt-2 text-center text-gray-500">
+                        Apakah Anda yakin ingin keluar dari sistem?
+                    </p>
+
+                    <!-- Button -->
+                    <div class="mt-8 flex gap-3">
+
+                        <button onclick="closeLogoutModal()"
+                            class="flex-1 rounded-xl border border-gray-300 py-3 font-semibold text-gray-700 transition hover:bg-gray-100">
+                            Batal
+                        </button>
+
+                        <a href="{{ url('logout') }}"
+                            class="flex-1 rounded-xl bg-red-500 py-3 text-center font-semibold text-white transition hover:bg-red-600">
+                            Ya, Keluar
+                        </a>
+
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+
 
     </div>
 </aside>

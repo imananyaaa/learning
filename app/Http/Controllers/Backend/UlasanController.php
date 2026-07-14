@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Imports\UlasanImport;
 use App\Models\Ulasan;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 use Maatwebsite\Excel\Facades\Excel;
 
 class UlasanController extends Controller
@@ -87,6 +88,19 @@ class UlasanController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $ulasan = Ulasan::find($id);
+
+        if ($ulasan->foto) {
+
+            $oldFile = str_replace('app/', '', $ulasan->foto);
+
+            if (Storage::exists($oldFile)) {
+                Storage::delete($oldFile);
+            }
+        }
+
+        $ulasan->delete();
+
+        return back();
     }
 }

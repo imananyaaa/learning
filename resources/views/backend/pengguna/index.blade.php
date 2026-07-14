@@ -114,12 +114,19 @@
 
 
 
+
                             {{-- Status --}}
                             <td class="text-center">
                                 @if ($pengguna->status == '1')
-                                    <span class="btn-primary">Belum Terverifikasi</span>
+                                    <span
+                                        class="inline-flex items-center px-3 py-1 rounded-full text-xs font-semibold bg-red-100 text-red-600">
+                                        Belum Terverifikasi
+                                    </span>
                                 @elseif ($pengguna->status == '2')
-                                    <span class="btn-danger">Sudah Terverifikasi</span>
+                                    <span
+                                        class="inline-flex items-center px-3 py-1 rounded-full text-xs font-semibold bg-blue-100 text-blue-600">
+                                        Sudah Terverifikasi
+                                    </span>
                                 @endif
                             </td>
 

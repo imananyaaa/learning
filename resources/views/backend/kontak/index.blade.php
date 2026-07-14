@@ -4,10 +4,6 @@
             <h2 class="text-xl font-bold text-slate-800">
                 Kelola Kontak
             </h2>
-
-            <p class="text-sm text-slate-500 mt-0.5">
-                Kontak
-            </p>
         </div>
 
         @if($list_kontak->isEmpty())
@@ -32,8 +28,7 @@
                         <th class="text-left">Telepon</th>
                         <th class="text-left">Whatsapp</th>
                         <th class="text-left">Instagram</th>
-                        <th class="text-left">Latitude</th>
-                        <th class="text-left">Longitude</th>
+                        <th class="text-left">Maps</th>
                     </tr>
                 </thead>
 
@@ -96,12 +91,7 @@
 
                              {{-- Latitude --}}
                             <td class="text-slate-600 text-sm">
-                                {{ $kontak->latitude ?? '-' }}
-                            </td>
-
-                             {{-- Longitude --}}
-                            <td class="text-slate-600 text-sm">
-                                {{ $kontak->longitude ?? '-' }}
+                                {{ $kontak->link_maps ?? '-' }}
                             </td>
 
                         </tr>

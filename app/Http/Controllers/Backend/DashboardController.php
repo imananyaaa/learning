@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Backend;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Models\Ulasan;
 
 class DashboardController extends Controller
 {
@@ -13,6 +14,28 @@ class DashboardController extends Controller
     public function index()
     {
          $data['admin'] = $admin = auth()->guard('admin')->user();
+
+         $stats = [
+
+            'ulasan'      => Ulasan::count(),
+            'rating'      => round(Ulasan::avg('rating') ?? 0, 1),
+
+        ];
+
+         $data['ratingDist'] = collect([5, 4, 3, 2, 1])->map(function ($star) use ($stats) {
+            $count = Ulasan::where('rating', $star)->count();
+
+            $pct = $stats['ulasan'] > 0
+                ? round(($count / $stats['ulasan']) * 100)
+                : 0;
+
+            return [
+                'star'  => $star,
+                'count' => $count,
+                'pct'   => $pct
+            ];
+        });
+
         return View('backend.dashboard', $data);
     }
 

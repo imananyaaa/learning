@@ -5,7 +5,7 @@
             <i class="fa-solid fa-arrow-left text-xs"></i> Kembali
         </a>
         <div class="card p-7">
-            <h2 class="text-lg font-bold text-slate-800 mb-6">Edit Event</h2>
+            <h2 class="text-lg font-bold text-slate-800 mb-6">Edit Kontak</h2>
 
             <form action="{{ url('backend/kontak/update', $kontak->id) }}" method="POST" enctype="multipart/form-data">
                 @csrf
@@ -44,19 +44,14 @@
                     </div>
 
                     <div>
-                        <label class="form-label">Latitude <span class="text-red-500">*</span></label>
-                        <input type="number" step="any" name="latitude" value="{{ old('latitude', $kontak->latitude) }}" class="form-input" required>
-                    </div>
-
-                    <div>
-                        <label class="form-label">Longitude <span class="text-red-500">*</span></label>
-                        <input type="number" step="any" name="longitude" value="{{ old('longitude', $kontak->longitude) }}" class="form-input" required>
+                        <label class="form-label">Maps <span class="text-red-500">*</span></label>
+                        <input type="text" step="any" name="link_maps" value="{{ old('link_maps', $kontak->link_maps) }}" class="form-input" required>
                     </div>
 
                 </div>
 
                 <div class="flex gap-3 pt-2">
-                    <a href="{{ url('backend/kontak/index') }}"
+                    <a href="{{ url('backend/kontak') }}"
                         class="flex-1 py-2.5 text-center rounded-xl border border-slate-200 text-slate-600 font-semibold text-sm hover:bg-slate-50">Batal</a>
                     <button type="submit" class="btn-primary flex-1 justify-center py-2.5">
                         <i class="fa-solid fa-save"></i> Simpan Perubahan

@@ -35,8 +35,7 @@ class KontakController extends Controller
         $kontak->telepon = request('telepon');
         $kontak->whatsapp = request('whatsapp');
         $kontak->instagram = request('instagram');
-        $kontak->lalitude = request('latitude');
-        $kontak->longitude = request('longitude');
+        $kontak->link_maps = request('link_maps');
         $kontak->save();
 
         return redirect('backend/kontak');
@@ -65,12 +64,11 @@ class KontakController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        $kontak = New Kontak();
+        $kontak = Kontak::find($id);
         $kontak->telepon = request('telepon');
         $kontak->whatsapp = request('whatsapp');
         $kontak->instagram = request('instagram');
-        $kontak->lalitude = request('latitude');
-        $kontak->longitude = request('longitude');
+        $kontak->link_maps = request('link_maps');
         $kontak->save();
 
         return redirect('backend/kontak');

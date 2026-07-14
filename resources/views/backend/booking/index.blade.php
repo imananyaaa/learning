@@ -88,32 +88,6 @@
                                             <i class="fa-solid fa-eye"></i>
                                         </a>
 
-                                        @if ($booking->status == '1')
-                                            <button type="button"
-                                                @click="
-                                                modalIsOpen = true;
-                                                bookingId = {{ $booking->id }};
-                                                aksi = 'terima';"
-                                                class="flex items-center justify-center space-x-1 px-3 py-1.5 bg-blue-600 text-white hover:bg-blue-700 rounded-md font-medium transition">
-
-                                                <i class="bi bi-check-lg"></i>
-                                                <span class="text-xs">Diterima</span>
-
-                                            </button>
-
-                                            <button type="button"
-                                                @click="
-                                                modalIsOpen = true;
-                                                bookingId = {{ $booking->id }};
-                                                aksi = 'tolak';"
-                                                class="flex items-center justify-center space-x-1 px-3 py-1.5 bg-red-600 text-white hover:bg-red-700 rounded-md font-medium transition">
-
-                                                <i class="bi bi-x-lg"></i>
-                                                <span class="text-xs">Tolak</span>
-
-                                            </button>
-                                        @endif
-
                                         @if ($booking->status == '2')
                                             <form action="{{ url('backend/booking/selesai', $booking->id) }}"
                                                 method="POST" class="flex">
@@ -139,15 +113,29 @@
                                     Sampai <br>
                                     {{ date('d-M-Y', strtotime($booking->tanggal_selesai)) }}</td>
                                 <td class="text-center">
+
                                     @if ($booking->status == '1')
-                                        <span class="btn-primary">New Booking</span>
+                                        <span
+                                            class="inline-flex items-center px-3 py-1 rounded-full text-xs font-semibold bg-green-100 text-green-600">
+                                            Booking Baru
+                                        </span>
                                     @elseif ($booking->status == '2')
-                                        <span class="btn-primary">Sedang Berlangsung</span>
+                                        <span
+                                            class="inline-flex items-center px-3 py-1 rounded-full text-xs font-semibold bg-blue-100 text-blue-600">
+                                            Sedang Berlangsung
+                                        </span>
                                     @elseif ($booking->status == '3')
-                                        <span class="btn-primary">Ditolak</span>
+                                        <span
+                                            class="inline-flex items-center px-3 py-1 rounded-full text-xs font-semibold bg-red-100 text-red-600">
+                                            Ditolak
+                                        </span>
                                     @elseif ($booking->status == '4')
-                                        <span class="btn-primary">Selesai</span>
+                                        <span
+                                            class="inline-flex items-center px-3 py-1 rounded-full text-xs font-semibold bg-white text-slate-600 border border-slate-200">
+                                            Selesai
+                                        </span>
                                     @endif
+
                                 </td>
 
                             </tr>

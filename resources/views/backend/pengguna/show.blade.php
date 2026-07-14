@@ -25,10 +25,6 @@
                         </span>
                     </div>
                 </div>
-                <a href="{{ url('backend/pengguna/show', $pengguna) }}"
-                   class="btn-warning shrink-0">
-                    <i class="fa-solid fa-pen"></i> Lihat
-                </a>
             </div>
 
             {{-- Info Grid --}}

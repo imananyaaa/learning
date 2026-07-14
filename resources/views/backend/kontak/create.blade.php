@@ -58,22 +58,14 @@
                     </div>
 
                     <div>
-                            <label class="form-label">Latitude <span class="text-red-500">*</span></label>
-                            <input type="number" step="any" name="latitude" value="{{ old('latitude') }}" class="form-input"
+                            <label class="form-label">Maps<span class="text-red-500">*</span></label>
+                            <input type="text" step="any" name="link_maps"  class="form-input"
                                 required>
-                            @error('latitude')
+                            @error('link_maps')
                                 <p class="form-error">{{ $message }}</p>
                             @enderror
                         </div>
 
-                        <div>
-                            <label class="form-label">Longitude <span class="text-red-500">*</span></label>
-                            <input type="number" step="any" name="longitude" value="{{ old('longitude') }}" class="form-input"
-                                required>
-                            @error('longitude')
-                                <p class="form-error">{{ $message }}</p>
-                            @enderror
-                        </div>
                     </div>
 
 

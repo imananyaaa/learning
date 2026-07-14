@@ -45,16 +45,9 @@
 
                  <div class="bg-slate-50 rounded-xl p-4">
                     <p class="text-xs text-slate-400 mb-1">
-                        <i class="fa-solid fa-location-dot mr-1"></i> Latitude
+                        <i class="fa-solid fa-location-dot mr-1"></i> Maps
                     </p>
-                    <p class="font-semibold text-slate-700">{{ $kontak->latitude }}</p>
-                </div>
-
-                 <div class="bg-slate-50 rounded-xl p-4">
-                    <p class="text-xs text-slate-400 mb-1">
-                        <i class="fa-solid fa-location-dot mr-1"></i> Longitude
-                    </p>
-                    <p class="font-semibold text-slate-700">{{ $kontak->longitude }}</p>
+                    <p class="font-semibold text-slate-700">{{ $kontak->link_maps }}</p>
                 </div>
 
             </div>

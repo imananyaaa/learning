@@ -39,7 +39,9 @@
 
                     <div>
                         <label class="form-label">Sejarah <span class="text-red-500">*</span></label>
-                        <textarea name="sejarah" id="summernote">{{$tentang_kami->sejarah}}</textarea>
+                        <textarea name="sejarah" id="summernote"
+                            class="w-full rounded-lg border border-gray-300 p-3 text-sm focus:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                            rows="5">{{$tentang_kami->sejarah}}</textarea>
                     </div>
 
 
@@ -47,13 +49,13 @@
                         <label class="form-label">Foto Tentang Kami</label>
                         @if ($tentang_kami->foto)
                             <div class="mb-3">
-                                <img src="{{ Storage::url($tentang_kami->foto) }}"
+                                <img src="{{ url("public/$tentang_kami->foto") }}"
                                     class="rounded-xl h-40 object-cover border border-slate-200">
                                 <p class="text-xs text-slate-400 mt-1">Foto saat ini. Upload baru untuk mengganti.</p>
                             </div>
                         @endif
                         <input type="file" name="foto" class="form-input" accept="image/*"
-                            onchange="previewImg(this,'prev')">
+                            onchange="previewImg(this,'prev')" value="{{ $tentang_kami->foto }}">
                         @error('foto')
                             <p class="form-error">{{ $message }}</p>
                         @enderror

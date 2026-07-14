@@ -59,7 +59,7 @@
                             onchange="previewImg(this,'prev')">
                     </div>
                     <div class="flex gap-3 pt-2">
-                        <a href="{{ url('backend/fasilitas-utama/update') }}"
+                        <a href="{{ url('backend/fasilitas-utama') }}"
                             class="flex-1 py-2.5 text-center rounded-xl border border-slate-200 text-slate-600 font-semibold text-sm hover:bg-slate-50">Batal</a>
                         <button type="submit" class="btn-primary flex-1 justify-center py-2.5"><i
                                 class="fa-solid fa-save"></i> Simpan Perubahan</button>

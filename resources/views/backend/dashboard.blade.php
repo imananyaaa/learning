@@ -2,8 +2,8 @@
 
 
 <div class="mb-6">
-    <h1 class="text-2xl font-bold text-slate-800">Selamat Pagi, <span class="text-blue-600">{{ Auth::guard('admin')->user()->nama }}!</span> 👋</h1>
-    
+    <h1 class="text-2xl font-bold text-slate-800">Selamat Datang, <span class="text-blue-600">{{ Auth::guard('admin')->user()->nama }}!</span> 👋</h1>
+
 </div>
 
 {{-- STAT CARDS --}}
@@ -62,28 +62,18 @@
 </div>
 
 {{-- CHARTS ROW --}}
-<div class="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-8">
+<div class="grid grid-cols-1 gap-12 mb-8">
 
-    {{-- Chart Ulasan per Tahun --}}
-    <div class="card p-6 lg:col-span-2">
-        <div class="flex items-center justify-between mb-5">
-            <div>
-                <h3 class="font-bold text-slate-800">Statistik Ulasan</h3>
-                <p class="text-xs text-slate-400 mt-0.5">Jumlah ulasan per bulan tahun {{ date('Y') }}</p>
-            </div>
-            <span class="badge badge-blue">{{ date('Y') }}</span>
-        </div>
-        <canvas id="chartUlasan" height="200"></canvas>
-    </div>
+
 
     {{-- Chart Rating --}}
-    <div class="card p-6">
+    <div class="card p-12">
         <div class="mb-5">
             <h3 class="font-bold text-slate-800">Distribusi Rating</h3>
             <p class="text-xs text-slate-400 mt-0.5">Sebaran bintang ulasan</p>
         </div>
-        <canvas id="chartRating" height="200"></canvas>
-        {{-- <div class="mt-4 space-y-2">
+
+        <div class="mt-4 space-y-2">
             @foreach($ratingDist as $r)
             <div class="flex items-center gap-2 text-xs">
                 <span class="text-yellow-500 font-bold w-8">{{ $r['star'] }}★</span>
@@ -93,7 +83,7 @@
                 <span class="text-slate-500 w-6 text-right">{{ $r['count'] }}</span>
             </div>
             @endforeach
-        </div> --}}
+        </div>
     </div>
 </div>
 
@@ -130,7 +120,7 @@
     {{-- Recent Event --}}
     <div class="card">
         <div class="flex items-center justify-between p-5 border-b border-slate-100">
-            <h3 class="font-bold text-slate-800">Event Mendatang</h3>
+            <h3 class="font-bold text-slate-800">Event </h3>
             <a href="{{ url('backend/event') }}" class="text-xs text-blue-600 font-semibold hover:underline">Lihat semua →</a>
         </div>
         {{-- <div class="divide-y divide-slate-100">
