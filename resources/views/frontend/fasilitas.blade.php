@@ -446,9 +446,9 @@
 
                 @forelse ($list_fasilitas_pendukung as $fasilitas)
 
-                    <div class="col-lg-4 col-md-6" data-aos="fade-up">
+                    <div class="col-lg-4 col-md-6 d-flex" data-aos="fade-up">
 
-                        <div class="fac-card">
+                        <div class="fac-card w-100 d-flex flex-column">
 
                             {{-- GAMBAR --}}
                             <div
@@ -476,44 +476,29 @@
 
 
                             {{-- BODY --}}
-                            <div class="fac-body">
+                            <div class="fac-body d-flex flex-column">
 
-                                <span class="fac-tag utama">
-                                    Fasilitas Pendukung
-                                </span>
+                                <div class="fac-top">
+                                    <span class="fac-tag utama">
+                                        Fasilitas Pendukung
+                                    </span>
 
-                                <div
-                                    style="font-weight:700;
-                                           font-size:.97rem;
-                                           color:var(--text-dark);
-                                           margin-bottom:6px;">
+                                    <h5 class="mt-3 mb-2">{{ $fasilitas->nama }}</h5>
 
-                                    {{ $fasilitas->nama }}
+                                    <p class="mb-0">
+                                        {{ Str::words($fasilitas->deskripsi, 20) }}
+                                    </p>
                                 </div>
 
-                                <p
-                                    style="font-size:.84rem;
-                                           color:var(--text-light);
-                                           line-height:1.65;
-                                           margin:0 0 14px;">
-
-                                    {{ $fasilitas->deskripsi }}
-                                </p>
-
-
-                                {{-- TOMBOL DETAIL --}}
-                                <div class="d-flex justify-content-start">
-
+                                <div class="mt-auto">
                                     <button
                                         type="button"
                                         class="btn-primary-custom"
                                         data-bs-toggle="modal"
                                         data-bs-target="#detailPendukung{{ $fasilitas->id }}">
-
                                         <i class="bi bi-eye"></i>
                                         Lihat Detail
                                     </button>
-
                                 </div>
 
                             </div>

@@ -52,8 +52,8 @@
                                             <span class="text-medium">
                                                 Tanggal Kegiatan :
                                             </span>
-                                            {{ date('d-M-Y', strtotime($booking->tanggal_mulai)) }} /
-                                            {{ date('d-M-Y', strtotime($booking->tanggal_selesai)) }}
+                                            {{ date('d M Y', strtotime($booking->tanggal_mulai)) }} /
+                                            {{ date('d M Y', strtotime($booking->tanggal_selesai)) }}
                                         </div>
                                     </div>
                                     <div class="card-body">
@@ -383,9 +383,9 @@
                                                                         <span class="text-medium">
                                                                             Tanggal Kegiatan :
                                                                         </span>
-                                                                        {{ date('d-M-Y', strtotime($booking->tanggal_mulai)) }}
+                                                                        {{ date('d M Y', strtotime($booking->tanggal_mulai)) }}
                                                                         /
-                                                                        {{ date('d-M-Y', strtotime($booking->tanggal_selesai)) }}
+                                                                        {{ date('d M Y', strtotime($booking->tanggal_selesai)) }}
                                                                     </div>
                                                                 </div>
                                                                 <div class="card-body">
@@ -515,108 +515,263 @@
                 </div>
             </div>
             <div class="row g-4">
-                @foreach ($list_fasilitas_pendukung as $fasilitas)
-                    <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="">
-                        <div class="fac-card">
-                            <div class="fac-img" title="Klik untuk detail">
-                                <img src="{{ url("public/$fasilitas->foto") }}" alt="{{ $fasilitas->nama }}"
+
+                @forelse ($list_fasilitas_pendukung as $fasilitas)
+
+                    <div class="col-lg-4 col-md-6 d-flex" data-aos="fade-up">
+
+                        <div class="fac-card w-100 d-flex flex-column">
+
+                            {{-- GAMBAR --}}
+                            <div
+                                class="fac-img"
+                                title="Klik untuk melihat detail"
+                                style="cursor:pointer;"
+                                data-bs-toggle="modal"
+                                data-bs-target="#detailPendukung{{ $fasilitas->id }}">
+
+                                <img
+                                    src="{{ $fasilitas->foto
+                                        ? url('public/' . $fasilitas->foto)
+                                        : url('public/images/lc.jpg') }}"
+                                    alt="{{ $fasilitas->nama }}"
                                     onerror="this.onerror=null;this.src='{{ url('public/images/lc.jpg') }}'">
+
                                 <div class="fac-img-overlay">
-                                    <span><i class="bi bi-zoom-in"></i> Lihat Detail</span>
+                                    <span>
+                                        <i class="bi bi-zoom-in"></i>
+                                        Lihat Detail
+                                    </span>
                                 </div>
+
                             </div>
-                            <div class="fac-body">
-                                <span class="fac-tag utama">Fasilitas Pendukung</span>
+
+
+                            {{-- BODY --}}
+                            <div class="fac-body d-flex flex-column">
+
+                                <div class="fac-top">
+                                    <span class="fac-tag utama">
+                                        Fasilitas Pendukung
+                                    </span>
+
+                                    <h5 class="mt-3 mb-2">{{ $fasilitas->nama }}</h5>
+
+                                    <p class="mb-0">
+                                        {{ Str::words($fasilitas->deskripsi, 20) }}
+                                    </p>
+                                </div>
+
+                                <div class="mt-auto">
+                                    <button
+                                        type="button"
+                                        class="btn-primary-custom"
+                                        data-bs-toggle="modal"
+                                        data-bs-target="#detailPendukung{{ $fasilitas->id }}">
+                                        <i class="bi bi-eye"></i>
+                                        Lihat Detail
+                                    </button>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+
+
+                    {{-- =====================================================
+                        MODAL DETAIL FASILITAS PENDUKUNG
+                    ====================================================== --}}
+                    <div
+                        class="modal fade"
+                        id="detailPendukung{{ $fasilitas->id }}"
+                        tabindex="-1"
+                        aria-labelledby="detailPendukungLabel{{ $fasilitas->id }}"
+                        aria-hidden="true">
+
+                        <div class="modal-dialog modal-lg modal-dialog-centered">
+
+                            <div
+                                class="modal-content"
+                                style="border-radius:20px;
+                                       border:none;
+                                       overflow:hidden;">
+
+
+                                {{-- HEADER --}}
                                 <div
-                                    style="font-weight:700;font-size:.97rem;color:var(--text-dark);margin-bottom:6px;">
-                                    {{ $fasilitas->nama }}</div>
-                                <p style="font-size:.84rem;color:var(--text-light);line-height:1.65;margin:0 0 14px;">
-                                    {{ $fasilitas->deskripsi }}</p>
+                                    class="modal-header"
+                                    style="border-bottom:1px solid #e8eef7;
+                                           padding:20px 28px;">
 
-                                <div class="row g-4">
+                                    <h5
+                                        class="modal-title"
+                                        id="detailPendukungLabel{{ $fasilitas->id }}"
+                                        style="font-weight:700;
+                                               color:var(--text-dark);">
 
-                                    <div class="col-lg-6 col-md-6">
-                                        <button class="btn btn-primary" data-bs-toggle="modal"
-                                            data-bs-target="#exampleModalPendukung{{ $fasilitas->id }}">
-                                            <i class="bi bi-info"></i> Detail
-                                        </button>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="modal fade" id="exampleModalPendukung{{ $fasilitas->id }}" tabindex="-1"
-                        aria-labelledby="exampleModalLabel" aria-hidden="true">
-                        <div class="modal-dialog modal-lg">
-                            <div class="modal-content">
-                                <div class="modal-header">
-                                    <h1 class="modal-title fs-5" id="exampleModalLabel">
+                                        <i class="bi bi-tools me-2"></i>
                                         Detail {{ $fasilitas->nama }}
-                                    </h1>
-                                    <button type="button" class="btn-close" data-bs-dismiss="modal"
-                                        aria-label="Close"></button>
+                                    </h5>
+
+                                    <button
+                                        type="button"
+                                        class="btn-close"
+                                        data-bs-dismiss="modal"
+                                        aria-label="Close">
+                                    </button>
+
                                 </div>
-                                <div class="modal-body">
-                                    <div class="row">
-                                        <div class="col-lg-4">
-                                            <div class="card mb-4">
-                                                <div class="card-body text-center">
-                                                    <img src="{{ url("public/$fasilitas->foto") }}" class="img-fluid"
-                                                        style="width: 100%;">
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-lg-8">
-                                            <div class="card mb-4">
-                                                <div class="card-body">
-                                                    <div class="row">
-                                                        <div class="col-sm-5">
-                                                            <p class="mb-0">Nama Fasilitas</p>
-                                                        </div>
-                                                        <div class="col-sm-7">
-                                                            <p class="text-muted mb-0">{{ $fasilitas->nama }}</p>
-                                                        </div>
-                                                    </div>
 
-                                                    <hr>
-                                                    <div class="row">
-                                                        <div class="col-sm-5">
-                                                            <p class="mb-0">Status</p>
-                                                        </div>
-                                                        <div class="col-sm-7">
-                                                            <p class="text-muted mb-0">{{ $fasilitas->status }}</p>
-                                                        </div>
-                                                    </div>
 
-                                                </div>
-                                            </div>
+                                {{-- BODY --}}
+                                <div class="modal-body" style="padding:28px;">
+
+                                    <div class="row g-4 align-items-start">
+
+
+                                        {{-- FOTO --}}
+                                        <div class="col-lg-5">
+
+                                            <img
+                                                src="{{ $fasilitas->foto
+                                                    ? url('public/' . $fasilitas->foto)
+                                                    : url('public/images/lc.jpg') }}"
+                                                alt="{{ $fasilitas->nama }}"
+                                                class="img-fluid w-100"
+                                                style="height:280px;
+                                                       object-fit:cover;
+                                                       border-radius:16px;"
+                                                onerror="this.onerror=null;this.src='{{ url('public/images/lc.jpg') }}'">
 
                                         </div>
-                                        <div class="row">
-                                            <div class="col-md-12">
-                                                <div class="card mb-4 mb-md-0">
-                                                    <div class="card-body">
-                                                        <p class="mb-4">
-                                                            {{ $fasilitas->deskripsi }}
-                                                        </p>
 
+
+                                        {{-- INFORMASI --}}
+                                        <div class="col-lg-7">
+
+                                            <div
+                                                style="background:#f8fbff;
+                                                       border-radius:16px;
+                                                       padding:22px;">
+
+
+                                                {{-- NAMA --}}
+                                                <div class="mb-3">
+
+                                                    <small
+                                                        style="color:var(--text-light);">
+                                                        Nama Fasilitas
+                                                    </small>
+
+                                                    <div
+                                                        style="font-weight:700;
+                                                               color:var(--text-dark);
+                                                               margin-top:4px;">
+
+                                                        {{ $fasilitas->nama }}
                                                     </div>
-                                                </div>
-                                            </div>
 
+                                                </div>
+
+                                                <hr>
+
+
+                                                {{-- STATUS --}}
+                                                <div>
+
+                                                    <small
+                                                        style="color:var(--text-light);">
+                                                        Status
+                                                    </small>
+
+                                                    <div
+                                                        style="font-weight:600;
+                                                               color:var(--text-dark);
+                                                               margin-top:4px;">
+
+                                                        {{ $fasilitas->status ?? 'Tidak tersedia' }}
+                                                    </div>
+
+                                                </div>
+
+                                            </div>
                                         </div>
+
                                     </div>
+
+
+                                    {{-- DESKRIPSI --}}
+                                    <div
+                                        class="mt-4"
+                                        style="background:#f8fbff;
+                                               border-radius:16px;
+                                               padding:22px;">
+
+                                        <h6
+                                            style="font-weight:700;
+                                                   color:var(--text-dark);
+                                                   margin-bottom:10px;">
+
+                                            <i class="bi bi-card-text me-2"></i>
+                                            Deskripsi Fasilitas
+                                        </h6>
+
+                                        <p
+                                            style="color:var(--text-medium);
+                                                   line-height:1.8;
+                                                   margin:0;">
+
+                                            {{ $fasilitas->deskripsi ?? 'Deskripsi fasilitas belum tersedia.' }}
+                                        </p>
+
+                                    </div>
+
                                 </div>
-                                <div class="modal-footer">
-                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"><i
-                                            class="bi bi-times"></i>Close</button>
-                                    {{-- <button type="button" class="btn btn-primary">Save
-                                        changes</button> --}}
+
+
+                                {{-- FOOTER --}}
+                                <div
+                                    class="modal-footer"
+                                    style="border-top:1px solid #e8eef7;
+                                           padding:18px 28px;">
+
+                                    <button
+                                        type="button"
+                                        class="btn btn-secondary"
+                                        data-bs-dismiss="modal">
+
+                                        <i class="bi bi-x-lg"></i>
+                                        Tutup
+                                    </button>
+
                                 </div>
+
                             </div>
                         </div>
                     </div>
-                @endforeach
+
+                @empty
+
+                    <div class="col-12">
+                        <div class="text-center py-5">
+
+                            <i
+                                class="bi bi-tools"
+                                style="font-size:3rem;color:var(--text-light);">
+                            </i>
+
+                            <p
+                                class="mt-3"
+                                style="color:var(--text-light);">
+
+                                Data fasilitas pendukung belum tersedia.
+                            </p>
+
+                        </div>
+                    </div>
+
+                @endforelse
+
             </div>
         </div>
     </section>
@@ -702,7 +857,7 @@
                                     <li><i class="bi bi-check-circle-fill"></i> {{ $item }}</li>
                                 @endforeach
                             </ul>
-                            
+
                         </div>
                     </div>
                 @endforeach

@@ -83,9 +83,9 @@
                             <td class="text-center">{{ $booking->fasilitas->nama }}</td>
                             <td class="text-center">{{ $booking->nama_kegiatan }}</td>
                             <td class="text-center">
-                                {{ date('d-M-Y', strtotime($booking->tanggal_mulai)) }} <br>
+                                {{ date('d M Y', strtotime($booking->tanggal_mulai)) }} <br>
                                 Sampai <br>
-                                {{ date('d-M-Y', strtotime($booking->tanggal_selesai)) }}</td>
+                                {{ date('d M Y', strtotime($booking->tanggal_selesai)) }}</td>
                             <td class="text-center">
                                 @if ($booking->status == '1')
                                     <span class="btn-primary">New Booking</span>

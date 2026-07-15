@@ -13,70 +13,76 @@
 
     </div>
 
-    <div class="card overflow-hidden">
-        <div class="overflow-x-auto">
-            <table class="w-full">
-                <thead class="tbl-head">
-                    <tr>
-                        <th class="text-left">No</th>
-                        <th class="text-center">Aksi</th>
-                        <th class="text-left">Foto</th>
-                        <th class="text-left">Visi</th>
-                        <th class="text-left">Misi</th>
-                        <th class="text-left">Sejarah</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    @foreach ($list_tentang_kami as $tentang_kami)
-                        <tr class="tbl-row">
+    <div class="card p-6">
 
-                            <td class="text-slate-400 text-xs">{{ $loop->iteration }}</td>
+    @foreach ($list_tentang_kami as $tentang_kami)
 
-                            {{-- Tentang Kami --}}
+    <table class="w-full border border-slate-300">
+    <div class="flex justify-end items-center gap-2 mb-4">
 
-                            <td>
-                                <div class="flex items-center justify-center gap-2">
-                                    {{-- Detail --}}
-                                    <a href="{{ url('backend/tentang_kami/show', $tentang_kami->id) }}"
-                                        class="inline-flex items-center gap-1 px-3 py-1.5 rounded-lg text-xs font-semibold bg-blue-50 text-blue-600 hover:bg-blue-100 transition"
-                                        title="Lihat Detail">
-                                        <i class="fa-solid fa-eye"></i>
-                                    </a>
-                                    {{-- Edit --}}
-                                    <a href="{{ url('backend/tentang_kami/edit', $tentang_kami->id) }}" class="btn-warning"
-                                        title="Edit">
-                                        <i class="fa-solid fa-pen"></i>
-                                    </a>
-                                </div>
-                            </td>
-                            <td>
-                                <div class="flex items-center gap-3">
-                                    @if ($tentang_kami->foto)
-                                        <img src="{{ url("public/$tentang_kami->foto") }}"
-                                            class="w-12 h-12 rounded-lg object-cover border border-slate-200">
-                                    @else
-                                        <div
-                                            class="w-12 h-12 rounded-lg bg-green-100 flex items-center justify-center shrink-0">
-                                            <i class="fa-solid fa-calendar text-green-500 text-sm"></i>
-                                        </div>
-                                    @endif
-                                </div>
-                            </td>
+    <a href="{{ url('backend/tentang_kami/show', $tentang_kami->id) }}"
+        class="inline-flex items-center justify-center w-10 h-10 rounded-lg bg-blue-600 text-white hover:bg-blue-700 transition"
+        title="Lihat Detail">
+        <i class="fa-solid fa-eye"></i>
+    </a>
 
-                            {{-- Visi --}}
-                            <td class="text-slate-600 text-sm">{{ $tentang_kami->visi }}</td>
+    <a href="{{ url('backend/tentang_kami/edit', $tentang_kami->id) }}"
+        class="inline-flex items-center justify-center w-10 h-10 rounded-lg bg-amber-100 text-amber-600 hover:bg-amber-200 transition"
+        title="Edit">
+        <i class="fa-solid fa-pen"></i>
+    </a>
 
-                            {{-- Misi --}}
-                            <td class="text-slate-600 text-sm">{{ $tentang_kami->misi }}</td>
-
-                            {{-- Sejarah --}}
-                            <td class="text-slate-600 text-sm">{!! nl2br($tentang_kami->sejarah) !!}</td>
+</div>
 
 
-                        </tr>
-                    @endforeach
-                </tbody>
-            </table>
-        </div>
-    </div>
+        <tr>
+            <td class="border p-3 font-semibold">
+                Visi
+            </td>
+
+            <td class="border p-3">
+                {{ $tentang_kami->visi }}
+            </td>
+        </tr>
+
+        <tr>
+            <td class="border p-3 font-semibold">
+                Misi
+            </td>
+
+            <td class="border p-3">
+                {{ $tentang_kami->misi }}
+            </td>
+        </tr>
+
+        <tr>
+            <td class="border p-3 font-semibold align-top">
+                Sejarah
+            </td>
+
+            <td class="border p-3">
+                {!! nl2br($tentang_kami->sejarah) !!}
+            </td>
+        </tr>
+
+        <tr>
+            <td class="border p-3 font-semibold">
+                Foto
+            </td>
+
+            <td class="border p-3">
+
+                @if($tentang_kami->foto)
+                    <img src="{{ url("public/$tentang_kami->foto") }}"
+                         class="w-44 rounded-lg border">
+                @endif
+
+            </td>
+        </tr>
+
+    </table>
+
+    @endforeach
+
+</div>
 </x-backend>

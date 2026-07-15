@@ -63,7 +63,7 @@
                 <div class="col-lg-6 text-center" data-aos="fade-up">
 
                     <div class="stag">
-                        <i class="bi bi-eye-fill"></i>
+                        <i class=""></i>
                         Visi & Misi
                     </div>
 
@@ -86,7 +86,7 @@
                     <div class="vm-card">
 
                         <div class="vm-icon">
-                            <i class="bi bi-eye-fill"></i>
+                            <i class=""></i>
                         </div>
 
                         <h4
@@ -119,7 +119,7 @@
                     <div class="vm-card">
 
                         <div class="vm-icon">
-                            <i class="bi bi-bullseye"></i>
+                            <i class=""></i>
                         </div>
 
                         <h4
@@ -204,7 +204,7 @@
 
                     <div class="stag">
 
-                        <i class="bi bi-clock-history"></i>
+                        <i class=""></i>
                         Sejarah
 
                     </div>

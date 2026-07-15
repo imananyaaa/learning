@@ -74,9 +74,8 @@
     </div>
 
     <div class="footer-bottom">
-        <div class="container d-flex flex-wrap justify-content-between align-items-center gap-2">
+        <div class="container d-flex flex-wrap justify-content-center align-items-center gap-2">
             <span class="footer-bottom-text">© {{ date('Y') }} IAR Indonesia Learning Center. All rights reserved.</span>
-            <span class="footer-bottom-text">Developed with <i class="bi bi-heart-fill text-danger"></i> for Conservation</span>
         </div>
     </div>
 </footer>

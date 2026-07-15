@@ -1517,6 +1517,17 @@
             z-index: 1
         }
 
+        .fac-body{
+            display: flex;
+            flex-direction: column;
+            height: 70%;
+        }
+
+        .fac-top{
+            flex: 1;
+        }
+
+
         .steps .step .step-icon-wrap::before {
             left: 0
         }

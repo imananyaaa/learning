@@ -27,7 +27,7 @@
                                     <i class="bi bi-geo-alt-fill"></i>
                                 </div>
                                 <h6>Alamat</h6>
-                                
+                                <P>Jl. Ketapang–Tanjungpura </P>
                                 <a href="{{ $kontak->link_maps }}" class="btn-br" target="_blank">
                                     Rute
                                 </a>
@@ -56,7 +56,7 @@
                                 <p>{{ $kontak->whatsapp }}</p>
                                 <a href="https://wa.me/{{ preg_replace('/[^0-9]/', '', $kontak->whatsapp) }}"
                                     target="_blank" class="btn-br">
-                                    Chat
+                                    Hubungi
                                 </a>
                             </div>
                         </div>
@@ -67,9 +67,12 @@
                                     <i class="bi bi-instagram"></i>
                                 </div>
                                 <h6>Instagram</h6>
-                                <p>{{ $kontak->instagram }}</p>
-                                <a href="{{ $kontak->instagram_link }}" target="_blank" class="btn-br">
-                                    Follow
+                                <p>{{ '@' . $kontak->instagram }}</p>
+
+                                <a href="https://www.instagram.com/{{ ltrim($kontak->instagram, '@') }}"
+                                target="_blank"
+                                class="btn-br">
+                                    Kunjungi
                                 </a>
                             </div>
                         </div>
@@ -191,7 +194,7 @@
                         <div style="font-size:.82rem;color:var(--tx-400);line-height:1.8;">
                             <div class="d-flex gap-2 mb-2"><i class="bi bi-geo-alt-fill mt-1"
                                     style="color:var(--br-500);flex-shrink:0;"></i>
-                                Koordinat lokasi: -1.7375161006912656, 110.01042955355726</div>
+                                Jl. Ketapang–Tanjungpura</div>
                             <div class="d-flex gap-2 mb-3"><i class="bi bi-clock-fill mt-1"
                                     style="color:var(--br-500);flex-shrink:0;"></i>
                                 Senin – Jumat: 08:00 – 17:00 WIB</div>

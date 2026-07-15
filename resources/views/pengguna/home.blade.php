@@ -127,45 +127,22 @@
                 </div>
             </div>
 
-            @php
-                $events = [
-                    [
-                        'image' => 'event1.jpg',
-                        'date' => '15 Jun 2026',
-                        'title' => 'Workshop Konservasi Satwa Liar',
-                        'excerpt' =>
-                            'Pelatihan intensif tentang teknik konservasi modern untuk pelestarian satwa liar Indonesia.',
-                    ],
-                    [
-                        'image' => 'event2.jpg',
-                        'date' => '22 Jun 2026',
-                        'title' => 'Seminar Pendidikan Lingkungan',
-                        'excerpt' =>
-                            'Meningkatkan kesadaran masyarakat tentang pentingnya menjaga kelestarian lingkungan.',
-                    ],
-                    [
-                        'image' => 'event3.jpg',
-                        'date' => '30 Jun 2026',
-                        'title' => 'Pelatihan Ekowisata',
-                        'excerpt' => 'Program pelatihan untuk mengembangkan potensi ekowisata berbasis konservasi.',
-                    ],
-                ];
-            @endphp
+
 
             <div class="row g-4">
-                @foreach ($events as $index => $event)
-                    <div class="col-md-4" data-aos="fade-up" data-aos-delay="{{ $index * 100 }}">
+                @foreach ($list_event as $event)
+                    <div class="col-md-4" data-aos="fade-up" data-aos-delay>
                         <div class="event-card">
                             <div class="event-image">
-                                <img src="{{ asset('images/' . $event['image']) }}" alt="{{ $event['title'] }}"
+                                <img src="{{ url("public/$event->foto") }}" alt="{{ $event['title'] }}"
                                     onerror="this.onerror=null; this.style.display='none'; this.parentElement.innerHTML='<div class=\'event-image-placeholder\'><i class=\'bi bi-calendar-event\'></i></div>';">
                             </div>
                             <div class="event-body">
                                 <span class="event-date">
-                                    <i class="bi bi-calendar3"></i> {{ $event['date'] }}
+                                    <i class="bi bi-calendar3"></i> {{ $event->tanggal }}
                                 </span>
-                                <h5 class="event-title">{{ $event['title'] }}</h5>
-                                <p class="event-excerpt">{{ $event['excerpt'] }}</p>
+                                <h5 class="event-judul">{{ $event->judul}}</h5>
+                                <p class="event-kuota">{{ $event->kuota }}</p>
                             </div>
                         </div>
                     </div>

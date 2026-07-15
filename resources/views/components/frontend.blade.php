@@ -1455,6 +1455,17 @@
             transition: all .3s ease;
         }
 
+        .fac-body{
+            display: flex;
+            flex-direction: column;
+            height: 70%;
+        }
+
+        .fac-top{
+            flex: 1;
+        }
+
+
         textarea.form-input {
             min-height: 160px;
             resize: none;

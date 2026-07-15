@@ -118,7 +118,7 @@
 
                                     <p>
                                         <span class="text-gray-700 mr-2">
-                                            {{ date('d-M-Y', strtotime($booking->tanggal_mulai)) }}
+                                            {{ date('d M Y', strtotime($booking->tanggal_mulai)) }}
                                         </span>
                                     </p>
 
@@ -138,7 +138,7 @@
 
                                     <p>
                                         <span class="text-gray-700 mr-2">
-                                            {{ date('d-M-Y', strtotime($booking->tanggal_selesai)) }}
+                                            {{ date('d M Y', strtotime($booking->tanggal_selesai)) }}
                                         </span>
                                     </p>
 
