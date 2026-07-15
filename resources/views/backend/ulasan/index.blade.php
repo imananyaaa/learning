@@ -43,9 +43,13 @@
                 {{-- Tombol --}}
                 <div class="flex gap-2">
 
-                    <button type="submit" class="btn-primary">
-                        <i class="fa-solid fa-magnifying-glass"></i>
+                    <button type="submit"
+                        class="px-6 py-3 rounded-xl bg-blue-600 text-white font-semibold
+                           hover:bg-blue-700 transition">
+
+                        <i class="fa-solid fa-magnifying-glass mr-2"></i>
                         Cari
+
                     </button>
 
                     @if (request('search'))
@@ -117,12 +121,12 @@
 
                                 </a>
 
-                                {{-- Hapus --}}
-                                    <a onclick="return confirm('Apakah Anda Yakin Ingin Menghapus Data Ini?')"
-                                        href="{{ url("backend/ulasan/delete/$ulasan->id") }}')" class="btn-danger"
-                                        title="Hapus">
-                                        <i class="fa-solid fa-trash"></i>
-                                    </a>
+                                <button onclick="openDel('{{ url('ulasan/ulasan/destroy', $ulasan) }}')"
+                                    class="btn-danger">
+
+                                    <i class="fa-solid fa-trash"></i>
+
+                                </button>
 
                             </div>
                         </td>

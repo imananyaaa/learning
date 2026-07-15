@@ -16,7 +16,7 @@
         </h2>
 
         @if($fasilitas->foto)
-            <img src="{{ Storage::url($fasilitas->foto) }}"
+            <img src="{{ url("public/$fasilitas->foto") }}"
                  class="w-full rounded-xl mb-5 max-h-96 object-cover">
         @endif
 

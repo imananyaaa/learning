@@ -28,7 +28,7 @@
                 <div class="container padding-bottom-3x mb-1">
                     @foreach ($list_booking as $booking)
                         @if (Auth::guard('pengguna')->user()->nik == $booking->nik)
-                            @if ($booking->status != '3' && $booking->status != '4')
+                            @if ($booking->status = '1' && $booking->status = '2')
                                 <div class="card mb-3">
                                     <div class="p-4 text-center text-white text-lg bg-dark rounded-top">
                                         <span class="text-uppercase">Tracking Pemesanan : </span>
@@ -130,11 +130,25 @@
                                             href="{{ url("public/$booking->file_proposal") }}" target="_blank">
                                             Lihat Dokumen
                                         </a>
+
+                                        @php
+                                            $expired = now()->greaterThan(
+                                                \Carbon\Carbon::parse($booking->created_at)->addMinutes(30),
+                                            );
+                                        @endphp
                                         @if ($booking->status == '1')
-                                            <a class="btn btn-outline-danger btn-rounded btn-sm float-end"
-                                                href="orderDetails">
-                                                Batalkan Pemesanan
-                                            </a>
+                                            @if (!$expired)
+                                                <a href="{{ url('pengguna/fasilitas/batal', $booking->id) }}"
+                                                    onclick="return confirm('Apakah Anda yakin ingin membatalkan pemesanan ini?')"
+                                                    class="btn btn-outline-danger btn-rounded btn-sm float-end">
+                                                    Batalkan Pemesanan
+                                                </a>
+                                            @else
+                                                <button type="button"
+                                                    class="btn btn-secondary btn-rounded btn-sm float-end" disabled>
+                                                    Waktu Pembatalan Habis
+                                                </button>
+                                            @endif
                                         @endif
 
                                     </div>
@@ -163,7 +177,8 @@
                             <div class="fac-img" title="Klik untuk detail">
                                 <img src="{{ url("public/$fasilitas->foto") }}" alt="{{ $fasilitas->nama }}"
                                     onerror="this.onerror=null;this.src='{{ url('public/images/lc.jpg') }}'">
-                                <div class="fac-img-overlay">
+                                <div class="fac-img-overlay" data-bs-toggle="modal"
+                                        data-bs-target="#detailPendukung{{ $fasilitas->id }}">
                                     <span><i class="bi bi-zoom-in"></i> Lihat Detail</span>
                                 </div>
                             </div>
@@ -300,11 +315,11 @@
                                         </div>
 
                                         <div class="form-group row mt-3">
-                                            <label for="inputEmail3" class="col-sm-4 col-form-label">Tanggal Mulai
+                                            <label class="col-sm-4 col-form-label">Tanggal Mulai
                                                 Kegiatan</label>
                                             <div class="col-sm-8">
-                                                <input type="date" class="form-control" name="tanggal_mulai"
-                                                    required>
+                                                <input id="tanggal_mulai{{ $fasilitas->id }}" type="date"
+                                                    class="form-control" name="tanggal_mulai" required>
                                             </div>
                                         </div>
 
@@ -312,8 +327,8 @@
                                             <label for="inputEmail3" class="col-sm-4 col-form-label">Tanggal Selesai
                                                 Kegiatan</label>
                                             <div class="col-sm-8">
-                                                <input type="date" class="form-control" name="tanggal_selesai"
-                                                    required>
+                                                <input id="tanggal_selesai{{ $fasilitas->id }}" type="date"
+                                                    class="form-control" name="tanggal_selesai" required>
                                             </div>
                                         </div>
 
@@ -537,8 +552,9 @@
                                     alt="{{ $fasilitas->nama }}"
                                     onerror="this.onerror=null;this.src='{{ url('public/images/lc.jpg') }}'">
 
-                                <div class="fac-img-overlay">
-                                    <span>
+                                <div class="fac-img-overlay" data-bs-toggle="modal"
+                                        data-bs-target="#detailPendukung{{ $fasilitas->id }}">
+                                    <span >
                                         <i class="bi bi-zoom-in"></i>
                                         Lihat Detail
                                     </span>
@@ -927,4 +943,45 @@
             </div>
         </div>
     </div>
+
+    <script>
+        let tanggalBlock = @json($tanggal_block);
+
+
+        @foreach ($list_fasilitas as $fasilitas)
+
+            let block{{ $fasilitas->id }} =
+                tanggalBlock[{{ $fasilitas->id }}] ?? [];
+
+
+            document
+                .getElementById('tanggal_mulai{{ $fasilitas->id }}')
+                .addEventListener('change', function() {
+
+                    if (block{{ $fasilitas->id }}.includes(this.value)) {
+
+                        alert('Tanggal sudah dibooking');
+
+                        this.value = '';
+
+                    }
+
+                });
+
+
+            document
+                .getElementById('tanggal_selesai{{ $fasilitas->id }}')
+                .addEventListener('change', function() {
+
+                    if (block{{ $fasilitas->id }}.includes(this.value)) {
+
+                        alert('Tanggal sudah dibooking');
+
+                        this.value = '';
+
+                    }
+
+                });
+        @endforeach
+    </script>
     </x-frontend>

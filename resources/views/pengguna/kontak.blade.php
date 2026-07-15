@@ -133,11 +133,7 @@
                                         <option value="">-- Pilih Tujuan --</option>
 
                                         <option value="Informasi Program">
-                                            Informasi Program
-                                        </option>
-
-                                        <option value="Pendaftaran Peserta">
-                                            Pendaftaran Peserta
+                                            Informasi Lowongan Pekerjaan
                                         </option>
 
                                         <option value="Kerja Sama">
