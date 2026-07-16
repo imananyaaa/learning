@@ -14,12 +14,12 @@
         <div class="flex items-center gap-4 mb-6">
 
             <div class="w-14 h-14 rounded-full bg-blue-100 flex items-center justify-center text-blue-700 font-bold text-lg">
-                {{ strtoupper(substr($ulasan->user->name ?? 'U',0,1)) }}
+                {{ strtoupper(substr($ulasan->nama ?? 'U',0,1)) }}
             </div>
 
             <div>
                 <h3 class="font-bold text-slate-800 text-lg">
-                    {{ $ulasan->user->name ?? 'User Tidak Ditemukan' }}
+                    {{ $ulasan->nama ?? 'User Tidak Ditemukan' }}
                 </h3>
 
                 <p class="text-slate-500">

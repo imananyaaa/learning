@@ -108,7 +108,7 @@
             <div class="row justify-content-between align-items-end mb-5">
                 <div class="col-lg-6" data-aos="fade-right">
                     <span class="section-badge">
-                        <i class="bi bi-calendar-event-fill"></i> Kegiatan Terbaru
+                        <i class="bi bi-calendar-event-fill"></i> Event
                     </span>
                     <h2 class="section-title">Event & <span>Kegiatan</span></h2>
                 </div>

@@ -78,7 +78,7 @@
             <div class="row justify-content-between align-items-end mb-5">
                 <div class="col-lg-6" data-aos="fade-right">
                     <div class="stag"><i class="bi bi-star-fill"></i> Ulasan</div>
-                    <h2 class="stitle">Apa Kata <em>Pengguna</em>?</h2>
+                    <h2 class="stitle">Apa Kata <em>{{ $pengguna->nama }}</em>?</h2>
                     <div class="divider"></div>
                     <p class="sdesc">Ulasan nyata dari para peserta dan pengguna fasilitas Learning Center.</p>
                 </div>

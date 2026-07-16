@@ -16,6 +16,7 @@ class UlasanController extends Controller
      */
     public function index(Request $request)
     {
+        $data['ulasan'] = Ulasan::count();
 
         $search = $request->search;
 

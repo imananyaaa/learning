@@ -23,3 +23,4 @@ Route::get('/ulasan',[UlasanController::class, 'index' ]);
 Route::post('/ulasan',[UlasanController::class, 'store' ]);
 
 Route::get('/kontak',[KontakController::class, 'index' ]);
+Route::post('/kontak/store',[KontakController::class, 'store' ]);

@@ -5,7 +5,6 @@ namespace App\Http\Controllers\Backend;
 use App\Http\Controllers\Controller;
 use App\Models\PesanKontak;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Schema;
 
 class PesanController extends Controller
@@ -28,16 +27,13 @@ class PesanController extends Controller
                 ]);
             });
 
-        $data['list_pesan'] = PesanKontak::when($search, function ($query) use ($search, $columns) {
-
-                $query->where(function ($q) use ($search, $columns) {
-
-                    foreach ($columns as $column) {
-                        $q->orWhere($column, 'like', "%{$search}%");
-                    }
-
-                });
-
+        $data['list_pesan'] = PesanKontak::when($search, function ($query) use ($search) {
+                $query->where('nama', 'like', "%{$search}%")
+                    ->orWhere('email', 'like', "%{$search}%")
+                    ->orWhere('telepon', 'like', "%{$search}%")
+                    ->orWhere('tujuan', 'like', "%{$search}%")
+                    ->orWhere('pesan', 'like', "%{$search}%")
+                    ->orWhere('email', 'like', "%{$search}%");
             })
             ->latest()
             ->paginate(10)

@@ -81,6 +81,7 @@
                 @endforeach
             </div>
 
+            @include('section.notif')
             <div class="row g-5 align-items-start">
                 <div class="col-lg-6" data-aos="fade-right">
                     <div class="stag"><i class="bi bi-send-fill"></i>Kirim Pesan</div>
@@ -89,7 +90,7 @@
 
                     <div class="contact-form-box">
 
-                        <form action="{{ url('kontak.store') }}" method="POST">
+                        <form action="{{ url('kontak/store') }}" method="POST">
                             @csrf
                             @if (session('success'))
                                 <div
@@ -134,11 +135,7 @@
                                         <option value="">-- Pilih Tujuan --</option>
 
                                         <option value="Informasi Program">
-                                            Informasi Program
-                                        </option>
-
-                                        <option value="Pendaftaran Peserta">
-                                            Pendaftaran Peserta
+                                            Informasi Lowongan Pekerjaan
                                         </option>
 
                                         <option value="Kerja Sama">

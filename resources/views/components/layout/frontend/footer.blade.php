@@ -42,6 +42,7 @@
                     <li><a href="{{url('tentang-kami') }}" class="footer-link">Tentang Kami</a></li>
                     <li><a href="{{url('fasilitas') }}" class="footer-link">Fasilitas</a></li>
                     <li><a href="{{url('event') }}" class="footer-link">Event</a></li>
+                    <li><a href="{{url('ulasan') }}" class="footer-link">Ulasan</a></li>
                     <li><a href="{{url('kontak') }}" class="footer-link">Kontak</a></li>
                 </ul>
             </div>

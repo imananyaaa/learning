@@ -4,7 +4,7 @@
     <div class="grid grid-cols-2 gap-4 mb-6">
         <div class="card p-4 text-center">
             <div class="text-2xl font-black text-slate-800">
-
+                {{ $ulasan }}
             </div>
             <span class="badge badge-blue mt-1">
                 Total Ulasan

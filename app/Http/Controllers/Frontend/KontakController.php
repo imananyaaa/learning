@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Frontend;
 
 use App\Http\Controllers\Controller;
 use App\Models\Kontak;
+use App\Models\PesanKontak;
 use Illuminate\Http\Request;
 
 class KontakController extends Controller
@@ -30,7 +31,15 @@ class KontakController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $pesan_kontak = New PesanKontak();
+        $pesan_kontak->nama = request('nama');
+        $pesan_kontak->email = request('email');
+        $pesan_kontak->telepon = request('telepon');
+        $pesan_kontak->tujuan = request('tujuan');
+        $pesan_kontak->pesan = request('pesan');
+        $pesan_kontak->save();
+
+        return back()->with('success', 'Terimakasih, Pesan Anda Berhasil Dikirim');
     }
 
     /**

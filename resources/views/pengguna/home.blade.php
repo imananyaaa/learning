@@ -83,14 +83,6 @@
 
                 <div class="facility-item">
                     <div class="facility-icon">
-                        <i class="bi bi-book-fill"></i>
-                    </div>
-                    <h5 class="facility-name">Ruang Kelas</h5>
-                    <p class="facility-desc">Ruang kelas representatif untuk pelatihan dan workshop.</p>
-                </div>
-
-                <div class="facility-item">
-                    <div class="facility-icon">
                         <i class="bi bi-tree-fill"></i>
                     </div>
                     <h5 class="facility-name">Area Outdoor</h5>
@@ -116,7 +108,7 @@
             <div class="row justify-content-between align-items-end mb-5">
                 <div class="col-lg-6" data-aos="fade-right">
                     <span class="section-badge">
-                        <i class="bi bi-calendar-event-fill"></i> Kegiatan Terbaru
+                        <i class="bi bi-calendar-event-fill"></i> Event
                     </span>
                     <h2 class="section-title">Event & <span>Kegiatan</span></h2>
                 </div>

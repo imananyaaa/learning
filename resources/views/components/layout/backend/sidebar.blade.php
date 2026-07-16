@@ -93,13 +93,18 @@
         <a href="{{ url('backend/pesan') }}"
             class="nav-link {{ request()->routeIs('backend/pesan*') ? 'active' : '' }}">
             <span class="nav-icon"><i class="fa-solid fa-envelope"></i></span> Pesan
+            <span class="ml-2 bg-red-500 text-white text-xs rounded-full px-2 py-1 ">
+                        {{ $pesan_masuk }}
+                    </span>
 
         </a>
 
         <a href="{{ url('backend/pengguna') }}"
             class="nav-link {{ request()->routeIs('backend/pengguna*') ? 'active' : '' }}">
             <span class="nav-icon"><i class="fa-solid fa-users"></i></span> Pengguna
-
+            <span class="ml-2 bg-red-500 text-white text-xs rounded-full px-2 py-1">
+                        {{ $pengguna_baru }}
+                    </span>
         </a>
 
         <div x-data="{ open: {{ request()->routeIs('backend/booking*', 'backend/booking-selesai*', 'backend/booking-ditolak*') ? 'true' : 'false' }} }">
