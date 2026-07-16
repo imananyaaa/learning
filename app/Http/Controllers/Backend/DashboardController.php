@@ -5,6 +5,9 @@ namespace App\Http\Controllers\Backend;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Ulasan;
+use App\Models\Fasilitas;
+use App\Models\PesanKontak;
+use App\Models\Event;
 
 class DashboardController extends Controller
 {
@@ -35,6 +38,11 @@ class DashboardController extends Controller
                 'pct'   => $pct
             ];
         });
+
+        $data['fasilitas'] = Fasilitas::count();
+        $data['event'] = Event::count();
+        $data['ulasan'] = Ulasan::count();
+        $data['pesan'] = PesanKontak::count();
 
         return View('backend.dashboard', $data);
     }

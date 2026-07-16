@@ -89,18 +89,7 @@ class UlasanController extends Controller
      */
     public function destroy(string $id)
     {
-        $ulasan = Ulasan::find($id);
-
-        if ($ulasan->foto) {
-
-            $oldFile = str_replace('app/', '', $ulasan->foto);
-
-            if (Storage::exists($oldFile)) {
-                Storage::delete($oldFile);
-            }
-        }
-
-        $ulasan->delete();
+        Ulasan::destroy($id);
 
         return back();
     }

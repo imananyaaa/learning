@@ -121,12 +121,11 @@
 
                                 </a>
 
-                                <button onclick="openDel('{{ url('ulasan/ulasan/destroy', $ulasan) }}')"
-                                    class="btn-danger">
-
-                                    <i class="fa-solid fa-trash"></i>
-
-                                </button>
+                                <a onclick="return confirm('Apakah Anda Yakin Ingin Menghapus Data Ini?')"
+                                        href="{{ url("backend/ulasan/delete/$ulasan->id") }}')" class="btn-danger"
+                                        title="Hapus">
+                                        <i class="fa-solid fa-trash"></i>
+                                    </a>
 
                             </div>
                         </td>

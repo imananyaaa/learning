@@ -57,11 +57,7 @@
                                     {{ old('jenis', $event->jenis) == 'eksternal' ? 'selected' : '' }}>Eksternal</option>
                             </select>
                         </div>
-                        <div>
-                            <label class="form-label">Kuota Peserta</label>
-                            <input type="number" name="kuota" value="{{ old('kuota', $event->kuota) }}"
-                                class="form-input" min="0" placeholder="Kosongkan = tidak terbatas">
-                        </div>
+
                     </div>
 
                     <div>
@@ -75,17 +71,6 @@
                         <textarea name="deskripsi" class="form-input" rows="4" required>{{ old('deskripsi', $event->deskripsi) }}</textarea>
                     </div>
 
-                    <div>
-                        <label class="form-label">Status</label>
-                        <select name="status" class="form-input">
-                            <option value="aktif" {{ old('status', $event->status) == 'aktif' ? 'selected' : '' }}>
-                                Aktif</option>
-                            <option value="selesai"
-                                {{ old('status', $event->status) == 'selesai' ? 'selected' : '' }}>Selesai</option>
-                            <option value="dibatalkan"
-                                {{ old('status', $event->status) == 'dibatalkan' ? 'selected' : '' }}>Dibatalkan</option>
-                        </select>
-                    </div>
 
                     <div>
                         <label class="form-label">Foto Event</label>

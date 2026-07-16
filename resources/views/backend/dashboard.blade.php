@@ -13,7 +13,7 @@
             <div class="w-11 h-11 rounded-xl flex items-center justify-center" style="background:#eff6ff">
                 <i class="fa-solid fa-building text-blue-600 text-lg"></i>
             </div>
-            <span class="badge badge-blue">Aktif</span>
+            <span class="badge badge-blue">{{ $fasilitas }}</span>
         </div>
         {{-- <div class="text-3xl font-black text-slate-800">{{ $stats['fasilitas'] }}</div> --}}
         <div class="text-sm text-slate-500 mt-1 font-medium">Total Fasilitas</div>
@@ -25,7 +25,7 @@
             <div class="w-11 h-11 rounded-xl flex items-center justify-center" style="background:#f0fdf4">
                 <i class="fa-solid fa-calendar-days text-green-600 text-lg"></i>
             </div>
-            {{-- <span class="badge badge-green">{{ $stats['event_aktif'] }} Aktif</span> --}}
+            <span class="badge badge-green">{{ $event }}</span>
         </div>
         {{-- <div class="text-3xl font-black text-slate-800">{{ $stats['event'] }}</div> --}}
         <div class="text-sm text-slate-500 mt-1 font-medium">Total Event</div>
@@ -37,7 +37,7 @@
             <div class="w-11 h-11 rounded-xl flex items-center justify-center" style="background:#fefce8">
                 <i class="fa-solid fa-star text-yellow-500 text-lg"></i>
             </div>
-            {{-- <span class="badge badge-yellow">{{ $stats['rating'] }}★ Avg</span> --}}
+            <span class="badge badge-yellow">{{ $ulasan }}★ Avg</span>
         </div>
         {{-- <div class="text-3xl font-black text-slate-800">{{ $stats['ulasan'] }}</div> --}}
         <div class="text-sm text-slate-500 mt-1 font-medium">Total Ulasan</div>
@@ -49,11 +49,9 @@
             <div class="w-11 h-11 rounded-xl flex items-center justify-center" style="background:#fef2f2">
                 <i class="fa-solid fa-envelope text-red-500 text-lg"></i>
             </div>
-            {{-- @if($stats['kontak_baru'] > 0)
-                 <span class="badge badge-red">{{ $stats['kontak_baru'] }} Baru</span>
-            @else
-                <span class="badge badge-gray">Kosong</span>
-            @endif --}}
+
+                 <span class="badge badge-red">{{ $pesan }} Baru</span>
+
         </div>
         {{-- <div class="text-3xl font-black text-slate-800">{{ $stats['kontak'] }}</div> --}}
         <div class="text-sm text-slate-500 mt-1 font-medium">Total Pesan</div>

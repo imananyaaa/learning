@@ -28,9 +28,7 @@
                         <span class="badge badge-{{ $event->jenis == 'internal' ? 'blue' : 'green' }}">
                             {{ ucfirst($event->jenis) }}
                         </span>
-                        <span class="badge badge-{{ $event->status == 'aktif' ? 'green' : ($event->status == 'selesai' ? 'gray' : 'red') }}">
-                            {{ ucfirst($event->status ?? 'aktif') }}
-                        </span>
+                    
                     </div>
                 </div>
                 <a href="{{ url('backend/event/edit', $event) }}"
@@ -66,14 +64,7 @@
                     <p class="font-semibold text-slate-700">{{ $event->lokasi }}</p>
                 </div>
 
-                <div class="bg-slate-50 rounded-xl p-4">
-                    <p class="text-xs text-slate-400 mb-1">
-                        <i class="fa-solid fa-users mr-1"></i> Kuota Peserta
-                    </p>
-                    <p class="font-semibold text-slate-700">
-                        {{ $event->kuota ? number_format($event->kuota) . ' orang' : 'Tidak terbatas' }}
-                    </p>
-                </div>
+
             </div>
 
             {{-- Deskripsi --}}

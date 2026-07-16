@@ -67,14 +67,7 @@
                                 <p class="form-error">{{ $message }}</p>
                             @enderror
                         </div>
-                        <div>
-                            <label class="form-label">Kuota Peserta</label>
-                            <input type="number" name="kuota" value="{{ old('kuota') }}" class="form-input"
-                                min="0" placeholder="Kosongkan = tidak terbatas">
-                            @error('kuota')
-                                <p class="form-error">{{ $message }}</p>
-                            @enderror
-                        </div>
+
                     </div>
 
                     <div>
@@ -93,17 +86,6 @@
                         @enderror
                     </div>
 
-                    <div>
-                        <label class="form-label">Status</label>
-                        <select name="status" class="form-input">
-                            <option value="aktif" {{ old('status', 'aktif') == 'aktif' ? 'selected' : '' }}>Aktif
-                            </option>
-                            <option value="selesai" {{ old('status') == 'selesai' ? 'selected' : '' }}>Selesai
-                            </option>
-                            <option value="dibatalkan" {{ old('status') == 'dibatalkan' ? 'selected' : '' }}>
-                                Dibatalkan</option>
-                        </select>
-                    </div>
 
                     <div>
                         <label class="form-label">Foto Event</label>
@@ -117,7 +99,7 @@
                     </div>
 
                     <div class="flex gap-3 pt-2">
-                        <a href="{{ url('admin.event.index') }}"
+                        <a href="{{ url('backend/event') }}"
                             class="flex-1 py-2.5 text-center rounded-xl border border-slate-200 text-slate-600 font-semibold text-sm hover:bg-slate-50">Batal</a>
                         <button type="submit" class="btn-primary flex-1 justify-center py-2.5">
                             <i class="fa-solid fa-save"></i> Simpan

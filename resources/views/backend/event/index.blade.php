@@ -67,7 +67,6 @@
                         <th class="text-left">Tanggal</th>
                         <th class="text-left">Lokasi</th>
                         <th class="text-left">Jenis</th>
-                        <th class="text-left">Status</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -112,9 +111,7 @@
                                     @endif
                                     <div>
                                         <p class="font-semibold text-slate-800">{{ $event->judul }}</p>
-                                        <p class="text-xs text-slate-400">
-                                            {{ $event->kuota ? number_format($event->kuota) . ' peserta' : 'Tidak terbatas' }}
-                                        </p>
+
                                     </div>
                                 </div>
                             </td>
@@ -136,14 +133,6 @@
                             <td>
                                 <span class="badge badge-{{ $event->jenis == 'internal' ? 'blue' : 'green' }}">
                                     {{ ucfirst($event->jenis) }}
-                                </span>
-                            </td>
-
-                            {{-- Status --}}
-                            <td>
-                                <span
-                                    class="badge badge-{{ $event->status == 'aktif' ? 'green' : ($event->status == 'selesai' ? 'gray' : 'red') }}">
-                                    {{ ucfirst($event->status ?? 'aktif') }}
                                 </span>
                             </td>
 

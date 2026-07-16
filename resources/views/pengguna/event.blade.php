@@ -140,9 +140,7 @@
                                         {{ $event->jenis }}
                                     </span>
 
-                                    <span class="ev-badge badge-open">
-                                        {{ ucfirst($event->status) }}
-                                    </span>
+
 
                                 </div>
 
@@ -319,10 +317,6 @@
 
                                                     <span class="ev-badge badge-{{ strtolower($event->jenis) }}">
                                                         {{ ucfirst($event->jenis) }}
-                                                    </span>
-
-                                                    <span class="ev-badge badge-open">
-                                                        {{ ucfirst($event->status) }}
                                                     </span>
 
                                                 </div>
