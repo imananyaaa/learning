@@ -28,7 +28,7 @@
                         <span class="badge badge-{{ $event->jenis == 'internal' ? 'blue' : 'green' }}">
                             {{ ucfirst($event->jenis) }}
                         </span>
-                    
+
                     </div>
                 </div>
                 <a href="{{ url('backend/event/edit', $event) }}"

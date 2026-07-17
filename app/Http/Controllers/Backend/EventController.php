@@ -65,9 +65,7 @@ class EventController extends Controller
         $event->tanggal = request('tanggal');
         $event->waktu = request('waktu');
         $event->jenis = request('jenis');
-        $event->kuota = request('kuota');
         $event->lokasi = request('lokasi');
-        $event->status = request('status');
         $event->handleUploadPoto();
         $event->deskripsi = request('deskripsi');
         $event->save();
@@ -103,9 +101,7 @@ class EventController extends Controller
         $event->tanggal = request('tanggal');
         $event->waktu = request('waktu');
         $event->jenis = request('jenis');
-        $event->kuota = request('kuota');
         $event->lokasi = request('lokasi');
-        $event->status = request('status');
         $event->handleUploadPoto();
         $event->deskripsi = request('deskripsi');
         $event->save();

@@ -408,7 +408,7 @@
 
                 {{-- Register User --}}
                 <div class="register-section">
-                    <p>Belum memiliki akun untuk memberikan ulasan?</p>
+                    <p>Belum memiliki akun?</p>
 
                     <a href="{{ url('register') }}" class="btn-register">
                         <i class="bi bi-person-plus-fill"></i>
