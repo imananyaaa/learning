@@ -90,7 +90,7 @@
                     <div>
                         <label class="form-label">Foto Event</label>
                         {{-- Tidak ada batasan ukuran di sini --}}
-                        <input type="file" name="foto" class="form-input" accept="image/*"
+                        <input type="file" name="foto" class="form-input" accept="jpg, .png, .jpeg"
                             onchange="previewImg(this,'prev')">
                         @error('foto')
                             <p class="form-error">{{ $message }}</p>

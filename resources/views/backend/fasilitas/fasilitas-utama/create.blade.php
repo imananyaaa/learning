@@ -20,16 +20,23 @@
                     <div class="grid grid-cols-2 gap-4">
                         <div>
                             <label class="form-label">Kapasitas <span class="text-red-500">*</span></label>
-                        <input type="number" name="kapasitas" value="{{ old('kapasitas') }}" class="form-input"
-                            placeholder="Kapasitas Tempat" required>
+                            <input type="number" name="kapasitas" value="{{ old('kapasitas') }}" class="form-input"
+                                placeholder="Kapasitas Tempat" required>
                         </div>
                         <div>
-                           <label class="form-label">Status</label>
-                        <select name="status" class="form-input">
-                            <option value=""> Pilih Status</option>
-                            <option value="Tersedia" {{ old('status', 'Tersedia') == 'Tersedia' ? 'selected' : '' }}>Tersedia</option>
-                            <option value="DIperbaiki" {{ old('status') == 'DIperbaiki' ? 'selected' : '' }}>DIperbaiki</option>
-                        </select>
+                            <label class="form-label">Status</label>
+                            <select name="status" class="form-input">
+                                <option value=""> Pilih Status</option>
+                                <option value="Tersedia"
+                                    {{ old('status', 'Tersedia') == 'Tersedia' ? 'selected' : '' }}>Tersedia</option>
+                                <option value="DIperbaiki" {{ old('status') == 'DIperbaiki' ? 'selected' : '' }}>
+                                    DIperbaiki</option>
+                            </select>
+                        </div>
+                         <div>
+                            <label class="form-label">Harga <span class="text-red-500">*</span></label>
+                            <input type="text" name="harga" value="{{ old('harga') }}" class="form-input"
+                                placeholder="Harga Fasilitas" required>
                         </div>
                     </div>
                     <div>

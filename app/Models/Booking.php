@@ -12,37 +12,69 @@ class Booking extends Model
     function handleUploadFile()
     {
         {
-        if (request()->hasFile('file_proposal')) {
+            if (request()->hasFile('file_proposal')) {
 
-            // Hapus file_proposal lama
-            if ($this->file_proposal) {
+                // Hapus file_proposal lama
+                if ($this->file_proposal) {
 
-                // app/event/file_proposal.jpg -> event/file_proposal.jpg
-                $oldFile = str_replace('app/', '', $this->file_proposal);
+                    // app/event/file_proposal.jpg -> event/file_proposal.jpg
+                    $oldFile = str_replace('app/', '', $this->file_proposal);
 
-                if (Storage::exists($oldFile)) {
-                    Storage::delete($oldFile);
+                    if (Storage::exists($oldFile)) {
+                        Storage::delete($oldFile);
+                    }
                 }
+
+                // Upload file_proposal baru
+                $file_proposal = request()->file('file_proposal');
+
+                $destination = "booking";
+
+                $randomStr = Str::random(5);
+
+                $filename = time() . "-" . $randomStr . "." . $file_proposal->extension();
+
+                $url = $file_proposal->storeAs($destination, $filename);
+
+                $this->file_proposal = "app/" . $url;
             }
+        }
+    }
 
-            // Upload file_proposal baru
-            $file_proposal = request()->file('file_proposal');
+    function handleUploadBuktiTF()
+    {
+        {
+            if (request()->hasFile('bukti_transfer')) {
 
-            $destination = "booking";
+                // Hapus bukti_transfer lama
+                if ($this->bukti_transfer) {
 
-            $randomStr = Str::random(5);
+                    // app/event/bukti_transfer.jpg -> event/bukti_transfer.jpg
+                    $oldFile = str_replace('app/', '', $this->bukti_transfer);
 
-            $filename = time() . "-" . $randomStr . "." . $file_proposal->extension();
+                    if (Storage::exists($oldFile)) {
+                        Storage::delete($oldFile);
+                    }
+                }
 
-            $url = $file_proposal->storeAs($destination, $filename);
+                // Upload bukti_transfer baru
+                $bukti_transfer = request()->file('bukti_transfer');
 
-            $this->file_proposal = "app/" . $url;
+                $destination = "bukti-transfer";
+
+                $randomStr = Str::random(5);
+
+                $filename = time() . "-" . $randomStr . "." . $bukti_transfer->extension();
+
+                $url = $bukti_transfer->storeAs($destination, $filename);
+
+                $this->bukti_transfer = "app/" . $url;
+            }
         }
     }
 
 
 
-    }
 
     public function Pengguna()
     {

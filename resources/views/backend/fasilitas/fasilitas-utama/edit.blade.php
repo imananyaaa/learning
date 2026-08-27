@@ -5,7 +5,8 @@
                 class="fa-solid fa-arrow-left text-xs"></i> Kembali</a>
         <div class="card p-7">
             <h2 class="text-lg font-bold text-slate-800 mb-6">Edit Fasilitas Utama</h2>
-            <form action="{{ url('backend/fasilitas-utama/update', $fasilitas) }}" method="POST" enctype="multipart/form-data">
+            <form action="{{ url('backend/fasilitas-utama/update', $fasilitas) }}" method="POST"
+                enctype="multipart/form-data">
                 @csrf @method('PUT')
                 <div class="space-y-5">
                     <div>
@@ -16,15 +17,16 @@
                             <p class="form-error">{{ $message }}</p>
                         @enderror
                     </div>
-                    <div class="grid grid-cols-2 gap-4">
+                    <div class="grid grid-cols-3 gap-4">
                         <div>
-                            <label class="form-label">Jenis <span class="text-red-500">*</span></label>
-                            <select name="jenis" class="form-input" required>
-                                <option value="utama" {{ old('jenis', $fasilitas->jenis) == 'utama' ? 'selected' : '' }}>
-                                    Fasilitas Utama</option>
-                                <option value="pendukung"
-                                    {{ old('jenis', $fasilitas->jenis) == 'pendukung' ? 'selected' : '' }}>Fasilitas Utama
+                            <label class="form-label">Status</label>
+                            <select name="status" class="form-input">
+                                <option value="aktif"
+                                    {{ old('status', $fasilitas->status) == 'aktif' ? 'selected' : '' }}>Aktif
                                 </option>
+                                <option value="nonaktif"
+                                    {{ old('status', $fasilitas->status) == 'nonaktif' ? 'selected' : '' }}>
+                                    Nonaktif</option>
                             </select>
                         </div>
                         <div>
@@ -32,20 +34,17 @@
                             <input type="number" name="kapasitas" value="{{ old('kapasitas', $fasilitas->kapasitas) }}"
                                 class="form-input" min="0">
                         </div>
+                        <div>
+                            <label class="form-label"> Harga</label>
+                            <input type="text" name="harga" value="{{ old('harga', $fasilitas->harga) }}"
+                                class="form-input">
+                        </div>
                     </div>
                     <div>
                         <label class="form-label">Deskripsi <span class="text-red-500">*</span></label>
                         <textarea name="deskripsi" class="form-input" rows="4" required>{{ old('deskripsi', $fasilitas->deskripsi) }}</textarea>
                     </div>
-                    <div>
-                        <label class="form-label">Status</label>
-                        <select name="status" class="form-input">
-                            <option value="aktif" {{ old('status', $fasilitas->status) == 'aktif' ? 'selected' : '' }}>Aktif
-                            </option>
-                            <option value="nonaktif" {{ old('status', $fasilitas->status) == 'nonaktif' ? 'selected' : '' }}>
-                                Nonaktif</option>
-                        </select>
-                    </div>
+
                     <div>
                         <label class="form-label">Foto Fasilitas</label>
                         @if ($fasilitas->foto)

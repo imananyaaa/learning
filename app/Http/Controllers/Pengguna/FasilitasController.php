@@ -74,6 +74,7 @@ class FasilitasController extends Controller
         $booking->nama_kegiatan = request('nama_kegiatan');
         $booking->tanggal_mulai = request('tanggal_mulai');
         $booking->tanggal_selesai = request('tanggal_selesai');
+        $booking->total_harga = request('total_harga');
         $booking->handleUploadFile();
         $booking->status = '1';
 
@@ -106,9 +107,12 @@ class FasilitasController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function buktiTransfer(Request $request, string $id)
     {
-        //
+        $booking = Booking::find($id);
+        $booking->handleUploadBuktiTF();
+        $booking->save();
+        return back()->with('success', 'Upload Bukti Transfer Berhasil di Lakukan');
     }
 
     /**

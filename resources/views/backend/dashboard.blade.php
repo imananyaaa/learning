@@ -41,7 +41,7 @@
         </div>
         {{-- <div class="text-3xl font-black text-slate-800">{{ $stats['ulasan'] }}</div> --}}
         <div class="text-sm text-slate-500 mt-1 font-medium">Total Ulasan</div>
-        <a href="{{ url('admin/ulasan') }}" class="text-xs text-yellow-600 font-semibold mt-2 inline-flex items-center gap-1 hover:gap-2 transition-all">Lihat <i class="fa-solid fa-arrow-right text-[10px]"></i></a>
+        <a href="{{ url('backend/ulasan') }}" class="text-xs text-yellow-600 font-semibold mt-2 inline-flex items-center gap-1 hover:gap-2 transition-all">Lihat <i class="fa-solid fa-arrow-right text-[10px]"></i></a>
     </div>
 
     <div class="card p-5 hover:-translate-y-1 transition-transform">
@@ -55,7 +55,7 @@
         </div>
         {{-- <div class="text-3xl font-black text-slate-800">{{ $stats['kontak'] }}</div> --}}
         <div class="text-sm text-slate-500 mt-1 font-medium">Total Pesan</div>
-        <a href="{{ url('backend/kontak') }}" class="text-xs text-red-500 font-semibold mt-2 inline-flex items-center gap-1 hover:gap-2 transition-all">Lihat <i class="fa-solid fa-arrow-right text-[10px]"></i></a>
+        <a href="{{ url('backend/pesan') }}" class="text-xs text-red-500 font-semibold mt-2 inline-flex items-center gap-1 hover:gap-2 transition-all">Lihat <i class="fa-solid fa-arrow-right text-[10px]"></i></a>
     </div>
 </div>
 

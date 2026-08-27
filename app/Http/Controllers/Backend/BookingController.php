@@ -33,6 +33,12 @@ class BookingController extends Controller
         return view('backend.booking.ditolak', $data);
     }
 
+    public function bookingDibatalkan(Request $request)
+    {
+         $data['list_booking'] = $this->getBooking($request, [5]);
+        return view('backend.booking.dibatalkan', $data);
+    }
+
 
     public function show(string $id)
     {
@@ -82,6 +88,19 @@ class BookingController extends Controller
         return back()->with('success', 'Data Booking Berhasil Di Selesaikan');
     }
 
+     public function batal(Booking $booking)
+    {
+        $booking->status = '5';
+        $booking->save();
+
+        $tracking = New Tracking();
+        $tracking->id_booking = $booking->id;
+        $tracking->status = 'Dibatalkan';
+        $tracking->save();
+
+        return back()->with('success', 'Data Booking Berhasil Di Selesaikan');
+    }
+
 
     public function konfirmasi(Request $request, $id)
     {
@@ -92,9 +111,12 @@ class BookingController extends Controller
         if ($request->aksi == 'terima') {
             $booking->status = 2;
             $statusTracking = 'Diterima';
-        } else {
+        } elseif ($request->aksi == 'tolak') {
             $booking->status = 3;
             $statusTracking = 'Ditolak';
+        } elseif ($request->aksi == 'batal') {
+            $booking->status = 5;
+            $statusTracking = 'Dibatalkan';
         }
 
         $booking->save();

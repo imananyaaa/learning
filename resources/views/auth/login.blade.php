@@ -341,7 +341,6 @@
         <div class="login-card">
             <div class="card-heading">
                 <h2>Selamat Datang</h2>
-                <p>Masuk ke panel admin</p>
             </div>
             @include('section.notif')
 

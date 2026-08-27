@@ -176,8 +176,7 @@
                                         File Proposal
                                     </span>
 
-                                    <a href="{{ url("public/$booking->file_proposal") }}"
-                                        target="_blank"
+                                    <a href="{{ url("public/$booking->file_proposal") }}" target="_blank"
                                         class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600">
 
                                         Lihat Proposal
@@ -188,10 +187,34 @@
 
                             </div>
 
+                            <div class="mb-6">
+
+                                <div class="flex justify-between flex-wrap gap-2 w-full">
+
+                                    <span class="text-gray-700 font-bold">
+                                        Bukti Transfer
+                                    </span>
+
+                                    @if (!empty($booking->bukti_transfer))
+                                        <a href="{{ url("public/$booking->bukti_transfer") }}" target="_blank"
+                                            class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600">
+
+                                            Lihat Bukti Transfer
+
+                                        </a>
+                                    @else
+                                        <span class="bg-blue-500 text-white italic px-4 py-2 rounded hover:bg-blue-600">
+                                            Belum Upload Bukti Transfer
+                                        </span>
+                                    @endif
+
+                                </div>
+
+                            </div>
+
 
                             {{-- TOMBOL TERIMA DAN TOLAK --}}
                             @if ($booking->status == '1')
-
                                 <div class="flex items-center justify-center gap-3 mt-10 pt-6 border-t border-gray-200">
 
                                     <button type="button"
@@ -225,8 +248,22 @@
 
                                     </button>
 
-                                </div>
+                                    <button type="button"
+                                        @click="
+                                            modalIsOpen = true;
+                                            aksi = 'batal';
+                                        "
+                                        class="flex items-center justify-center gap-2 px-6 py-2.5 bg-blue-600 text-white hover:bg-blue-700 rounded-lg font-medium transition">
 
+                                        <i class="bi bi-x-lg"></i>
+
+                                        <span>
+                                            Dibatalkan
+                                        </span>
+
+                                    </button>
+
+                                </div>
                             @endif
 
                         </div>
@@ -240,20 +277,16 @@
 
 
         {{-- MODAL KONFIRMASI --}}
-        <div x-cloak
-            x-show="modalIsOpen"
-            x-transition.opacity
+        <div x-cloak x-show="modalIsOpen" x-transition.opacity
             class="fixed inset-0 z-50 flex items-center justify-center p-4">
 
             {{-- BACKDROP --}}
-            <div class="absolute inset-0 bg-black/60 backdrop-blur-sm"
-                @click="modalIsOpen = false">
+            <div class="absolute inset-0 bg-black/60 backdrop-blur-sm" @click="modalIsOpen = false">
             </div>
 
 
             {{-- MODAL --}}
-            <div x-show="modalIsOpen"
-                x-transition
+            <div x-show="modalIsOpen" x-transition
                 class="relative w-full max-w-xl bg-white rounded-2xl shadow-2xl overflow-hidden">
 
 
@@ -280,6 +313,10 @@
                                     Tolak Booking
                                 </span>
 
+                                <span x-show="aksi == 'batal'">
+                                    Booking di Batalkan
+                                </span>
+
                             </h3>
 
                             <p class="text-sm text-gray-500">
@@ -291,9 +328,7 @@
                     </div>
 
 
-                    <button type="button"
-                        @click="modalIsOpen = false"
-                        class="text-gray-400 hover:text-red-500">
+                    <button type="button" @click="modalIsOpen = false" class="text-gray-400 hover:text-red-500">
 
                         <i class="bi bi-x-lg text-xl"></i>
 
@@ -305,15 +340,12 @@
                 {{-- BODY --}}
                 <div class="p-6 space-y-5">
 
-                    <form method="POST"
-                        x-bind:action="'{{ url('backend/booking/konfirmasi') }}/' + bookingId">
+                    <form method="POST" x-bind:action="'{{ url('backend/booking/konfirmasi') }}/' + bookingId">
 
                         @csrf
                         @method('PUT')
 
-                        <input type="hidden"
-                            name="aksi"
-                            :value="aksi">
+                        <input type="hidden" name="aksi" :value="aksi">
 
 
                         <div>
@@ -322,19 +354,14 @@
                                 Catatan
                             </label>
 
-                            <textarea name="catatan"
-                                rows="5"
-                                class="w-full border rounded-lg p-4"
-                                placeholder="Masukkan catatan..."
-                                required></textarea>
+                            <textarea name="catatan" rows="5" class="w-full border rounded-lg p-4" placeholder="Masukkan catatan..." required></textarea>
 
                         </div>
 
 
                         <div class="mt-5 flex justify-end gap-3">
 
-                            <button type="button"
-                                @click="modalIsOpen = false"
+                            <button type="button" @click="modalIsOpen = false"
                                 class="px-5 py-2 bg-gray-300 rounded-lg">
 
                                 Batal
@@ -342,8 +369,7 @@
                             </button>
 
 
-                            <button type="submit"
-                                class="px-5 py-2 bg-blue-600 text-white rounded-lg">
+                            <button type="submit" class="px-5 py-2 bg-blue-600 text-white rounded-lg">
 
                                 Simpan
 

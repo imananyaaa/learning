@@ -162,6 +162,16 @@
                     </div>
                 </a>
 
+                 <a href="{{ url('backend/booking-dibatalkan') }}"
+                    class="block py-2 text-sm rounded-md transition-colors {{ request()->routeIs('backend/booking-dibatalkan*') ? 'text-white bg-white/10 font-medium' : 'text-white/60 hover:text-white hover:bg-white/5' }}">
+                    <div class="flex items-center">
+                        <span class="nav-icon">
+                            <i class="fa-solid fa-times"></i>
+                        </span>
+                        <span style="margin-left: 10px"> Booking Dibatalkan</span>
+                    </div>
+                </a>
+
             </div>
         </div>
     </nav>

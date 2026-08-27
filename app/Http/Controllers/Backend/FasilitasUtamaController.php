@@ -36,6 +36,7 @@ class FasilitasUtamaController extends Controller
         $fasilitas->kapasitas = request('kapasitas');
         $fasilitas->jenis_fasilitas = 'Fasilitas Utama';
         $fasilitas->deskripsi = request('deskripsi');
+        $fasilitas->harga = request('harga');
         $fasilitas->status = request('status');
         $fasilitas->handleUploadPoto();
         $fasilitas->save();
@@ -73,6 +74,7 @@ class FasilitasUtamaController extends Controller
         $fasilitas->kapasitas = request('kapasitas');
         $fasilitas->jenis_fasilitas = 'Fasilitas Utama';
         $fasilitas->deskripsi = request('deskripsi');
+        $fasilitas->harga = request('harga');
         $fasilitas->status = request('status');
         $fasilitas->handleUploadPoto();
         $fasilitas->save();

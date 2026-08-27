@@ -197,55 +197,55 @@
                 <label>NIK</label>
                 <div class="input-group">
                     <i class="bi bi-person"></i>
-                    <input type="text"name="nik" placeholder="Masukkan NIK" required>
+                    <input type="text" name="nik" placeholder="Masukkan NIK" required>
                 </div>
 
                 <label>Nama Lengkap</label>
                 <div class="input-group">
                     <i class="bi bi-person"></i>
-                    <input type="text"name="nama" placeholder="Masukkan nama lengkap" required>
+                    <input type="text" name="nama" placeholder="Masukkan nama lengkap" required>
                 </div>
 
                 <label>Email</label>
                 <div class="input-group">
                     <i class="bi bi-envelope"></i>
-                    <input type="email"name="username" placeholder="Masukkan Email" required>
+                    <input type="email" name="username" placeholder="Masukkan Email" required>
                 </div>
 
                 <label>Password</label>
                 <div class="input-group">
                     <i class="bi bi-lock"></i>
-                    <input type="password"name="password" placeholder="Masukkan Password" required>
+                    <input type="password" name="password" placeholder="Masukkan Password" required>
                 </div>
 
                 <label>Tanggal Lahir</label>
                 <div class="input-group">
                     <i class="bi bi-calendar"></i>
-                    <input type="date"name="tanggal_lahir" required>
+                    <input type="date" name="tanggal_lahir" required>
                 </div>
 
                 <label>Tempat Lahir</label>
                 <div class="input-group">
                     <i class="bi bi-person"></i>
-                    <input type="text"name="tempat_lahir" placeholder="Masukkan Tempat Lahir" required>
+                    <input type="text" name="tempat_lahir" placeholder="Masukkan Tempat Lahir" required>
                 </div>
 
                 <label>Alamat </label>
                 <div class="input-group">
                     <i class="bi bi-person"></i>
-                    <input type="text"name="alamat" placeholder="Masukkan Alamat" required>
+                    <input type="text" name="alamat" placeholder="Masukkan Alamat" required>
                 </div>
 
                 <label>No Hp</label>
                 <div class="input-group">
                     <i class="bi bi-person"></i>
-                    <input type="text"name="no_hp" placeholder="Masukkan Nomor Handphone" required>
+                    <input type="text" name="no_hp" placeholder="Masukkan Nomor Handphone +62..." required>
                 </div>
 
                 <label>Pas Foto</label>
                 <div class="input-group">
                     <i class="bi bi-person"></i>
-                    <input type="file"name="foto" accept=".jpg, .png, .jpeg" required>
+                    <input type="file" name="foto" accept=".jpg, .png, .jpeg" required>
                 </div>
 
                 <button type="submit" class="btn-register">

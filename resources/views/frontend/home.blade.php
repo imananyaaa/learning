@@ -126,7 +126,7 @@
                     <div class="col-md-4" data-aos="fade-up" data-aos-delay>
                         <div class="event-card">
                             <div class="event-image">
-                                <img src="{{ url("public/$event->foto") }}" alt="{{ $event['title'] }}"
+                                <img src="{{ url("public/$event->foto") }}" alt="{{ $event->judul }}"
                                     onerror="this.onerror=null; this.style.display='none'; this.parentElement.innerHTML='<div class=\'event-image-placeholder\'><i class=\'bi bi-calendar-event\'></i></div>';">
                             </div>
                             <div class="event-body">

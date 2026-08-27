@@ -87,6 +87,8 @@ Route::get('booking/show/{id}', [BookingController::class, 'show']);
 Route::put('booking/verifikasi/{booking}', [BookingController::class, 'verifikasi']);
 Route::put('booking/ditolak/{booking}', [BookingController::class, 'ditolak']);
 Route::put('booking/selesai/{booking}', [BookingController::class, 'selesai']);
+Route::put('booking/batal/{booking}', [BookingController::class, 'batal']);
 Route::get('booking-selesai', [BookingController::class, 'bookingSelesai']);
 Route::get('booking-ditolak', [BookingController::class, 'bookingDitolak']);
+Route::get('booking-dibatalkan', [BookingController::class, 'bookingDibatalkan']);
 Route::put('/booking/konfirmasi/{id}', [BookingController::class, 'konfirmasi']);

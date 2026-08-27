@@ -101,6 +101,19 @@
                                                     <span class="text-xs">Selesai</span>
                                                 </button>
                                             </form>
+
+                                            <form action="{{ url('backend/booking/batal', $booking->id) }}"
+                                                method="POST" class="flex">
+                                                @csrf
+                                                @method('PUT')
+                                                <button
+                                                    class="flex items-center justify-center space-x-1 px-3 py-1.5 bg-red-600 text-white hover:bg-red-700 rounded-md font-medium transition"
+                                                    title="Selesai"
+                                                    onclick="return confirm('Apakah Anda yakin ingin menandai booking ini sebagai selesai?')">
+                                                    <i class="bi bi-x-lg"></i>
+                                                    <span class="text-xs">Batal</span>
+                                                </button>
+                                            </form>
                                         @endif
                                     </div>
                                 </td>

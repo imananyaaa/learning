@@ -17,7 +17,7 @@
                         <th class="text-left">No</th>
                         <th class="text-center">Aksi</th>
                         <th class="text-left">Fasilitas</th>
-                        <th class="text-left">Jenis</th>
+                        <th class="text-left">Harga</th>
                         <th class="text-left">Kapasitas</th>
                         <th class="text-left">Status</th>
                     </tr>
@@ -63,7 +63,7 @@
                                     </div>
                                 </div>
                              </td>
-                            <td class="text-slate-400 text-xs">{{ $fasilitas->nama }}</td>
+                            <td class="text-slate-400 text-xs">Rp. {{ $fasilitas->harga }}</td>
                             <td class="text-slate-400 text-xs">{{ $fasilitas->kapasitas }}</td>
                             <td class="text-slate-400 text-xs">{{ $fasilitas->status }}</td>
 

@@ -28,12 +28,20 @@
                 <div class="container padding-bottom-3x mb-1">
                     @foreach ($list_booking as $booking)
                         @if (Auth::guard('pengguna')->user()->nik == $booking->nik)
-                            @if ($booking->status = '1' && $booking->status = '2')
+                            @if (in_array($booking->status, ['1', '2']))
                                 <div class="card mb-3">
-                                    <div class="p-4 text-center text-white text-lg bg-dark rounded-top">
-                                        <span class="text-uppercase">Tracking Pemesanan : </span>
-                                        <span class="text-medium">{{ $booking->kode_booking }}</span>
+                                    <div
+                                        class="d-flex flex-wrap flex-sm-nowrap justify-content-between py-3 px-2 bg-dark">
+                                        <div class="w-100 text-left py-1 px-2 text-white">
+                                            <span class="text-uppercase">Tracking Pemesanan : </span>
+                                            <span class="text-medium">{{ $booking->kode_booking }}</span>
+                                        </div>
+                                        <div class="w-100 text-right py-1 px-2 text-white">
+                                            <span class="text-uppercase">Total Harga : </span>
+                                            <span class="text-medium">{{ $booking->total_harga }}</span>
+                                        </div>
                                     </div>
+
                                     <div
                                         class="d-flex flex-wrap flex-sm-nowrap justify-content-between py-3 px-2 bg-secondary">
                                         <div class="w-100 text-center py-1 px-2">
@@ -112,6 +120,7 @@
                                                         </div>
                                                     @endif
 
+
                                                     @if ($tracking->status == 'Selesai')
                                                         <div class="step completed">
                                                             <div class="step-icon-wrap">
@@ -136,6 +145,9 @@
                                                 \Carbon\Carbon::parse($booking->created_at)->addMinutes(30),
                                             );
                                         @endphp
+
+
+
                                         @if ($booking->status == '1')
                                             @if (!$expired)
                                                 <a href="{{ url('pengguna/fasilitas/batal', $booking->id) }}"
@@ -150,7 +162,65 @@
                                                 </button>
                                             @endif
                                         @endif
+                                        @if ($booking->status == '2')
+                                            @if (empty($booking->bukti_transfer))
+                                                <button class="btn btn-primary btn-rounded btn-sm"
+                                                    data-bs-toggle="modal"
+                                                    data-bs-target="#UploadBukti{{ $booking->id }}">
+                                                    <i class="bi bi-upload"></i>
+                                                    Upload Bukti Transfer
+                                                </button>
+                                            @else
+                                                <span class="btn btn-warning btn-rounded btn-sm">
+                                                    <i class="bi bi-check-circle"></i>
+                                                    Bukti Transfer Sudah Diupload
+                                                </span>
+                                            @endif
+                                        @endif
 
+
+                                        <div class="modal fade" id="UploadBukti{{ $booking->id }}" tabindex="-1"
+                                            aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                            <div class="modal-dialog modal-lg">
+                                                <div class="modal-content">
+                                                    <div class="modal-header">
+                                                        <h1 class="modal-title fs-5" id="exampleModalLabel">
+                                                            Upload Bukti Transfer {{ $booking->nama_kegiatan }}
+                                                        </h1>
+                                                        <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                                            aria-label="Close"></button>
+                                                    </div>
+                                                    <form
+                                                        action="{{ url('pengguna/fasilitas/bukti-transfer', $booking->id) }}"
+                                                        enctype="multipart/form-data" method="POST">
+                                                        @csrf
+                                                        @method('PUT')
+                                                        <div class="modal-body">
+
+                                                            <div class="form-group row mt-3">
+                                                                <label for="inputEmail3"
+                                                                    class="col-sm-4 col-form-label">
+                                                                    Bukti Transfer
+                                                                </label>
+                                                                <div class="col-sm-8">
+                                                                    <input type="file" class="form-control"
+                                                                        name="bukti_transfer"
+                                                                        accept=".jpg, .png, .jpeg" required>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="modal-footer">
+                                                            <button type="button" class="btn btn-secondary"
+                                                                data-bs-dismiss="modal">
+                                                                <i class="bi bi-times"></i> Batal</button>
+                                                            <button type="submit" class="btn btn-primary"><i
+                                                                    class="bi bi-save"></i>
+                                                                Upload </button>
+                                                        </div>
+                                                    </form>
+                                                </div>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
                             @endif
@@ -178,13 +248,14 @@
                                 <img src="{{ url("public/$fasilitas->foto") }}" alt="{{ $fasilitas->nama }}"
                                     onerror="this.onerror=null;this.src='{{ url('public/images/lc.jpg') }}'">
                                 <div class="fac-img-overlay" data-bs-toggle="modal"
-                                        data-bs-target="#detailPendukung{{ $fasilitas->id }}">
+                                    data-bs-target="#detailPendukung{{ $fasilitas->id }}">
                                     <span><i class="bi bi-zoom-in"></i> Lihat Detail</span>
                                 </div>
                             </div>
                             <div class="fac-body">
                                 <span class="fac-tag utama">Fasilitas Utama</span>
-                                <div style="font-weight:700;font-size:.97rem;color:var(--text-dark);margin-bottom:6px;">
+                                <div
+                                    style="font-weight:700;font-size:.97rem;color:var(--text-dark);margin-bottom:6px;">
                                     {{ $fasilitas->nama }}</div>
 
 
@@ -255,6 +326,16 @@
                                                         </div>
                                                         <div class="col-sm-7">
                                                             <p class="text-muted mb-0">{{ $fasilitas->status }}</p>
+                                                        </div>
+                                                    </div>
+
+                                                    <hr>
+                                                    <div class="row">
+                                                        <div class="col-sm-5">
+                                                            <p class="mb-0">Harga</p>
+                                                        </div>
+                                                        <div class="col-sm-7">
+                                                            <p class="text-muted mb-0">Rp. {{ $fasilitas->harga }}</p>
                                                         </div>
                                                     </div>
 
@@ -333,6 +414,14 @@
                                         </div>
 
                                         <div class="form-group row mt-3">
+                                            <label for="inputEmail3" class="col-sm-4 col-form-label"> Harga</label>
+                                            <div class="col-sm-8">
+                                                <input type="text" id="total_harga{{ $fasilitas->id }}"
+                                                    class="form-control" name="total_harga" readonly>
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group row mt-3">
                                             <label for="inputEmail3" class="col-sm-4 col-form-label">Proposal
                                                 Kegiatan</label>
                                             <div class="col-sm-8">
@@ -354,7 +443,7 @@
 
                     <div class="modal fade" id="riwayatbooking" tabindex="-1" aria-labelledby="exampleModalLabel"
                         aria-hidden="true">
-                        <div class="modal-dialog modal-lg">
+                        <div class="modal-dialog modal-xl">
                             <div class="modal-content">
                                 <div class="modal-header">
                                     <h1 class="modal-title fs-5" id="exampleModalLabel">
@@ -372,130 +461,175 @@
 
                                                     @foreach ($list_booking as $booking)
                                                         @if (Auth::guard('pengguna')->user()->nik == $booking->nik)
-                                                            <div class="card mb-3">
-                                                                <div
-                                                                    class="p-4 text-center text-white text-lg bg-dark rounded-top">
-                                                                    <span class="text-uppercase">Tracking Pemesanan :
-                                                                    </span>
-                                                                    <span
-                                                                        class="text-medium">{{ $booking->kode_booking }}</span>
-                                                                </div>
-                                                                <div
-                                                                    class="d-flex flex-wrap flex-sm-nowrap justify-content-between py-3 px-2 bg-secondary">
-                                                                    <div class="w-100 text-center py-1 px-2">
-                                                                        <span class="text-medium">
-                                                                            Nama Fasilitas :
-                                                                        </span>
-                                                                        {{ $booking->fasilitas->nama }}
-                                                                    </div>
-                                                                    <div class="w-100 text-center py-1 px-2">
-                                                                        <span class="text-medium">
-                                                                            Nama Kegiatan :
-                                                                        </span>
-                                                                        {{ $booking->nama_kegiatan }}
-                                                                    </div>
-                                                                    <div class="w-100 text-center py-1 px-2">
-                                                                        <span class="text-medium">
-                                                                            Tanggal Kegiatan :
-                                                                        </span>
-                                                                        {{ date('d M Y', strtotime($booking->tanggal_mulai)) }}
-                                                                        /
-                                                                        {{ date('d M Y', strtotime($booking->tanggal_selesai)) }}
-                                                                    </div>
-                                                                </div>
-                                                                <div class="card-body">
+                                                            @if (in_array($booking->status, ['3', '4', '5']))
+                                                                <div class="card mb-3">
                                                                     <div
-                                                                        class="steps d-flex flex-wrap flex-sm-nowrap justify-content-between padding-top-2x padding-bottom-1x">
-                                                                        <div class="step completed">
-                                                                            <div class="step-icon-wrap">
-                                                                                <div class="step-icon"><i
-                                                                                        class="pe-7s-cart"></i></div>
-                                                                            </div>
-                                                                            <h4 class="step-title">
-                                                                                Pemesanan Dibuat
-                                                                            </h4>
+                                                                        class="d-flex flex-wrap flex-sm-nowrap justify-content-between py-3 px-2 bg-dark">
+                                                                        <div
+                                                                            class="w-100 text-left py-1 px-2 text-white">
+                                                                            <span class="text-uppercase">Tracking
+                                                                                Pemesanan : </span>
+                                                                            <span
+                                                                                class="text-medium">{{ $booking->kode_booking }}</span>
                                                                         </div>
-                                                                        @foreach ($list_tracking as $tracking)
-                                                                            @if ($tracking->id_booking == $booking->id)
-                                                                                @if ($tracking->status == 'Menunggu Verifikasi')
-                                                                                    <div class="step completed">
-                                                                                        <div class="step-icon-wrap">
-                                                                                            <div class="step-icon">
-                                                                                                <i
-                                                                                                    class="bi bi-envelope-check"></i>
-                                                                                            </div>
-                                                                                        </div>
-                                                                                        <h4 class="step-title">
-                                                                                            Menunggu Verifikasi
-                                                                                        </h4>
-                                                                                    </div>
-                                                                                @endif
-                                                                                @if ($tracking->status == 'Diterima')
-                                                                                    <div class="step completed">
-                                                                                        <div class="step-icon-wrap">
-                                                                                            <div class="step-icon"><i
-                                                                                                    class="pe-7s-check"></i>
-                                                                                            </div>
-                                                                                        </div>
-                                                                                        <h4 class="step-title">
-                                                                                            Diterima
-                                                                                        </h4>
-                                                                                    </div>
-
-                                                                                    <div class="step completed">
-                                                                                        <div class="step-icon-wrap">
-                                                                                            <div class="step-icon"><i
-                                                                                                    class="bi bi-list"></i>
-                                                                                            </div>
-                                                                                        </div>
-                                                                                        <h4 class="step-title">
-                                                                                            Sedang Berlangsung
-                                                                                        </h4>
-                                                                                    </div>
-                                                                                @endif
-
-                                                                                @if ($tracking->status == 'Ditolak')
-                                                                                    <div class="step completed">
-                                                                                        <div class="step-icon-wrap">
-                                                                                            <div class="step-icon"><i
-                                                                                                    class="bi bi-x-lg"></i>
-                                                                                            </div>
-                                                                                        </div>
-                                                                                        <h4 class="step-title">
-                                                                                            Ditolak
-                                                                                        </h4>
-                                                                                    </div>
-                                                                                @endif
-
-                                                                                @if ($tracking->status == 'Selesai')
-                                                                                    <div class="step completed">
-                                                                                        <div class="step-icon-wrap">
-                                                                                            <div class="step-icon"><i
-                                                                                                    class="bi bi-hand-thumbs-up-fill"></i>
-                                                                                            </div>
-                                                                                        </div>
-                                                                                        <h4 class="step-title">
-                                                                                            Selesai
-                                                                                        </h4>
-                                                                                    </div>
-                                                                                @endif
-                                                                            @endif
-                                                                        @endforeach
+                                                                        <div
+                                                                            class="w-100 text-right py-1 px-2 text-white">
+                                                                            <span class="text-uppercase">Total Harga :
+                                                                            </span>
+                                                                            <span
+                                                                                class="text-medium">{{ $booking->total_harga }}</span>
+                                                                        </div>
                                                                     </div>
-                                                                    <a class="btn btn-outline-primary btn-rounded btn-sm float-star"
-                                                                        href="{{ url("public/$booking->file_proposal") }}"
-                                                                        target="_blank">
-                                                                        Lihat Dokumen
-                                                                    </a>
-                                                                    @if ($booking->status == '1')
-                                                                        <a class="btn btn-outline-danger btn-rounded btn-sm float-end"
-                                                                            href="orderDetails">
-                                                                            Batalkan Pemesanan
-                                                                        </a>
-                                                                    @endif
+                                                                    <div
+                                                                        class="d-flex flex-wrap flex-sm-nowrap justify-content-between py-3 px-2 bg-secondary">
+                                                                        <div class="w-100 text-center py-1 px-2">
+                                                                            <span class="text-medium">
+                                                                                Nama Fasilitas :
+                                                                            </span>
+                                                                            {{ $booking->fasilitas->nama }}
+                                                                        </div>
+                                                                        <div class="w-100 text-center py-1 px-2">
+                                                                            <span class="text-medium">
+                                                                                Nama Kegiatan :
+                                                                            </span>
+                                                                            {{ $booking->nama_kegiatan }}
+                                                                        </div>
+                                                                        <div class="w-100 text-center py-1 px-2">
+                                                                            <span class="text-medium">
+                                                                                Tanggal Kegiatan :
+                                                                            </span>
+                                                                            {{ date('d M Y', strtotime($booking->tanggal_mulai)) }}
+                                                                            /
+                                                                            {{ date('d M Y', strtotime($booking->tanggal_selesai)) }}
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="card-body">
+                                                                        <div
+                                                                            class="steps d-flex flex-wrap flex-sm-nowrap justify-content-between padding-top-2x padding-bottom-1x">
+                                                                            <div class="step completed">
+                                                                                <div class="step-icon-wrap">
+                                                                                    <div class="step-icon"><i
+                                                                                            class="pe-7s-cart"></i>
+                                                                                    </div>
+                                                                                </div>
+                                                                                <h4 class="step-title">
+                                                                                    Pemesanan Dibuat
+                                                                                </h4>
+                                                                            </div>
+                                                                            @foreach ($list_tracking as $tracking)
+                                                                                @if ($tracking->id_booking == $booking->id)
+                                                                                    @if ($tracking->status == 'Menunggu Verifikasi')
+                                                                                        <div class="step completed">
+                                                                                            <div
+                                                                                                class="step-icon-wrap">
+                                                                                                <div class="step-icon">
+                                                                                                    <i
+                                                                                                        class="bi bi-envelope-check"></i>
+                                                                                                </div>
+                                                                                            </div>
+                                                                                            <h4 class="step-title">
+                                                                                                Menunggu Verifikasi
+                                                                                            </h4>
+                                                                                        </div>
+                                                                                    @endif
+                                                                                    @if ($tracking->status == 'Diterima')
+                                                                                        <div class="step completed">
+                                                                                            <div
+                                                                                                class="step-icon-wrap">
+                                                                                                <div class="step-icon">
+                                                                                                    <i
+                                                                                                        class="pe-7s-check"></i>
+                                                                                                </div>
+                                                                                            </div>
+                                                                                            <h4 class="step-title">
+                                                                                                Diterima
+                                                                                            </h4>
+                                                                                        </div>
 
+                                                                                        <div class="step completed">
+                                                                                            <div
+                                                                                                class="step-icon-wrap">
+                                                                                                <div class="step-icon">
+                                                                                                    <i
+                                                                                                        class="bi bi-list"></i>
+                                                                                                </div>
+                                                                                            </div>
+                                                                                            <h4 class="step-title">
+                                                                                                Sedang Berlangsung
+                                                                                            </h4>
+                                                                                        </div>
+                                                                                    @endif
+
+                                                                                    @if ($tracking->status == 'Ditolak')
+                                                                                        <div class="step completed">
+                                                                                            <div
+                                                                                                class="step-icon-wrap">
+                                                                                                <div class="step-icon">
+                                                                                                    <i
+                                                                                                        class="bi bi-x-lg"></i>
+                                                                                                </div>
+                                                                                            </div>
+                                                                                            <h4 class="step-title">
+                                                                                                Ditolak
+                                                                                            </h4>
+                                                                                        </div>
+                                                                                    @endif
+
+                                                                                    @if ($tracking->status == 'Dibatalkan')
+                                                                                        <div class="step completed">
+                                                                                            <div
+                                                                                                class="step-icon-wrap">
+                                                                                                <div class="step-icon">
+                                                                                                    <i
+                                                                                                        class="bi bi-hand-thumbs-up-fill"></i>
+                                                                                                </div>
+                                                                                            </div>
+                                                                                            <h4 class="step-title">
+                                                                                                Dibatalkan
+                                                                                            </h4>
+                                                                                        </div>
+                                                                                    @endif
+
+                                                                                    @if ($tracking->status == 'Selesai')
+                                                                                        <div class="step completed">
+                                                                                            <div
+                                                                                                class="step-icon-wrap">
+                                                                                                <div class="step-icon">
+                                                                                                    <i
+                                                                                                        class="bi bi-hand-thumbs-up-fill"></i>
+                                                                                                </div>
+                                                                                            </div>
+                                                                                            <h4 class="step-title">
+                                                                                                Selesai
+                                                                                            </h4>
+                                                                                        </div>
+                                                                                    @endif
+                                                                                @endif
+                                                                            @endforeach
+                                                                        </div>
+                                                                        <a class="btn btn-outline-primary btn-rounded btn-sm float-star"
+                                                                            href="{{ url("public/$booking->file_proposal") }}"
+                                                                            target="_blank">
+                                                                            Lihat Dokumen
+                                                                        </a>
+
+                                                                        <a class="btn btn-outline-primary btn-rounded btn-sm float-star"
+                                                                            href="{{ url("public/$booking->bukti_transfer") }}"
+                                                                            target="_blank">
+                                                                            Lihat Bukti Transfer
+                                                                        </a>
+
+
+                                                                        @if ($booking->status == '1')
+                                                                            <a class="btn btn-outline-danger btn-rounded btn-sm float-end"
+                                                                                href="orderDetails">
+                                                                                Batalkan Pemesanan
+                                                                            </a>
+                                                                        @endif
+
+                                                                    </div>
                                                                 </div>
-                                                            </div>
+                                                            @endif
                                                         @endif
                                                     @endforeach
                                                 </div>
@@ -532,29 +666,21 @@
             <div class="row g-4">
 
                 @forelse ($list_fasilitas_pendukung as $fasilitas)
-
                     <div class="col-lg-4 col-md-6 d-flex" data-aos="fade-up">
 
                         <div class="fac-card w-100 d-flex flex-column">
 
                             {{-- GAMBAR --}}
-                            <div
-                                class="fac-img"
-                                title="Klik untuk melihat detail"
-                                style="cursor:pointer;"
-                                data-bs-toggle="modal"
-                                data-bs-target="#detailPendukung{{ $fasilitas->id }}">
+                            <div class="fac-img" title="Klik untuk melihat detail" style="cursor:pointer;"
+                                data-bs-toggle="modal" data-bs-target="#detailPendukung{{ $fasilitas->id }}">
 
-                                <img
-                                    src="{{ $fasilitas->foto
-                                        ? url('public/' . $fasilitas->foto)
-                                        : url('public/images/lc.jpg') }}"
+                                <img src="{{ $fasilitas->foto ? url('public/' . $fasilitas->foto) : url('public/images/lc.jpg') }}"
                                     alt="{{ $fasilitas->nama }}"
                                     onerror="this.onerror=null;this.src='{{ url('public/images/lc.jpg') }}'">
 
                                 <div class="fac-img-overlay" data-bs-toggle="modal"
-                                        data-bs-target="#detailPendukung{{ $fasilitas->id }}">
-                                    <span >
+                                    data-bs-target="#detailPendukung{{ $fasilitas->id }}">
+                                    <span>
                                         <i class="bi bi-zoom-in"></i>
                                         Lihat Detail
                                     </span>
@@ -579,10 +705,7 @@
                                 </div>
 
                                 <div class="mt-auto">
-                                    <button
-                                        type="button"
-                                        class="btn-primary-custom"
-                                        data-bs-toggle="modal"
+                                    <button type="button" class="btn-primary-custom" data-bs-toggle="modal"
                                         data-bs-target="#detailPendukung{{ $fasilitas->id }}">
                                         <i class="bi bi-eye"></i>
                                         Lihat Detail
@@ -597,31 +720,23 @@
                     {{-- =====================================================
                         MODAL DETAIL FASILITAS PENDUKUNG
                     ====================================================== --}}
-                    <div
-                        class="modal fade"
-                        id="detailPendukung{{ $fasilitas->id }}"
-                        tabindex="-1"
-                        aria-labelledby="detailPendukungLabel{{ $fasilitas->id }}"
-                        aria-hidden="true">
+                    <div class="modal fade" id="detailPendukung{{ $fasilitas->id }}" tabindex="-1"
+                        aria-labelledby="detailPendukungLabel{{ $fasilitas->id }}" aria-hidden="true">
 
                         <div class="modal-dialog modal-lg modal-dialog-centered">
 
-                            <div
-                                class="modal-content"
+                            <div class="modal-content"
                                 style="border-radius:20px;
                                        border:none;
                                        overflow:hidden;">
 
 
                                 {{-- HEADER --}}
-                                <div
-                                    class="modal-header"
+                                <div class="modal-header"
                                     style="border-bottom:1px solid #e8eef7;
                                            padding:20px 28px;">
 
-                                    <h5
-                                        class="modal-title"
-                                        id="detailPendukungLabel{{ $fasilitas->id }}"
+                                    <h5 class="modal-title" id="detailPendukungLabel{{ $fasilitas->id }}"
                                         style="font-weight:700;
                                                color:var(--text-dark);">
 
@@ -629,10 +744,7 @@
                                         Detail {{ $fasilitas->nama }}
                                     </h5>
 
-                                    <button
-                                        type="button"
-                                        class="btn-close"
-                                        data-bs-dismiss="modal"
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal"
                                         aria-label="Close">
                                     </button>
 
@@ -648,12 +760,8 @@
                                         {{-- FOTO --}}
                                         <div class="col-lg-5">
 
-                                            <img
-                                                src="{{ $fasilitas->foto
-                                                    ? url('public/' . $fasilitas->foto)
-                                                    : url('public/images/lc.jpg') }}"
-                                                alt="{{ $fasilitas->nama }}"
-                                                class="img-fluid w-100"
+                                            <img src="{{ $fasilitas->foto ? url('public/' . $fasilitas->foto) : url('public/images/lc.jpg') }}"
+                                                alt="{{ $fasilitas->nama }}" class="img-fluid w-100"
                                                 style="height:280px;
                                                        object-fit:cover;
                                                        border-radius:16px;"
@@ -674,8 +782,7 @@
                                                 {{-- NAMA --}}
                                                 <div class="mb-3">
 
-                                                    <small
-                                                        style="color:var(--text-light);">
+                                                    <small style="color:var(--text-light);">
                                                         Nama Fasilitas
                                                     </small>
 
@@ -695,8 +802,7 @@
                                                 {{-- STATUS --}}
                                                 <div>
 
-                                                    <small
-                                                        style="color:var(--text-light);">
+                                                    <small style="color:var(--text-light);">
                                                         Status
                                                     </small>
 
@@ -717,8 +823,7 @@
 
 
                                     {{-- DESKRIPSI --}}
-                                    <div
-                                        class="mt-4"
+                                    <div class="mt-4"
                                         style="background:#f8fbff;
                                                border-radius:16px;
                                                padding:22px;">
@@ -746,15 +851,11 @@
 
 
                                 {{-- FOOTER --}}
-                                <div
-                                    class="modal-footer"
+                                <div class="modal-footer"
                                     style="border-top:1px solid #e8eef7;
                                            padding:18px 28px;">
 
-                                    <button
-                                        type="button"
-                                        class="btn btn-secondary"
-                                        data-bs-dismiss="modal">
+                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
 
                                         <i class="bi bi-x-lg"></i>
                                         Tutup
@@ -771,21 +872,16 @@
                     <div class="col-12">
                         <div class="text-center py-5">
 
-                            <i
-                                class="bi bi-tools"
-                                style="font-size:3rem;color:var(--text-light);">
+                            <i class="bi bi-tools" style="font-size:3rem;color:var(--text-light);">
                             </i>
 
-                            <p
-                                class="mt-3"
-                                style="color:var(--text-light);">
+                            <p class="mt-3" style="color:var(--text-light);">
 
                                 Data fasilitas pendukung belum tersedia.
                             </p>
 
                         </div>
                     </div>
-
                 @endforelse
 
             </div>
@@ -947,41 +1043,67 @@
     <script>
         let tanggalBlock = @json($tanggal_block);
 
-
         @foreach ($list_fasilitas as $fasilitas)
 
-            let block{{ $fasilitas->id }} =
-                tanggalBlock[{{ $fasilitas->id }}] ?? [];
+            const harga{{ $fasilitas->id }} = {{ $fasilitas->harga }};
+            let block{{ $fasilitas->id }} = tanggalBlock[{{ $fasilitas->id }}] ?? [];
 
+            function hitungTotal{{ $fasilitas->id }}() {
 
-            document
-                .getElementById('tanggal_mulai{{ $fasilitas->id }}')
+                let mulai = document.getElementById('tanggal_mulai{{ $fasilitas->id }}').value;
+                let selesai = document.getElementById('tanggal_selesai{{ $fasilitas->id }}').value;
+
+                if (mulai && selesai) {
+
+                    let tglMulai = new Date(mulai);
+                    let tglSelesai = new Date(selesai);
+
+                    let selisih = (tglSelesai - tglMulai) / (1000 * 60 * 60 * 24);
+
+                    if (selisih >= 0) {
+
+                        let jumlahHari = selisih + 1;
+
+                        let total = jumlahHari * harga{{ $fasilitas->id }};
+
+                        document.getElementById('total_harga{{ $fasilitas->id }}').value =
+                            "Rp. " + total.toLocaleString('id-ID', {
+                                minimumFractionDigits: 2,
+                                maximumFractionDigits: 2
+                            });
+
+                    } else {
+
+                        document.getElementById('total_harga{{ $fasilitas->id }}').value = "";
+
+                    }
+                }
+            }
+
+            document.getElementById('tanggal_mulai{{ $fasilitas->id }}')
                 .addEventListener('change', function() {
 
                     if (block{{ $fasilitas->id }}.includes(this.value)) {
-
                         alert('Tanggal sudah dibooking');
-
                         this.value = '';
-
                     }
+
+                    hitungTotal{{ $fasilitas->id }}();
 
                 });
 
-
-            document
-                .getElementById('tanggal_selesai{{ $fasilitas->id }}')
+            document.getElementById('tanggal_selesai{{ $fasilitas->id }}')
                 .addEventListener('change', function() {
 
                     if (block{{ $fasilitas->id }}.includes(this.value)) {
-
                         alert('Tanggal sudah dibooking');
-
                         this.value = '';
-
                     }
+
+                    hitungTotal{{ $fasilitas->id }}();
 
                 });
         @endforeach
     </script>
+
     </x-frontend>

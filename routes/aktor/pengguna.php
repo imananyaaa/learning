@@ -14,6 +14,7 @@ Route::get('/tentang-kami',[TentangKamiController::class, 'index' ]);
 
 Route::get('/fasilitas',[FasilitasController::class, 'index' ]);
 Route::post('/fasilitas',[FasilitasController::class, 'store' ]);
+Route::put('/fasilitas/bukti-transfer/{id}',[FasilitasController::class, 'buktiTransfer' ]);
 Route::get('/fasilitas/batal/{id}',[FasilitasController::class, 'destroy' ]);
 
 Route::get('/event',[EventController::class, 'index' ]);
